@@ -1,0 +1,110 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #ffaff7, #ff41e6);
+    background-image: url(https://media.discordapp.net/attachments/1083967939381833738/1266521839342063647/cute-anime-cat-girl-nekomimi-kawaii_021352.png?ex=66aeae61&is=66ad5ce1&hm=beeacac9a90c7d247865de171ae6281ab47c18e5548f8d3ea1f13f201bd32835&=&format=webp&quality=lossless&width=756&height=423);
+    background-repeat: no-repeat;
+    background-size: cover; /* or contain, depending on your preference */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /* Hide scrollbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px;
+    background: linear-gradient(to right, #ffaff7, #ff41e6); /* Gradient background */
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: auto; /* Prevent overflow and hide scrollbar */
+    max-height: 80%; /* Adjust this if needed */
+    transition: transform 0.3s ease-in-out;
+    text-align: center; /* Center text in the container */
+}
+
+.container:hover {
+    transform: scale(1.05);
+}
+
+.photo-container {
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-in;
+}
+
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #ff69b4; 
+}
+
+.profile-photo:hover {
+    transform: rotate(360deg);
+}
+
+.about-content {
+    text-align: center; /* Center text within the content area */
+    animation: fadeIn 2s ease-in;
+    padding: 10px;  /* Added padding to prevent clipping */
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #ff69b4; /* Color for the text */
+    display: inline-block;
+    padding-bottom: 10px; /* Space for the underline */
+    position: relative;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px; /* Height of the underline */
+    bottom: 0;
+    left: 0;
+    background-color: #ff69b4; /* Color of the underline */
+}
+
+p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background-color: #007bff;
+    visibility: hidden;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out;
+}
+
+a:hover::after {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
