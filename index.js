@@ -11,7 +11,7 @@ app.get('/', (request, response) => {
 });
 
 app.get('/auth/discord', (request, response) => {
-	return response.sendFile('index.html', { root: 'https://nikibot.in/' });
+	return response.sendFile('index.html', { root: 'https://nekocode.in/' });
 });
 
 const port = '53134';
