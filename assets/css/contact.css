@@ -129,7 +129,6 @@ body {
     background-size: cover; /* Cover the entire page */
     background-repeat: no-repeat; /* Don't repeat the image */
     background-position: center; /* Center the image */
-    background-position: center;
     margin: 0;
     padding: 0;
     display: flex;
