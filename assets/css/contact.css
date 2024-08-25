@@ -5,9 +5,8 @@
 body {
     font-family: Arial, sans-serif;
     background-image: url("images/cute-anime-cat-girl-nekomimi-kawaii.png");
-    background-size: auto;
+    background-size: cover;
     background-repeat: no-repeat;
-    background-size: cover; /* or contain, depending on your preference */
     background-position: center;
     background-color: #121212;
     color: #fff;
@@ -127,10 +126,9 @@ body {
 body {
     font-family: Arial, sans-serif;
     background-image: url("images/cute-anime-cat-girl-nekomimi-kawaii.png");
-    background-size: auto;
-    background-color: #f9f9f9;
-    background-repeat: no-repeat;
-    background-size: cover; /* or contain, depending on your preference */
+    background-size: cover; /* Cover the entire page */
+    background-repeat: no-repeat; /* Don't repeat the image */
+    background-position: center; /* Center the image */
     background-position: center;
     margin: 0;
     padding: 0;
