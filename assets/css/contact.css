@@ -4,6 +4,11 @@
 
 body {
     font-family: Arial, sans-serif;
+    background-image: url("images/cute-anime-cat-girl-nekomimi-kawaii.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-size: cover; /* or contain, depending on your preference */
+    background-position: center;
     background-color: #121212;
     color: #fff;
     display: flex;
