@@ -1,39 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us</title>
-    <link rel="stylesheet" href="assets/css/contact.css">
-    <link rel="shortcut icon" href="./images/ニキータ・パリク.png" type="image/png"/>
-</head>
-<body>
-  
-  <div class="contact-form">
-    <h1 class="centered-heading">Get in touch with us</h1>
-    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
-      <input type="hidden" name="access_key" value="2c465b7f-eece-4067-8a3e-0d96c620396a">
-        
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Contact Email" required>
+    <link rel="stylesheet" href="assets/css/contact.css" />
+    <link
+      rel="shortcut icon"
+      href="./images/ニキータ・パリク.png"
+      type="image/png"
+    />
+  </head>
+  <body>
+    <style>
+      body {
+        background-image: url("images/cute-anime-cat-girl-nekomimi-kawaii.png");
+        background-size: cover; /* Cover the entire page */
+        background-repeat: no-repeat; /* Don't repeat the image */
+        background-position: center; /* Center the image */
+      }
+    </style>
+    <div class="contact-form">
+      <h1 class="centered-heading">Get in touch with us</h1>
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        id="contactForm"
+      >
+        <input
+          type="hidden"
+          name="access_key"
+          value="bd3cc371-69d9-4620-b8b5-32eea88024b3"
+        />
+
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Contact Email"
+          required
+        />
         <select name="subject" required>
           <option value="" disabled selected>Select a subject</option>
           <option value="General Inquiry">General Inquiry</option>
-          <option value="Bot Not Working/Offline">Bot Not Working/Offline</option>
+          <option value="Bot Not Working/Offline">
+            Bot Not Working/Offline
+          </option>
           <option value="Report a Bug">Report a Bug</option>
           <option value="Feedback">Feedback</option>
           <option value="Other">Other</option>
         </select>
-      <textarea name="message" placeholder="Your query here..." rows="5" maxlength="500" required></textarea>
+        <textarea
+          name="message"
+          placeholder="Your query here..."
+          rows="5"
+          maxlength="500"
+          required
+        ></textarea>
         <button type="submit">Submit</button>
-        <input type="hidden" name="redirect" value="https://nekocode.in/thank-you.html">
-    </form>
-</div>
-<script>
-  window.onload = function() {
-      // Reset the form fields when the page loads
-      document.getElementById("contact-form").reset();
-  };
-</script> 
-</body>
+        <input
+          type="hidden"
+          name="redirect"
+          value="https://nikibot.in/thank-you.html"
+        />
+      </form>
+    </div>
+    <script>
+      window.onload = function () {
+        // Reset the form fields when the page loads
+        document.getElementById("form").reset();
+      };
+    </script>
+  </body>
 </html>
