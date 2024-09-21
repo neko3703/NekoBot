@@ -4,10 +4,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url("images/cute-anime-cat-girl-nekomimi-kawaii.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
     background-color: #121212;
     color: #fff;
     display: flex;
@@ -17,14 +13,32 @@ body {
     margin: 0;
 }
 .contact-form {
-    background-color: #1c1c1c;
+    background-color: rgba(28, 28, 28, 0.8); /* Transparent background */
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 25px;
     box-shadow: 0 0 10px #ffa2e0;
     width: 100%;
     max-width: 400px;
     align-items: end;
 }
+
+.contact-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: none;
+    border-radius: 20px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+    background-color: #333;
+    background-size: 16px;
+}
+
 .contact-form h1 {
     margin-bottom: 15px;
     font-size: 24px;
@@ -125,10 +139,11 @@ body {
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url("images/cute-anime-cat-girl-nekomimi-kawaii.png");
-    background-size: cover; /* Cover the entire page */
-    background-repeat: no-repeat; /* Don't repeat the image */
-    background-position: center; /* Center the image */
+    background-image: url(https://media.discordapp.net/attachments/1083967939381833738/1266521839342063647/cute-anime-cat-girl-nekomimi-kawaii_021352.png?ex=66aeae61&is=66ad5ce1&hm=beeacac9a90c7d247865de171ae6281ab47c18e5548f8d3ea1f13f201bd32835&=&format=webp&quality=lossless&width=756&height=423);
+    background-color: #f9f9f9;
+    background-repeat: no-repeat;
+    background-size: cover; /* or contain, depending on your preference */
+    background-position: center;
     margin: 0;
     padding: 0;
     display: flex;
