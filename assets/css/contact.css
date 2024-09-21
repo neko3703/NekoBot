@@ -13,7 +13,8 @@ body {
     margin: 0;
     justify-content: center;  /* Center horizontally */
     align-items: center;      /* Center vertically */
-    height: 100vh;        
+    min-height: 100vh;        /* Ensure the body takes at least the full viewport height */
+    box-sizing: border-box;   /* Include padding and border in height/width calculations */    
 }
 .contact-form {
     background-color: rgba(28, 28, 28, 0.8); /* Transparent background */
