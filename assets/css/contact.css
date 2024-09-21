@@ -59,6 +59,7 @@ body {
     -moz-appearance: none;
     appearance: none;
 }
+
 .contact-form textarea {
     min-height: 110px; /* Minimum height */
     min-width: 100%;  /* Minimum width */
@@ -218,4 +219,34 @@ button {
 
 button:hover {
     background: linear-gradient(to right, #ff71f6, #ffa2e0);
+}
+
+/* Apply box-sizing to all elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Media Query for Mobile Devices */
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 10px; /* Ensure there's some padding around the edges on mobile */
+    }
+
+    .contact-form {
+        max-width: 100%; /* Make the form take up the full width on mobile */
+        margin: 0;       /* Reset margins */
+        padding: 15px;   /* Add some padding */
+    }
+
+    .contact-form input, .contact-form textarea, .contact-form select {
+        font-size: 14px; /* Slightly smaller font size for mobile */
+        padding: 8px;    /* Adjust padding for smaller screens */
+    }
+
+    .contact-form button {
+        font-size: 14px; /* Adjust button font size */
+        padding: 8px;    /* Adjust button padding */
+    }
 }
