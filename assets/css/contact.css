@@ -228,25 +228,27 @@ button:hover {
     box-sizing: border-box;
 }
 
-/* Media Query for Mobile Devices */
 @media only screen and (max-width: 600px) {
     body {
-        padding: 10px; /* Ensure there's some padding around the edges on mobile */
+        padding: 10px;          /* Add padding around the edges on mobile */
+        justify-content: center; /* Keep centering on mobile screens */
+        align-items: center;     /* Ensure vertical centering on smaller devices */
+        min-height: 100vh;       /* Ensure it takes the full screen height */
     }
 
     .contact-form {
-        max-width: 100%; /* Make the form take up the full width on mobile */
-        margin: 0;       /* Reset margins */
-        padding: 15px;   /* Add some padding */
+        max-width: 100%;         /* Form takes up the full width on mobile */
+        margin: 0;               /* Remove margins */
+        padding: 15px;           /* Add some padding */
     }
 
     .contact-form input, .contact-form textarea, .contact-form select {
-        font-size: 14px; /* Slightly smaller font size for mobile */
-        padding: 8px;    /* Adjust padding for smaller screens */
+        font-size: 14px;         /* Slightly smaller font size */
+        padding: 8px;            /* Adjust padding */
     }
 
     .contact-form button {
-        font-size: 14px; /* Adjust button font size */
-        padding: 8px;    /* Adjust button padding */
+        font-size: 14px;         /* Adjust button font size */
+        padding: 8px;            /* Adjust button padding */
     }
 }
