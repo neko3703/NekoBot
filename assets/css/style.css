@@ -270,3 +270,34 @@ nav.nav-w {
 .transparent-button i {
   margin-right: 5px;
 }
+
+.contact-us-button {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  padding: 10px 30px;
+  color: #2de3e0;
+  background-color: transparent; 
+  border: 2px solid #2de3e0;
+  border-radius: 8px;
+  font-size: 18px; 
+  font-weight: bold;
+  display: inline-flex;
+  align-items:center;
+  text-decoration: none; 
+  transition: background-color 0.3s ease, color 0.3s ease;
+  z-index: 1000;
+}
+
+.contact-us-button i {
+  margin-right: 10px; 
+  font-size: 22px; 
+}
+
+.contact-us-button:hover {
+  background-color: #2de3e0; 
+  color: #1a1a1a; 
+}
+
+/* Optional CSS for font awesome icon */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
