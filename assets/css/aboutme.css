@@ -1,7 +1,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(to right, #ffaff7, #ff41e6);
-    background-image: url("../../images/About\ me\ background.jpg");
+    background-image: url(../../images/About me background.jpg");
     background-repeat: no-repeat;
     background-size: cover; /* or contain, depending on your preference */
     margin: 0;
