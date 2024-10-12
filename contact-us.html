@@ -32,13 +32,15 @@
         <input type="hidden" name="access_key" value="aa2e9230-a9f4-4a9b-9c3b-94d8889e9453" />
 
         <input type="text" name="name" placeholder="How should we address you?" required/>
+        
         <input
           type="email"
           name="email"
           placeholder="Enter your mail address..."
           required
         />
-        <select name="subject" required>
+        
+<!--         <select name="subject" required>
           <option value="" disabled selected>Select a subject</option>
           <option value="General Inquiry">General Inquiry</option>
           <option value="Bot Not Working/Offline">
@@ -47,7 +49,15 @@
           <option value="Report a Bug">Report a Bug</option>
           <option value="Feedback">Feedback</option>
           <option value="Other">Other</option>
-        </select>
+        </select> -->
+        
+        <input
+          type="text"
+          name="subject"
+          placeholder="Subject"
+          required
+        />
+        
         <textarea
           name="message"
           placeholder="Describe your issue here."
