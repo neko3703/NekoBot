@@ -80,6 +80,15 @@
             .then(data => {
                 console.log('Fetched data:', data); // Log the fetched data
                 console.log('Raw content:', data.content); // Log the raw content
+
+                let currentResponses;
+        
+                try {
+                    currentResponses = JSON.parse(atob(data.content));
+                } catch (e) {
+                    console.error('Failed to decode content:', e);
+                    currentResponses = { responses: [] }; // Fallback to a new object if decoding fails
+                }
                 
                 const currentResponses = JSON.parse(atob(data.content));
                 currentResponses.responses.push(response);
