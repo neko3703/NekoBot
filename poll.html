@@ -20,9 +20,9 @@
 
         // This function sends the response to GitHub using the GitHub API
         function sendResponseToGitHub(response) {
-            const githubToken = 'YOUR_GITHUB_TOKEN';  // Replace with your personal GitHub token
-            const owner = 'YOUR_GITHUB_USERNAME';  // Replace with your GitHub username
-            const repo = 'poll-responses';  // Replace with your repository name
+            const githubToken = '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';  // Replace with your personal GitHub token
+            const owner = 'neko3703';  // Replace with your GitHub username
+            const repo = 'NekoBot';  // Replace with your repository name
             const issueTitle = `Poll Response: ${response}`;
             const issueBody = `Response: ${response} submitted at ${new Date().toLocaleString()}`;
             
