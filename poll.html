@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poll Response</title>
+    <script>
+        // This function extracts the query parameters from the URL
+        function getQueryParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const response = urlParams.get('response');  // Extract the 'response' parameter
+            if (response) {
+                // Display the response on the page
+                document.getElementById('message').textContent = "Your response is: " + response;
+
+                // Send the response to GitHub for storage
+                sendResponseToGitHub(response);
+            }
+        }
+
+        // This function sends the response to GitHub using the GitHub API
+        function sendResponseToGitHub(response) {
+            const githubToken = 'YOUR_GITHUB_TOKEN';  // Replace with your personal GitHub token
+            const owner = 'YOUR_GITHUB_USERNAME';  // Replace with your GitHub username
+            const repo = 'poll-responses';  // Replace with your repository name
+            const issueTitle = `Poll Response: ${response}`;
+            const issueBody = `Response: ${response} submitted at ${new Date().toLocaleString()}`;
+            
+            // Make a POST request to GitHub API to create an issue with the response
+            fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `token ${githubToken}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                },
+                body: JSON.stringify({
+                    title: issueTitle,
+                    body: issueBody
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Issue created:', data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Call the getQueryParams function when the page loads
+        window.onload = getQueryParams;
+    </script>
+</head>
+<body>
+    <h1>Thank you for your response!</h1>
+    <p id="message"></p>
+</body>
+</html>
