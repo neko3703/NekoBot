@@ -78,6 +78,9 @@
             })
             .then(response => response.json())
             .then(data => {
+                console.log('Fetched data:', data); // Log the fetched data
+                console.log('Raw content:', data.content); // Log the raw content
+                
                 const currentResponses = JSON.parse(atob(data.content));
                 currentResponses.responses.push(response);
 
