@@ -69,21 +69,21 @@
             const issueBody = `Response: ${response} submitted at ${new Date().toLocaleString()}`;
             
             // Make a POST request to GitHub API to create an issue with the response
-            fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `token ${githubToken}`,
-                    'Accept': 'application/vnd.github.v3+json'
-                },
-                body: JSON.stringify({
-                    title: issueTitle,
-                    body: issueBody
-                })
-            })
-            .then(response => response.json())
-            .then(data => console.log('Issue created:', data))
-            .catch(error => console.error('Error:', error));
-        }
+        //     fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Authorization': `token ${githubToken}`,
+        //             'Accept': 'application/vnd.github.v3+json'
+        //         },
+        //         body: JSON.stringify({
+        //             title: issueTitle,
+        //             body: issueBody
+        //         })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => console.log('Issue created:', data))
+        //     .catch(error => console.error('Error:', error));
+        // }
 
         fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/dispatches`, {
             method: 'POST',
