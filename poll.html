@@ -11,7 +11,12 @@
             const response = urlParams.get('response');  // Extract the 'response' parameter
             if (response) {
                 // Display the response on the page
-                document.getElementById('message').textContent = "Your response is: " + response;
+                if (response == "yes") {
+                    document.getElementById('message').textContent = "Thank you for providing a positive feedback!";
+                } else if (response == "no") {
+                    document.getElementById('message').textContent = "We see that you are not satisfied with the resolution. We will surely improve on this.";
+                }
+                // document.getElementById('message').textContent = "Your response is: " + response;
 
                 // Send the response to GitHub for storage
                 sendResponseToGitHub(response);
