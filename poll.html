@@ -85,6 +85,25 @@
             .catch(error => console.error('Error:', error));
         }
 
+        fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/dispatches`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `token ${token}`,  // GitHub PAT for repository_dispatch
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                event_type: 'create_poll_response',
+                client_payload: {
+                    response: response  // Send response data as payload
+                }
+            })
+        })
+        .then(response => response.json())
+        .then(data => console.log('GitHub Action triggered:', data))
+        .catch(error => console.error('Error triggering GitHub Action:', error));
+    }
+
         // Call the getQueryParams function when the page loads
         window.onload = getQueryParams;
     </script>
