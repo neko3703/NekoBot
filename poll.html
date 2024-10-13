@@ -70,7 +70,7 @@
     // Fetch the existing responses
     fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
         headers: {
-            'Authorization': `token ${githubToken}`,
+            'Authorization': `Bearer ${githubToken}`,
             'Accept': 'application/vnd.github.v3.raw'
         }
     })
