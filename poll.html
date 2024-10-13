@@ -60,28 +60,49 @@
             }
         }
 
-        // This function sends the response to GitHub using the GitHub API
-        function sendResponseToGitHub(response) {
+        // Function to store the response in GitHub
+        function storeResponse(response) {
             const githubToken = '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';  // Replace with your personal GitHub token
             const owner = 'neko3703';  // Replace with your GitHub username
             const repo = 'NekoBot';  // Replace with your repository name
-            const issueTitle = `Poll Response: ${response}`;
-            const issueBody = `Response: ${response} submitted at ${new Date().toLocaleString()}`;
-            
-            Make a POST request to GitHub API to create an issue with the response
-            fetch(`https://api.github.com/repos/${owner}/${repo}/issues`, {
-                method: 'POST',
+            const filePath = 'responses.json';  // Path to your responses JSON file
+            // const issueTitle = `Poll Response: ${response}`;
+            // const issueBody = `Response: ${response} submitted at ${new Date().toLocaleString()}`;
+
+            // Fetch the existing responses
+            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
                 headers: {
                     'Authorization': `token ${githubToken}`,
-                    'Accept': 'application/vnd.github.v3+json'
-                },
-                body: JSON.stringify({
-                    title: issueTitle,
-                    body: issueBody
-                })
+                    'Accept': 'application/vnd.github.v3.raw'
+                }
             })
             .then(response => response.json())
-            .then(data => console.log('Issue created:', data))
+            .then(data => {
+                const currentResponses = JSON.parse(atob(data.content));
+                currentResponses.responses.push(response);
+
+                // Update the file with the new responses
+                const updatedContent = btoa(JSON.stringify(currentResponses));
+                return fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${githubToken}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    },
+                    body: JSON.stringify({
+                        message: 'Updated responses',
+                        content: updatedContent,
+                        sha: data.sha  // Include the SHA of the existing file
+                    })
+                });
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Response stored successfully!');
+                } else {
+                    console.error('Error updating file:', response);
+                }
+            })
             .catch(error => console.error('Error:', error));
         }
 
