@@ -96,7 +96,7 @@
         return fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
             method: 'PUT',
             headers: {
-                'Authorization': `token ${githubToken}`,
+                'Authorization': `Bearer ${githubToken}`// `token ${githubToken}`,
                 'Accept': 'application/vnd.github.v3+json'
             },
             body: JSON.stringify({
