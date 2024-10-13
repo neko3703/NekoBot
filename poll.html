@@ -97,7 +97,7 @@
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${githubToken},`// `token ${githubToken}`,
-                        'Accept': 'application/vnd.github.v3.raw',
+                        'Accept': 'application/vnd.github.v3+json',
                     },
                     body: JSON.stringify({
                         message: 'Updated responses',
