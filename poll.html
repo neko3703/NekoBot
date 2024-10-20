@@ -50,64 +50,64 @@
         }
 
         // Function to store the response in GitHub
-        function storeResponse(response) {
-            const githubToken = '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';  // Replace with your personal GitHub token
-            const owner = 'neko3703';  // Replace with your GitHub username
-            const repo = 'NekoBot';  // Replace with your repository name
-            const filePath = 'responses.json';  // Path to your responses JSON file
+    //     function storeResponse(response) {
+    //         const githubToken = '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';  // Replace with your personal GitHub token
+    //         const owner = 'neko3703';  // Replace with your GitHub username
+    //         const repo = 'NekoBot';  // Replace with your repository name
+    //         const filePath = 'responses.json';  // Path to your responses JSON file
         
-            // Fetch the existing responses
-            fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
-                headers: {
-                    'Authorization': `Bearer ${githubToken}`,
-                    'Accept': 'application/vnd.github.v3.raw'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Fetched data:', data); // Log the fetched data
-                console.log('Raw content:', data.content); // Log the raw content
+    //         // Fetch the existing responses
+    //         fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
+    //             headers: {
+    //                 'Authorization': `Bearer ${githubToken}`,
+    //                 'Accept': 'application/vnd.github.v3.raw'
+    //             }
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             console.log('Fetched data:', data); // Log the fetched data
+    //             console.log('Raw content:', data.content); // Log the raw content
         
-                let currentResponses;
+    //             let currentResponses;
                 
-                try {
-                    currentResponses = JSON.parse(atob(data.content)); // Decode and parse existing responses
-                } catch (e) {
-                    console.error('Failed to decode content:', e);
-                    currentResponses = { responses: [] }; // Fallback to a new object if decoding fails
-                }
+    //             try {
+    //                 currentResponses = JSON.parse(atob(data.content)); // Decode and parse existing responses
+    //             } catch (e) {
+    //                 console.error('Failed to decode content:', e);
+    //                 currentResponses = { responses: [] }; // Fallback to a new object if decoding fails
+    //             }
         
-                // Push the new response into the existing responses array
-                currentResponses.responses.push(response);
+    //             // Push the new response into the existing responses array
+    //             currentResponses.responses.push(response);
         
-                // Update the file with the new responses
-                const updatedContent = btoa(JSON.stringify(currentResponses)); // Encode the updated responses
-                return fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `Bearer ${githubToken}`,// `token ${githubToken}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                    },
-                    body: JSON.stringify({
-                        message: 'Updated responses',
-                        content: updatedContent,
-                        sha: data.sha  // Include the SHA of the existing file
-                    })
-                });
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Response stored successfully!');
-                } else {
-                    console.error('Error updating file:', response);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }
+    //             // Update the file with the new responses
+    //             const updatedContent = btoa(JSON.stringify(currentResponses)); // Encode the updated responses
+    //             return fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`, {
+    //                 method: 'PUT',
+    //                 headers: {
+    //                     'Authorization': `Bearer ${githubToken}`,// `token ${githubToken}`,
+    //                     'Accept': 'application/vnd.github.v3+json',
+    //                 },
+    //                 body: JSON.stringify({
+    //                     message: 'Updated responses',
+    //                     content: updatedContent,
+    //                     sha: data.sha  // Include the SHA of the existing file
+    //                 })
+    //             });
+    //         })
+    //         .then(response => {
+    //             if (response.ok) {
+    //                 console.log('Response stored successfully!');
+    //             } else {
+    //                 console.error('Error updating file:', response);
+    //             }
+    //         })
+    //         .catch(error => console.error('Error:', error));
+    //     }
 
-        // Call the getQueryParams function when the page loads
-        window.onload = getQueryParams;
-    </script>
+    //     // Call the getQueryParams function when the page loads
+    //     window.onload = getQueryParams;
+  \ </script>
 </head>
 <body>
 <!--     <h1>Thank you for sharing your response.</h1> -->
