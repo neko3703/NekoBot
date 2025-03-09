@@ -151,6 +151,7 @@
           const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amountValue}&cu=INR`;
 
         window.location.href = payUrl;
+        qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
         } else {
           qrCodeDiv.style.display = "none"; // Hide if invalid input
     qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
