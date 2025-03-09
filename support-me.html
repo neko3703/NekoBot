@@ -75,7 +75,8 @@
         placeholder="Enter amount in INR"
         oninput="updateURL()"
       />
-      <button onclick="generateQRCode()">Pay Now</button>
+      <button onclick="generateQRCode()">Pay Using QR</button>
+      <button onclick="upiPay()">Pay Directly</button>
       <div id="qrcode"></div>
     </div>
 
@@ -125,6 +126,31 @@
             height: 200,
           });
         qrCodeDiv.style.display = "inline-block"; // Show QR code div
+
+        } else {
+          qrCodeDiv.style.display = "none"; // Hide if invalid input
+    qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
+        }
+      }
+
+      function upiPay(amount = null) {
+        const amountInput = document.getElementById("amount");
+        const qrCodeDiv = document.getElementById("qrcode");
+        qrCodeDiv.innerHTML = ""; // Clear previous QR code
+
+        let amountValue = amount || amountInput.value;
+
+        if (
+          amountValue.trim() !== "" &&
+          !isNaN(amountValue) &&
+          amountValue > 0
+        ) {
+          amountInput.value = amountValue; // Update input field
+          const upiId = "neko@barodampay"; // Updated UPI ID
+          const payeeName = "Neko"; // Encoded Payee Name
+          const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amountValue}&cu=INR`;
+
+        window.location.href = payUrl;
         } else {
           qrCodeDiv.style.display = "none"; // Hide if invalid input
     qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
