@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Me</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        margin: 0;
+      }
+      .container {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        backdrop-filter: blur(10px);
+        width: 300px;
+      }
+      h2 {
+        margin-bottom: 15px;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 12px 25px;
+        background: #ff7eb3;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+      button:hover {
+        background: #ff4f8b;
+      }
+      #qrcode {
+        margin-top: 20px;
+        padding: 10px;
+        background: #faafba;
+        display: inline-block;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Buy Me A Coffee ☕</h2>
+      <input type="number" id="amount" placeholder="Enter amount in INR" />
+      <button onclick="generateQRCode()">Generate QR Code</button>
+      <div id="qrcode"></div>
+    </div>
+    <script>
+      function generateQRCode() {
+        const amount = document.getElementById("amount").value;
+        const qrCodeDiv = document.getElementById("qrcode");
+        qrCodeDiv.innerHTML = ""; // Clear previous QR code
+
+        if (amount.trim() !== "" && !isNaN(amount) && amount > 0) {
+          const upiId = "neko@barodampay"; // Your actual UPI ID
+          const payeeName = "Neko"; // Encoded Payee Name
+          const payUrl = `upi://pay?pa=${upiId}&pn=Neko&am=${amount}&cu=INR`;
+
+          new QRCode(qrCodeDiv, {
+            text: payUrl,
+            width: 200,
+            height: 200,
+          });
+        } else {
+          alert("Please enter a valid amount.");
+        }
+      }
+    </script>
+  </body>
+</html>
