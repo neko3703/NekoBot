@@ -69,7 +69,12 @@
   <body>
     <div class="container">
       <h2>Buy Me A Coffee ☕</h2>
-      <input type="number" id="amount" placeholder="Enter amount in INR" />
+      <input
+        type="number"
+        id="amount"
+        placeholder="Enter amount in INR"
+        oninput="updateURL()"
+      />
       <button onclick="generateQRCode()">Generate QR Code</button>
       <div id="qrcode"></div>
     </div>
@@ -78,6 +83,21 @@
       function getQueryParam(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
+      }
+
+      function updateURL() {
+        const amountInput = document.getElementById("amount").value;
+        const url = new URL(window.location);
+        if (
+          amountInput.trim() !== "" &&
+          !isNaN(amountInput) &&
+          amountInput > 0
+        ) {
+          url.searchParams.set("amount", amountInput);
+        } else {
+          url.searchParams.delete("amount");
+        }
+        window.history.replaceState(null, "", url.toString());
       }
 
       function generateQRCode(amount = null) {
@@ -113,6 +133,7 @@
       window.onload = function () {
         const amountParam = getQueryParam("amount");
         if (amountParam) {
+          document.getElementById("amount").value = amountParam;
           generateQRCode(amountParam);
         }
       };
