@@ -61,7 +61,7 @@
         margin-top: 20px;
         padding: 10px;
         background: #faafba;
-        display: inline-block;
+        display: none;
         border-radius: 10px;
       }
     </style>
@@ -124,8 +124,10 @@
             width: 200,
             height: 200,
           });
+    qrCodeDiv.style.display = "inline-block"; // Show QR code div
         } else {
           qrCodeDiv.style.display = "none"; // Hide if invalid input
+    qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
         }
       }
 
