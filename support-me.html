@@ -76,7 +76,7 @@
         qrCodeDiv.innerHTML = ""; // Clear previous QR code
 
         if (amount.trim() !== "" && !isNaN(amount) && amount > 0) {
-          const upiId = "8107841501@ptsbi"; // Your actual UPI ID
+          const upiId = "neko@barodampay"; // Your actual UPI ID
           const payeeName = "Neko"; // Encoded Payee Name
           const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
             payeeName
