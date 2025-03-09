@@ -1,145 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Support Me</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link
       rel="shortcut icon"
       href="./images/ニキータ・パリク.png"
       type="image/png"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #fff;
-            margin: 0;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            backdrop-filter: blur(10px);
-            width: 300px;
-        }
-        h2 {
-            margin-bottom: 15px;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 8px;
-            outline: none;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 12px 25px;
-            background: #ff7eb3;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #ff4f8b;
-        }
-        #qrcode-container {
-            position: relative;
-            display: inline-block;
-            margin-top: 20px;
-        }
-        #qrcode {
-            padding: 10px;
-            background: #faafba;
-            display: inline-block;
-            border-radius: 10px;
-        }
-        #qr-logo {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 50px;
-            height: 50px;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            display: none;
-        }
+      body {
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        margin: 0;
+      }
+      .container {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        backdrop-filter: blur(10px);
+        width: 300px;
+      }
+      h2 {
+        margin-bottom: 15px;
+      }
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 12px 25px;
+        background: #ff7eb3;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+      button:hover {
+        background: #ff4f8b;
+      }
+      #qrcode {
+        margin-top: 20px;
+        padding: 10px;
+        background: #faafba;
+        display: inline-block;
+        border-radius: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h2>Buy Me A Coffee ☕</h2>
-        <input type="number" id="amount" placeholder="Enter amount in INR" oninput="updateURL()" />
-        <button onclick="generateQRCode()">Get QR to support!</button>
-        <div id="qrcode-container">
-            <div id="qrcode"></div>
-            <img id="qr-logo" src="./images/ニキータ・パリク.png" alt="Neko Code">
-        </div>
+      <h2>Buy Me A Coffee ☕</h2>
+      <input
+        type="number"
+        id="amount"
+        placeholder="Enter amount in INR"
+        oninput="updateURL()"
+      />
+      <button onclick="generateQRCode()">Generate QR Code</button>
+      <div id="qrcode"></div>
     </div>
 
     <script>
-        function getQueryParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
+      function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      function updateURL() {
+        const amountInput = document.getElementById("amount").value;
+        const url = new URL(window.location);
+        if (
+          amountInput.trim() !== "" &&
+          !isNaN(amountInput) &&
+          amountInput > 0
+        ) {
+          url.searchParams.set("amount", amountInput);
+        } else {
+          url.searchParams.delete("amount");
         }
+        window.history.replaceState(null, "", url.toString());
+      }
 
-        function updateURL() {
-            const amountInput = document.getElementById("amount").value;
-            const url = new URL(window.location);
-            if (amountInput.trim() !== "" && !isNaN(amountInput) && amountInput > 0) {
-                url.searchParams.set("amount", amountInput);
-            } else {
-                url.searchParams.delete("amount");
-            }
-            window.history.replaceState(null, "", url.toString());
+      function generateQRCode(amount = null) {
+        const amountInput = document.getElementById("amount");
+        const qrCodeDiv = document.getElementById("qrcode");
+        qrCodeDiv.innerHTML = ""; // Clear previous QR code
+
+        let amountValue = amount || amountInput.value;
+
+        if (
+          amountValue.trim() !== "" &&
+          !isNaN(amountValue) &&
+          amountValue > 0
+        ) {
+          amountInput.value = amountValue; // Update input field
+          const upiId = "neko@barodampay"; // Updated UPI ID
+          const payeeName = "Neko"; // Encoded Payee Name
+          const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
+            payeeName
+          )}&am=${amountValue}&cu=INR`;
+
+          new QRCode(qrCodeDiv, {
+            text: payUrl,
+            width: 200,
+            height: 200,
+          });
+        } else {
+          qrCodeDiv.style.display = "none"; // Hide if invalid input
         }
+      }
 
-        function generateQRCode(amount = null) {
-            const amountInput = document.getElementById("amount");
-            const qrCodeDiv = document.getElementById("qrcode");
-            qrCodeDiv.innerHTML = ""; // Clear previous QR code
-            
-            let amountValue = amount || amountInput.value;
-            
-            if (amountValue.trim() !== "" && !isNaN(amountValue) && amountValue > 0) {
-                amountInput.value = amountValue; // Update input field
-                const upiId = "neko@barodampay";
-                const payeeName = "Neko";
-                const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amountValue}&cu=INR`;
-                
-                new QRCode(qrCodeDiv, {
-                    text: payUrl,
-                    width: 200,
-                    height: 200
-                });
-
-                document.getElementById("qr-logo").style.display = "block"; // Show logo
-            } else {
-                document.getElementById("qr-logo").style.display = "none"; // Hide logo if no valid QR
-            }
+      // Auto-generate QR code if 'amount' parameter is in URL
+      window.onload = function () {
+        const amountParam = getQueryParam("amount");
+        if (amountParam) {
+          document.getElementById("amount").value = amountParam;
+          generateQRCode(amountParam);
         }
-
-        window.onload = function () {
-            const amountParam = getQueryParam("amount");
-            if (amountParam) {
-                document.getElementById("amount").value = amountParam;
-                generateQRCode(amountParam);
-            }
-        };
+      };
     </script>
-</body>
+  </body>
 </html>
