@@ -3,13 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Support Me</title>
+    <title>Google Pay QR Code Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-     <link
-      rel="shortcut icon"
-      href="./images/ニキータ・パリク.png"
-      type="image/png"
-    /> 
     <style>
       body {
         font-family: "Poppins", sans-serif;
@@ -61,43 +56,61 @@
         margin-top: 20px;
         padding: 10px;
         background: #faafba;
-        display: none; /* Hide initially */
+        display: inline-block;
         border-radius: 10px;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h2>Buy Me A Coffee ☕</h2>
+      <h2>Google Pay QR Code</h2>
       <input type="number" id="amount" placeholder="Enter amount in INR" />
       <button onclick="generateQRCode()">Generate QR Code</button>
       <div id="qrcode"></div>
     </div>
+
     <script>
-      function generateQRCode() {
-        const amount = document.getElementById("amount").value;
+      function getQueryParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      function generateQRCode(amount = null) {
+        const amountInput = document.getElementById("amount");
         const qrCodeDiv = document.getElementById("qrcode");
         qrCodeDiv.innerHTML = ""; // Clear previous QR code
 
-        if (amount.trim() !== "" && !isNaN(amount) && amount > 0) {
-          const upiId = "neko@barodampay"; // Your actual UPI ID
+        let amountValue = amount || amountInput.value;
+
+        if (
+          amountValue.trim() !== "" &&
+          !isNaN(amountValue) &&
+          amountValue > 0
+        ) {
+          amountInput.value = amountValue; // Update input field
+          const upiId = "neko@barodampay"; // Updated UPI ID
           const payeeName = "Neko"; // Encoded Payee Name
           const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
             payeeName
-          )}&am=${amount}&cu=INR`;
+          )}&am=${amountValue}&cu=INR`;
 
           new QRCode(qrCodeDiv, {
             text: payUrl,
             width: 200,
             height: 200,
           });
-
-          qrCodeDiv.style.display = "inline-block"; // Show QR code div
         } else {
-          alert("Please enter a valid amount.");
-          qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
+          qrCodeDiv.style.display = "none"; // Hide if invalid input
         }
       }
+
+      // Auto-generate QR code if 'amount' parameter is in URL
+      window.onload = function () {
+        const amountParam = getQueryParam("amount");
+        if (amountParam) {
+          generateQRCode(amountParam);
+        }
+      };
     </script>
   </body>
 </html>
