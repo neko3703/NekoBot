@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Support Me</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-     <link
-      rel="shortcut icon"
-      href="./images/ニキータ・パリク.png"
-      type="image/png"
-    /> 
+
     <style>
       body {
         font-family: "Poppins", sans-serif;
@@ -61,7 +57,7 @@
         margin-top: 20px;
         padding: 10px;
         background: #faafba;
-        display: inline-block;
+        display: none; /* Hide initially */
         border-radius: 10px;
       }
     </style>
@@ -80,17 +76,22 @@
         qrCodeDiv.innerHTML = ""; // Clear previous QR code
 
         if (amount.trim() !== "" && !isNaN(amount) && amount > 0) {
-          const upiId = "neko@barodampay"; // Your actual UPI ID
+          const upiId = "8107841501@ptsbi"; // Your actual UPI ID
           const payeeName = "Neko"; // Encoded Payee Name
-          const payUrl = `upi://pay?pa=${upiId}&pn=Neko&am=${amount}&cu=INR`;
+          const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
+            payeeName
+          )}&am=${amount}&cu=INR`;
 
           new QRCode(qrCodeDiv, {
             text: payUrl,
             width: 200,
             height: 200,
           });
+
+          qrCodeDiv.style.display = "inline-block"; // Show QR code div
         } else {
           alert("Please enter a valid amount.");
+          qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
         }
       }
     </script>
