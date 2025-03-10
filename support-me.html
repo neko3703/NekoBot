@@ -64,6 +64,11 @@
         display: none;
         border-radius: 10px;
       }
+      @media (min-width: 769px) {
+        .mobile-only {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -76,7 +81,7 @@
         oninput="updateURL()"
       />
       <button onclick="generateQRCode()">Pay Using QR</button>
-      <button onclick="upiPay()">Pay Directly</button>
+      <button class="mobile-only" onclick="upiPay()">Pay Directly</button>
       <div id="qrcode"></div>
     </div>
 
@@ -129,7 +134,6 @@
 
         } else {
           qrCodeDiv.style.display = "none"; // Hide if invalid input
-    qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
         }
       }
 
@@ -154,7 +158,6 @@
         qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
         } else {
           qrCodeDiv.style.display = "none"; // Hide if invalid input
-    qrCodeDiv.style.display = "none"; // Hide QR code div if input is invalid
         }
       }
 
