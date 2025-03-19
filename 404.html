@@ -12,18 +12,32 @@
             text-align: center;
             padding: 50px;
         }
-        .error-text {
-            font-size: 1.2rem;
+        .error-container {
+            display: inline-block;
             text-align: left;
             max-width: 600px;
-            margin: auto;
+        }
+        .error-text {
+            font-size: 1.2rem;
             line-height: 1.5;
+            display: inline;
+        }
+        .cursor {
+            font-weight: bold;
+            display: inline;
+            animation: none; /* Initially no blinking */
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
     </style>
 </head>
 <body>
     <h1>System Error: 404</h1>
-    <p class="error-text" id="terminal-output"></p>
+    <div class="error-container">
+        <p class="error-text" id="terminal-output"></p><span class="cursor" id="cursor">█</span>
+    </div>
 
     <script>
         let pageName = window.location.pathname.replace("/", "").toUpperCase();
@@ -51,13 +65,24 @@
         let i = 0;
         function typeText() {
             if (i < errorMessage.length) {
-                // Convert newlines to <br> for proper formatting
                 document.getElementById("terminal-output").innerHTML += errorMessage.charAt(i) === '\n' ? "<br>" : errorMessage.charAt(i);
                 i++;
-                setTimeout(typeText, 30);
+
+                // Move the cursor to the end of text dynamically
+                let container = document.querySelector(".error-container");
+                container.appendChild(document.getElementById("cursor"));
+
+                setTimeout(typeText, 75); // Slower typing effect
+            } else {
+                blinkCursor(); // Start blinking cursor after typing is done
             }
         }
         typeText();
+
+        function blinkCursor() {
+            let cursor = document.getElementById("cursor");
+            cursor.style.animation = "blink 0.5s infinite alternate"; // Start blinking
+        }
 
         document.addEventListener('keydown', function(event) {
             if (event.key.toLowerCase() === 'h') {
