@@ -13,11 +13,11 @@
             padding: 50px;
         }
         .error-text {
-            font-size: 1.5rem;
-            white-space: pre-line;
+            font-size: 1.2rem;
             text-align: left;
             max-width: 600px;
             margin: auto;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -26,36 +26,42 @@
     <p class="error-text" id="terminal-output"></p>
 
     <script>
-        // Get the current page path and format it
         let pageName = window.location.pathname.replace("/", "").toUpperCase();
-        if (pageName === "") pageName = "HOME"; // If the user accessed "/", set it to HOME
+        if (pageName === "") pageName = "HOME";
 
-        const errorMessage = `
+        const errorMessage = `SYSTEM ALERT: UNAUTHORIZED ACCESS DETECTED
+        -------------------------------------------------
         ERROR CODE: 404
-        PAGE "${pageName}" NOT FOUND
-        SYSTEM FAILURE DETECTED...
-        
-        Attempting to restore connection...
-        Loading...
-        ERROR: Unable to recover from failure.
-        
-        >> PRESS 'H' TO OVERRIDE
-        `;
+        TARGET FILE "${pageName}" NOT FOUND IN DATABASE.
+
+        POSSIBLE REASONS:
+        - The file has been moved or deleted.
+        - You mistyped the URL.
+        - The system is experiencing a critical failure.
+
+        INITIATING RECOVERY PROTOCOL...
+        >> Attempting to locate missing file...
+        >> Searching the database...
+        >> ERROR: TRACE NOT FOUND.
+
+        CONNECTION STATUS: UNAVAILABLE.
+        -------------------------------------------------
+        >> PRESS 'H' TO OVERRIDE AND RETURN TO HOME PAGE.`;
 
         let i = 0;
         function typeText() {
             if (i < errorMessage.length) {
-                document.getElementById("terminal-output").innerHTML += errorMessage.charAt(i);
+                // Convert newlines to <br> for proper formatting
+                document.getElementById("terminal-output").innerHTML += errorMessage.charAt(i) === '\n' ? "<br>" : errorMessage.charAt(i);
                 i++;
-                setTimeout(typeText, 50);
+                setTimeout(typeText, 30);
             }
         }
         typeText();
 
-        // Override and Redirect
         document.addEventListener('keydown', function(event) {
             if (event.key.toLowerCase() === 'h') {
-                document.getElementById("terminal-output").innerHTML += "\n\n>> OVERRIDE ACCEPTED: Redirecting...";
+                document.getElementById("terminal-output").innerHTML += "<br><br>> OVERRIDE ACCEPTED: Redirecting...";
                 setTimeout(() => window.location.href = "https://nekocode.in", 2000);
             }
         });
