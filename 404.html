@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - URL Not Found</title>
+    <title>404 - Not Found</title>
     <style>
         body {
             background: black;
@@ -24,11 +24,16 @@
 <body>
     <h1>System Error: 404</h1>
     <p class="error-text" id="terminal-output"></p>
+
     <script>
+        // Get the current page path and format it
+        let pageName = window.location.pathname.replace("/", "").toUpperCase();
+        if (pageName === "") pageName = "HOME"; // If the user accessed "/", set it to HOME
+
         const errorMessage = `
         ERROR CODE: 404
-        PAGE NOT FOUND!
-        URL FAILURE DETECTED...
+        PAGE "${pageName}" NOT FOUND
+        SYSTEM FAILURE DETECTED...
         
         Attempting to restore connection...
         Loading...
@@ -36,6 +41,7 @@
         
         >> PRESS 'H' TO OVERRIDE
         `;
+
         let i = 0;
         function typeText() {
             if (i < errorMessage.length) {
@@ -46,13 +52,13 @@
         }
         typeText();
 
+        // Override and Redirect
         document.addEventListener('keydown', function(event) {
-            if (event.key.toLowerCase() === 'h') {  // Converts 'H' or 'h' to lowercase
+            if (event.key.toLowerCase() === 'h') {
                 document.getElementById("terminal-output").innerHTML += "\n\n>> OVERRIDE ACCEPTED: Redirecting...";
                 setTimeout(() => window.location.href = "https://nekocode.in", 2000);
             }
         });
-
     </script>
 </body>
 </html>
