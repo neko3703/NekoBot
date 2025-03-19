@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - URL Not Found</title>
+    <style>
+        body {
+            background: black;
+            color: #0f0;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            padding: 50px;
+        }
+        .error-text {
+            font-size: 1.5rem;
+            white-space: pre-line;
+            text-align: left;
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>System Error: 404</h1>
+    <p class="error-text" id="terminal-output"></p>
+    <script>
+        const errorMessage = `
+        ERROR CODE: 404
+        PAGE NOT FOUND!
+        URL FAILURE DETECTED...
+        
+        Attempting to restore connection...
+        Loading...
+        ERROR: Unable to recover from failure.
+        
+        >> PRESS 'H' TO OVERRIDE
+        `;
+        let i = 0;
+        function typeText() {
+            if (i < errorMessage.length) {
+                document.getElementById("terminal-output").innerHTML += errorMessage.charAt(i);
+                i++;
+                setTimeout(typeText, 50);
+            }
+        }
+        typeText();
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key.toLowerCase() === 'h') {  // Converts 'H' or 'h' to lowercase
+                document.getElementById("terminal-output").innerHTML += "\n\n>> OVERRIDE ACCEPTED: Redirecting...";
+                setTimeout(() => window.location.href = "https://nekocode.in", 2000);
+            }
+        });
+
+    </script>
+</body>
+</html>
