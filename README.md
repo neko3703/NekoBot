@@ -1,6 +1,6 @@
 # Neko Code - Your Discord Companion
 
-ニキータ・パリーク is a versatile Discord bot equipped with a multitude of features. It excels in various tasks, including moderation, mini-games, and unique commands like weather updates, daily NASA images, and more.
+Neko Code is a versatile Discord bot equipped with a multitude of features. It excels in various tasks, including moderation, mini-games, and unique commands like weather updates, daily NASA images, and more.
 
 ## Features
 
@@ -8,7 +8,7 @@
 
 **Moderation Tools**: Keep your server in check with moderation commands to manage members and content.
 
-**Fun and Games**: Spice up your server with entertaining games and activities provided by ニキータ・パリーク.
+**Fun and Games**: Spice up your server with entertaining games and activities provided by Neko Code.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@
 
 If you encounter any issues or have questions, reach out to neko.code on the official [Neko Code support server](https://discord.gg/Xyk2TjeAMJ) or use `/report-issue` command directly from your server.
 
-Join the [Neko Code](https://discord.gg/Xyk2TjeAMJ.) community and elevate your Discord experience!
+Join the [Neko Code](https://discord.gg/Xyk2TjeAMJ) community and elevate your Discord experience!
 
 ## Important
 
