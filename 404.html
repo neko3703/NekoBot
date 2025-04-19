@@ -1,48 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 - Neko Code</title>
-  <link rel="stylesheet" href="assets/404.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-</head>
-<body>
-  <div class="embed-container">
-
-    <!-- Bot identity row -->
-    <div class="bot-header">
-      <img src="https://images-ext-1.discordapp.net/external/TRIOaw2s2ZRU0PsAP9g1RIw5H_H3S7BX76yYz-9_VPs/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/23e381010098d2269696dd55036dd260.webp?width=320&height=320" alt="Neko Code Avatar" class="avatar">
-      <span class="bot-name">Neko Code</span>
-      <span class="bot-tag">✓ APP</span>
-    </div>
-
-    <!-- Embed box -->
-    <div class="embed">
-      <div class="text-box">
-        <h3>Oops! Something went wrong...</h3>
-        <p id="dynamic-url-msg">🔸It looks like I couldn't find the page you requested.</p>
-        <p>🔸This might have been caused by a typo or the page no longer exists.</p>
-        <p>🔸Please check the URL again.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Neko Code</title>
+    <link rel="stylesheet" href="assets/404.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <div class="embed-container">
+      
+      <!-- Bot identity row -->
+      <div class="bot-header">
+        <img src="https://images-ext-1.discordapp.net/external/TRIOaw2s2ZRU0PsAP9g1RIw5H_H3S7BX76yYz-9_VPs/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/23e381010098d2269696dd55036dd260.webp?width=320&height=320" alt="Neko Code Avatar" class="avatar">
+        <span class="bot-name">Neko Code</span>
+        <span class="bot-tag">✓ APP</span>
       </div>
-      <img src="https://static.vecteezy.com/system/resources/previews/001/857/111/non_2x/error-404-page-not-found-landing-page-concept-for-mobile-and-pc-free-vector.jpg" alt="404 Error" class="embed-thumbnail">
+  
+      <!-- Embed box -->
+        <div class="embed">
+          <div class="text-box">
+            <h3>Oops! Something went wrong...</h3>
+            <p>🔸It looks like I couldn't find the page you requested.</p>
+            <p>🔸This might have been caused by a typo or the page no longer exists.</p>
+            <p>🔸Please check the URL again.</p>
+          </div>
+          <img src="https://static.vecteezy.com/system/resources/previews/001/857/111/non_2x/error-404-page-not-found-landing-page-concept-for-mobile-and-pc-free-vector.jpg" alt="404 Error" class="embed-thumbnail">
+      </div>
+      <button onclick="window.location.href='https://nekocode.in'" class="button">Go to Neko Code <i class="fa fa-external-link" aria-hidden="true"></i></button>
     </div>
-
-    <!-- Button -->
-    <button onclick="window.location.href='https://nekocode.in'" class="button">
-      Go to Neko Code <i class="fa fa-external-link" aria-hidden="true"></i>
-    </button>
-  </div>
-
-  <!-- Script to update the message -->
-  <script>
-    const path = window.location.pathname;
-    const trimmedPath = path === "/" ? "/" : path.replace(/^\/|\/$/g, "");
-    const messageElement = document.getElementById("dynamic-url-msg");
-
-    if (trimmedPath && trimmedPath !== "/") {
-      messageElement.innerText = `🔸It looks like I couldn't find the page: "${trimmedPath}" you requested.`;
-    }
-  </script>
-</body>
+  </body>
 </html>
