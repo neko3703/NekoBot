@@ -1,95 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Not Found</title>
-    <style>
-        body {
-            background: black;
-            color: #0f0;
-            font-family: "Courier New", monospace;
-            text-align: center;
-            padding: 50px;
-        }
-        .error-container {
-            display: inline-block;
-            text-align: left;
-            max-width: 600px;
-        }
-        .error-text {
-            font-size: 1.2rem;
-            line-height: 1.5;
-            display: inline;
-        }
-        .cursor {
-            font-weight: bold;
-            display: inline;
-            animation: none; /* Initially no blinking */
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-    </style>
-</head>
-<body>
-    <h1>System Error: 404</h1>
-    <div class="error-container">
-        <p class="error-text" id="terminal-output"></p><span class="cursor" id="cursor">█</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Neko Code</title>
+    <link rel="stylesheet" href="assets/css/404.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <div class="embed-container">
+      
+      <!-- Bot identity row -->
+      <div class="bot-header">
+        <img src="https://images-ext-1.discordapp.net/external/TRIOaw2s2ZRU0PsAP9g1RIw5H_H3S7BX76yYz-9_VPs/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/23e381010098d2269696dd55036dd260.webp?width=320&height=320" alt="Neko Code Avatar" class="avatar">
+        <span class="bot-name">Neko Code</span>
+        <span class="bot-tag">✓ APP</span>
+      </div>
+  
+      <!-- Embed box -->
+        <div class="embed">
+          <div class="text-box">
+            <h3>Oops! Something went wrong</h3>
+            <p>🔸It looks like I couldn't find the page you requested.</p>
+            <p>🔸This might have been caused by a typo or the page no longer exists.</p>
+            <p>🔸Please check the URL again.</p>
+          </div>
+          <img src="https://static.vecteezy.com/system/resources/previews/001/857/111/non_2x/error-404-page-not-found-landing-page-concept-for-mobile-and-pc-free-vector.jpg" alt="404 Error" class="embed-thumbnail">
+      </div>
+      <button onclick="window.location.href='https://nekocode.in'" class="button">Go to Neko Code <i class="fa fa-external-link" aria-hidden="true"></i></button>
     </div>
-
-    <script>
-        let pageName = window.location.pathname.replace("/", "").toUpperCase();
-        if (pageName === "") pageName = "HOME";
-
-        const errorMessage = `SYSTEM ALERT: UNAUTHORIZED ACCESS DETECTED
-        -------------------------------------------------
-        ERROR CODE: 404
-        TARGET PAGE "${pageName}" NOT FOUND IN DATABASE.
-
-        POSSIBLE REASONS:
-        - The page has been moved or deleted.
-        - You mistyped the URL.
-        - The system is experiencing a critical failure.
-
-        INITIATING RECOVERY PROTOCOL...
-        >> Attempting to locate missing page...
-        >> Searching the database...
-        >> ERROR: TRACE NOT FOUND.
-
-        CONNECTION STATUS: UNAVAILABLE.
-        -------------------------------------------------
-        >> PRESS 'H' TO OVERRIDE AND RETURN TO HOME PAGE.`;
-
-        let i = 0;
-        function typeText() {
-            if (i < errorMessage.length) {
-                document.getElementById("terminal-output").innerHTML += errorMessage.charAt(i) === '\n' ? "<br>" : errorMessage.charAt(i);
-                i++;
-
-                // Move the cursor to the end of text dynamically
-                let container = document.querySelector(".error-container");
-                container.appendChild(document.getElementById("cursor"));
-
-                setTimeout(typeText, 75); // Slower typing effect
-            } else {
-                blinkCursor(); // Start blinking cursor after typing is done
-            }
-        }
-        typeText();
-
-        function blinkCursor() {
-            let cursor = document.getElementById("cursor");
-            cursor.style.animation = "blink 0.5s infinite alternate"; // Start blinking
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key.toLowerCase() === 'h') {
-                document.getElementById("terminal-output").innerHTML += "<br><br>> OVERRIDE ACCEPTED: Redirecting...";
-                setTimeout(() => window.location.href = "https://nekocode.in", 2000);
-            }
-        });
-    </script>
-</body>
+  </body>
 </html>
