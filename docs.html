@@ -114,7 +114,7 @@
         }
         /* Increased indentation for nested lists */
         .sidebar ul ul {
-            margin-left: 1.5rem; /* Increased from 1rem (ml-4 in Tailwind is 1rem) */
+            margin-left: 2.5rem; /* Increased from 1.5rem */
         }
         .main-content-area {
             padding: 1.5rem;
@@ -925,18 +925,10 @@
 
             // Event listener for sidebar navigation clicks
             sidebarNav.addEventListener('click', (event) => {
-                console.log('Sidebar click detected.'); // Debugging: Confirm click listener fires
                 event.preventDefault(); // Prevent default link behavior (page jump)
                 const targetLink = event.target.closest('.sidebar-link');
-                console.log('Target Link:', targetLink); // Debugging: See what element is found
                 if (targetLink) {
                     const pageId = targetLink.dataset.pageId;
-                    console.log('Page ID:', pageId); // Debugging: See extracted page ID
-                    if (documentationContent[pageId]) {
-                        console.log('Content found for Page ID:', pageId); // Debugging: Confirm content exists
-                    } else {
-                        console.log('Content NOT found for Page ID:', pageId); // Debugging: Content missing
-                    }
                     loadContent(pageId);
                 }
             });
@@ -1076,7 +1068,7 @@
                         primaryColor = '#EC4899';
                         hoverColor = '#DB2777';
                         borderColor = '#BE185D';
-                        activeSidebarColor = '#BE185D';
+                        acotiveSidebarColor = '#BE185D';
                         break;
                     default: // Default to purple
                         primaryColor = '#8B5CF6';
@@ -1113,9 +1105,8 @@
             }
 
             // Load the default page on initial load (e.g., "about" page)
-            loadContent('about'); // Reverted to 'about' as default
+            loadContent('about');
         });
     </script>
 </body>
 </html>
-\
