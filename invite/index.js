@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="refresh" content="3; url=https://discord.gg/Xyk2TjeAMJ" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting to Discord...</title>
+  <style>
+    :root {
+      --bg: #0e1013;
+      --fg: #ffffff;
+      --accent: #5865F2;
+      --font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5em;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #cccccc;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      border: 2px solid var(--accent);
+      padding: 10px 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      display: inline-block;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Redirecting you to our Discord server...</h1>
+  <p>If you're not redirected automatically, click the button below:</p>
+  <a href="https://discord.com/api/oauth2/authorize?client_id=1022419550664400978&permissions=19235481189495&redirect_uri=https%3A%2F%2Fdiscord.gg%2FXyk2TjeAMJ&response_type=code&scope=bot%20guilds.join">Invite Neko Code</a>
+</body>
+</html>
