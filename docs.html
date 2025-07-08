@@ -70,37 +70,38 @@
         .btn-primary:active {
             transform: translateY(0);
         }
-
-        /* Sidebar styling for responsive behavior */
         .sidebar {
-            position: fixed; /* Fixed position for mobile slide-out */
+            background-color: transparent;
+            padding: 1.5rem;
+            border-radius: 0;
+            box-shadow: none;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            border-right: 1px solid var(--border-color);
+            /* Mobile specific styles */
+            position: fixed; /* Make it fixed for mobile overlay */
             top: 0;
             left: 0;
-            width: 80%; /* Takes up 80% of screen width on mobile */
-            max-width: 300px; /* Max width for sidebar on smaller screens */
-            height: 100vh;
-            background-color: var(--bg-primary); /* Ensure background for slide-out */
-            z-index: 50; /* Above main content, below overlay */
-            transform: translateX(-100%); /* Hidden by default */
+            width: 80%; /* Occupy 80% width on mobile */
+            max-width: 300px; /* Max width for mobile sidebar */
+            z-index: 50; /* Ensure it's above content but below modals */
+            background-color: var(--bg-primary); /* Solid background for mobile overlay */
+            transform: translateX(-100%); /* Start off-screen */
             transition: transform 0.3s ease-in-out;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Shadow for slide-out effect */
-            overflow-y: auto;
-            padding: 1.5rem;
-            border-right: 1px solid var(--border-color);
         }
-
-        .sidebar.sidebar-open {
+        .sidebar.open {
             transform: translateX(0); /* Slide in */
         }
-
-        /* Desktop styles for sidebar */
-        @media (min-width: 1024px) {
+        @media (min-width: 1024px) { /* Desktop styles */
             .sidebar {
-                position: sticky; /* Sticky on desktop */
-                width: 1/5; /* Tailwind w-1/5 */
-                max-width: none; /* Remove max-width constraint */
+                position: sticky; /* Revert to sticky on desktop */
+                width: 1/5; /* Keep desktop width */
                 transform: translateX(0); /* Always visible */
-                box-shadow: none; /* No shadow on desktop */
+                border-right: 1px solid var(--border-color);
             }
         }
 
@@ -110,7 +111,7 @@
             color: var(--text-secondary);
             transition: color 0.2s ease, background-color 0.2s ease, border-left 0.2s ease;
             border-radius: 0.25rem;
-            margin-bottom: 0.05rem; /* Further reduced spacing */
+            margin-bottom: 0.125rem;
         }
         .sidebar-link:hover {
             color: var(--text-primary);
@@ -130,51 +131,17 @@
             padding-left: calc(0.75rem - 3px);
         }
         .sidebar ul ul {
-            margin-left: 2.5rem; /* Increased indentation */
+            margin-left: 1.5rem;
         }
         .main-content-area {
             padding: 1.5rem;
             background-color: var(--bg-primary);
-            flex-grow: 1; /* Allow content to take available space */
         }
         @media (min-width: 1024px) {
             .main-content-area {
                 padding: 2.5rem;
             }
         }
-        /* Overlay for mobile sidebar */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 40; /* Below sidebar, above main content */
-            display: none; /* Hidden by default */
-        }
-        .overlay.overlay-visible {
-            display: block;
-        }
-
-        /* Hamburger button styling */
-        .hamburger-button {
-            display: block; /* Visible by default on small screens */
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.8rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 60; /* Ensure it's clickable */
-        }
-        @media (min-width: 1024px) {
-            .hamburger-button {
-                display: none; /* Hidden on large screens */
-            }
-        }
-
-        /* Scroll to top button styles */
         #scrollToTopBtn {
             display: none;
             position: fixed;
@@ -202,7 +169,6 @@
             transform: translateY(0);
         }
 
-        /* Search Overlay/Popup Styles */
         .search-overlay {
             position: fixed;
             top: 0;
@@ -269,7 +235,6 @@
             margin-top: 0.25rem;
         }
 
-        /* Settings Dropdown Styles */
         .settings-container {
             position: relative;
             display: inline-block;
@@ -328,23 +293,44 @@
             border-color: var(--text-primary);
         }
 
-        /* Specific color styles */
         .color-swatch-purple { background-color: #8B5CF6; }
         .color-swatch-green { background-color: #10B981; }
         .color-swatch-blue { background-color: #3B82F6; }
         .color-swatch-pink { background-color: #EC4899; }
+
+        /* Overlay for when mobile sidebar is open */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40; /* Below sidebar, above content */
+            display: none; /* Hidden by default */
+        }
+        .sidebar-overlay.show {
+            display: block;
+        }
     </style>
 </head>
 <body class="antialiased leading-normal">
     <div class="flex flex-col lg:flex-row min-h-screen">
-        <!-- Overlay for mobile sidebar -->
-        <div id="overlay" class="overlay"></div>
+        <!-- Sidebar Overlay for Mobile -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
         <!-- Left Sidebar Navigation -->
-        <aside class="lg:w-1/5 sidebar">
-            <div class="mb-8 text-center lg:text-left">
-                <h2 class="text-3xl font-bold text-white page-heading">Neko Code</h2>
-                <p class="text-gray-400 text-sm">Documentation</p>
+        <!-- The 'hidden' class is removed by JS on desktop, and added/removed on mobile -->
+        <aside id="sidebar" class="w-full lg:w-1/5 sidebar hidden lg:block">
+            <div class="mb-8 text-center lg:text-left flex items-center justify-between">
+                <div>
+                    <h2 class="text-3xl font-bold text-white page-heading">Neko Code</h2>
+                    <p class="text-gray-400 text-sm">Documentation</p>
+                </div>
+                <!-- Close button for mobile sidebar (visible only on mobile) -->
+                <button id="close-sidebar-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
 
             <div class="mb-6 relative">
@@ -359,8 +345,8 @@
                     <li><a href="#" class="sidebar-link" data-page-id="features">Features</a></li>
                     <li><a href="#" class="sidebar-link" data-page-id="how-to-use">How to Use</a></li>
                     <li><a href="#" class="sidebar-link" data-page-id="commands-overview">Command List Overview</a></li>
-                    <li><a href="#" class="sidebar-link" data-page-id="commands-slash">Slash Commands</a>
-                        <ul>
+                    <li class="ml-4"><a href="#" class="sidebar-link" data-page-id="commands-slash">Slash Commands</a>
+                        <ul class="ml-4">
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-moderation">Moderation</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-utility">Utility</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-fun">Fun</a></li>
@@ -376,8 +362,8 @@
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-uncategorized">Uncategorized</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" class="sidebar-link" data-page-id="commands-prefix">Prefix Commands</a>
-                        <ul>
+                    <li class="ml-4"><a href="#" class="sidebar-link" data-page-id="commands-prefix">Prefix Commands</a>
+                        <ul class="ml-4">
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-economy">Economy</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-fun-games">Fun and Games</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-utility">Utility</a></li>
@@ -387,7 +373,7 @@
                         </ul>
                     </li>
                     <li><a href="#" class="sidebar-link" data-page-id="other-features">Other Features</a>
-                        <ul>
+                        <ul class="ml-4">
                             <li><a href="#" class="sidebar-link" data-page-id="other-features-detectors">Detectors</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="other-features-quotes-link">Quotes Message Link</a></li>
                         </ul>
@@ -399,12 +385,14 @@
 
         <!-- Main Content Area -->
         <main class="w-full lg:w-4/5 main-content-area flex flex-col">
-            <!-- Header for settings and hamburger button -->
+            <!-- Header for settings button and hamburger icon -->
             <header class="flex justify-between items-center p-4">
-                <button id="hamburger-button" class="hamburger-button lg:hidden">
+                <!-- Hamburger Icon (visible on mobile, hidden on desktop) -->
+                <button id="hamburger-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
-                <div class="settings-container ml-auto"> <!-- ml-auto pushes it to the right -->
+
+                <div class="settings-container">
                     <button id="settings-button" class="settings-button">
                         SETTINGS
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -439,6 +427,7 @@
         <div class="search-container-modal">
             <input type="text" id="search-input-modal" placeholder="Search docs..." class="search-input-modal">
             <div id="search-results" class="search-results-list">
+                <!-- Search results will be dynamically loaded here -->
             </div>
         </div>
     </div>
@@ -447,6 +436,7 @@
     <button id="scrollToTopBtn" title="Go to top">↑</button>
 
     <script>
+        // Define all documentation content as HTML strings
         const documentationContent = {
             "about": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">About Neko Code</h2>
@@ -897,13 +887,16 @@
             const searchResultsContainer = document.getElementById('search-results');
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
+            // Settings elements
             const settingsButton = document.getElementById('settings-button');
             const settingsDropdown = document.getElementById('settings-dropdown');
             const colorSwatches = document.querySelectorAll('.color-swatch');
 
-            const hamburgerButton = document.getElementById('hamburger-button');
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('overlay');
+            // Hamburger menu elements
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const closeSidebarBtn = document.getElementById('close-sidebar-btn');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
 
             // Function to show/hide search overlay
             function showSearchOverlay() {
@@ -916,14 +909,8 @@
 
             function hideSearchOverlay() {
                 searchOverlay.classList.add('hidden');
-                searchInputModal.value = '';
-                searchResultsContainer.innerHTML = '';
-            }
-
-            // Function to close sidebar on mobile
-            function closeSidebar() {
-                sidebar.classList.remove('sidebar-open');
-                overlay.classList.remove('overlay-visible');
+                searchInputModal.value = ''; // Clear modal search input
+                searchResultsContainer.innerHTML = ''; // Clear modal results
             }
 
             // Function to load content into the main display area
@@ -931,15 +918,18 @@
                 if (documentationContent[pageId]) {
                     contentDisplay.innerHTML = documentationContent[pageId];
 
+                    // Remove all active and parent-active classes first
                     sidebarLinks.forEach(link => {
                         link.classList.remove('active');
                         link.classList.remove('sidebar-parent-active');
                     });
 
+                    // Set active class for the clicked link
                     const activeLink = document.querySelector(`[data-page-id="${pageId}"]`);
                     if (activeLink) {
                         activeLink.classList.add('active');
 
+                        // Highlight parent if it's a sub-command category
                         const parentPageIds = {
                             'commands-slash-moderation': 'commands-slash',
                             'commands-slash-utility': 'commands-slash',
@@ -976,17 +966,26 @@
                     contentDisplay.innerHTML = `<p class="text-red-400">Content for "${pageId}" not found.</p>`;
                 }
                 // Close sidebar after loading content on mobile
-                if (window.innerWidth < 1024) { // Check if it's a mobile screen
-                    closeSidebar();
+                if (window.innerWidth < 1024) {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('show');
                 }
             }
 
             // Event listener for sidebar navigation clicks
             sidebarNav.addEventListener('click', (event) => {
+                console.log('Sidebar click detected.');
                 event.preventDefault();
                 const targetLink = event.target.closest('.sidebar-link');
+                console.log('Target Link:', targetLink);
                 if (targetLink) {
                     const pageId = targetLink.dataset.pageId;
+                    console.log('Page ID:', pageId);
+                    if (documentationContent[pageId]) {
+                        console.log('Content found for Page ID:', pageId);
+                    } else {
+                        console.log('Content NOT found for Page ID:', pageId);
+                    }
                     loadContent(pageId);
                 }
             });
@@ -998,8 +997,9 @@
                     showSearchOverlay();
                 } else if (event.key === 'Escape' && !searchOverlay.classList.contains('hidden')) {
                     hideSearchOverlay();
-                } else if (event.key === 'Escape' && sidebar.classList.contains('sidebar-open')) {
-                    closeSidebar();
+                } else if (event.key === 'Escape' && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('show');
                 }
             });
 
@@ -1013,8 +1013,9 @@
                 }
             });
 
+            // Function to filter and display search results in the modal popup
             function filterSearchResultsModal(searchTerm) {
-                searchResultsContainer.innerHTML = '';
+                searchResultsContainer.innerHTML = ''; // Clear previous results
                 const lowerCaseSearchTerm = searchTerm.toLowerCase();
 
                 const matchingResults = [];
@@ -1025,18 +1026,21 @@
                     const titleElement = tempDiv.querySelector('h2');
                     const title = titleElement ? titleElement.textContent : pageId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 
-                    const snippetText = tempDiv.textContent.replace(/\s+/g, ' ').trim();
+                    // Get a snippet of the content
+                    const snippetText = tempDiv.textContent.replace(/\s+/g, ' ').trim(); // Remove extra whitespace
                     let snippet = '';
-                    const snippetLength = 150;
+                    const snippetLength = 150; // Max length of snippet
                     const startIndex = snippetText.toLowerCase().indexOf(lowerCaseSearchTerm);
 
                     if (startIndex !== -1 && lowerCaseSearchTerm.length > 0) {
+                        // If search term found, show snippet around it
                         const start = Math.max(0, startIndex - (snippetLength / 2));
                         const end = Math.min(snippetText.length, startIndex + lowerCaseSearchTerm.length + (snippetLength / 2));
                         snippet = snippetText.substring(start, end);
                         if (start > 0) snippet = '...' + snippet;
                         if (end < snippetText.length) snippet = snippet + '...';
                     } else {
+                        // If no search term or empty, just take the beginning
                         snippet = snippetText.substring(0, snippetLength);
                         if (snippetText.length > snippetLength) snippet += '...';
                     }
@@ -1054,7 +1058,7 @@
                         resultDiv.innerHTML = `<div class="title">${result.title}</div><div class="snippet">${result.snippet}</div>`;
                         resultDiv.addEventListener('click', () => {
                             loadContent(result.id);
-                            hideSearchOverlay();
+                            hideSearchOverlay(); // Close popup after selection
                         });
                         searchResultsContainer.appendChild(resultDiv);
                     });
@@ -1066,10 +1070,12 @@
                 }
             }
 
+            // Event listener for typing in modal search input
             searchInputModal.addEventListener('input', (event) => {
                 filterSearchResultsModal(event.target.value);
             });
 
+            // Scroll to top button logic
             window.onscroll = function() {
                 if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
                     scrollToTopBtn.style.display = "block";
@@ -1082,10 +1088,13 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            settingsButton.addEventListener('click', () => {
+            // Settings Dropdown and Theme Logic
+            settingsButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevent click from closing dropdown immediately
                 settingsDropdown.classList.toggle('show');
             });
 
+            // Close the dropdown if the user clicks outside of it
             window.addEventListener('click', (event) => {
                 if (!event.target.matches('#settings-button') && !event.target.closest('.settings-dropdown-content')) {
                     if (settingsDropdown.classList.contains('show')) {
@@ -1094,6 +1103,7 @@
                 }
             });
 
+            // Function to set theme color
             function setThemeColor(color) {
                 let primaryColor, hoverColor, borderColor, activeSidebarColor;
                 switch (color) {
@@ -1132,14 +1142,16 @@
                 document.documentElement.style.setProperty('--theme-border', borderColor);
                 document.documentElement.style.setProperty('--theme-active-sidebar', activeSidebarColor);
 
+                // Update active class for swatches
                 colorSwatches.forEach(swatch => {
                     swatch.classList.remove('active');
                 });
                 document.querySelector(`.color-swatch[data-color="${color}"]`).classList.add('active');
 
-                localStorage.setItem('themeColor', color);
+                localStorage.setItem('themeColor', color); // Persist preference
             }
 
+            // Event listeners for color swatches
             colorSwatches.forEach(swatch => {
                 swatch.addEventListener('click', () => {
                     const color = swatch.dataset.color;
@@ -1147,24 +1159,68 @@
                 });
             });
 
+            // Mobile sidebar toggle logic
+            hamburgerBtn.addEventListener('click', () => {
+                sidebar.classList.add('open');
+                sidebar.classList.remove('hidden'); // Ensure it's not hidden by the initial setup
+                sidebarOverlay.classList.add('show');
+            });
+
+            closeSidebarBtn.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('show');
+                // Re-add hidden class after transition for mobile if not desktop
+                if (window.innerWidth < 1024) {
+                    setTimeout(() => {
+                        sidebar.classList.add('hidden');
+                    }, 300); // Match CSS transition duration
+                }
+            });
+
+            sidebarOverlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                sidebarOverlay.classList.remove('show');
+                // Re-add hidden class after transition for mobile if not desktop
+                if (window.innerWidth < 1024) {
+                    setTimeout(() => {
+                        sidebar.classList.add('hidden');
+                    }, 300); // Match CSS transition duration
+                }
+            });
+
+            // Handle resize to ensure correct sidebar visibility on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1024) { // Desktop view
+                    sidebar.classList.remove('hidden');
+                    sidebar.classList.remove('open'); // Ensure it's not in mobile open state
+                    sidebarOverlay.classList.remove('show'); // Hide overlay
+                } else { // Mobile view
+                    // If the sidebar is not explicitly open, keep it hidden
+                    if (!sidebar.classList.contains('open')) {
+                        sidebar.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Initial setup for sidebar visibility based on screen size
+            // This ensures the correct state on page load without flickering
+            if (window.innerWidth >= 1024) {
+                sidebar.classList.remove('hidden'); // Ensure sidebar is visible on desktop initially
+            } else {
+                sidebar.classList.add('hidden'); // Hide sidebar on mobile initially
+            }
+
+
+            // Load saved preferences on startup
             const savedThemeColor = localStorage.getItem('themeColor');
             if (savedThemeColor) {
                 setThemeColor(savedThemeColor);
             }
 
-            // Hamburger menu functionality
-            hamburgerButton.addEventListener('click', () => {
-                sidebar.classList.add('sidebar-open');
-                overlay.classList.add('overlay-visible');
-            });
-
-            overlay.addEventListener('click', () => {
-                closeSidebar();
-            });
-
-            // Initial load
+            // Load the default page on initial load (e.g., "about" page)
             loadContent('about');
         });
     </script>
 </body>
 </html>
+    
