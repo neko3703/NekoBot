@@ -71,36 +71,36 @@
             transform: translateY(0);
         }
 
-        /* Sidebar styling - Desktop First Approach */
+        /* Sidebar styling for responsive behavior */
         .sidebar {
-            /* Default styles for desktop */
-            position: sticky;
+            position: fixed; /* Fixed position for mobile slide-out */
             top: 0;
-            width: 20%; /* Equivalent to Tailwind w-1/5 */
+            left: 0;
+            width: 80%; /* Takes up 80% of screen width on mobile */
+            max-width: 300px; /* Max width for sidebar on smaller screens */
             height: 100vh;
-            background-color: var(--bg-primary);
-            z-index: 10; /* Lower z-index for desktop to not interfere */
-            transform: translateX(0); /* Always visible on desktop */
-            box-shadow: none;
+            background-color: var(--bg-primary); /* Ensure background for slide-out */
+            z-index: 50; /* Above main content, below overlay */
+            transform: translateX(-100%); /* Hidden by default */
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Shadow for slide-out effect */
             overflow-y: auto;
             padding: 1.5rem;
             border-right: 1px solid var(--border-color);
-            transition: transform 0.3s ease-in-out; /* Smooth transition for mobile slide */
         }
 
-        /* Mobile specific overrides */
-        @media (max-width: 1023px) { /* Applies to screens smaller than 1024px (lg breakpoint) */
+        .sidebar.sidebar-open {
+            transform: translateX(0); /* Slide in */
+        }
+
+        /* Desktop styles for sidebar */
+        @media (min-width: 1024px) {
             .sidebar {
-                position: fixed; /* Fixed for mobile slide-out */
-                left: 0;
-                width: 80%; /* Takes up 80% of screen width on mobile */
-                max-width: 300px; /* Max width for sidebar on smaller screens */
-                transform: translateX(-100%); /* Hidden by default on mobile */
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Shadow for slide-out effect */
-                border-right: 1px solid var(--border-color); /* Ensure border on mobile slide-out */
-            }
-            .sidebar.sidebar-open {
-                transform: translateX(0); /* Slide in when open on mobile */
+                position: sticky; /* Sticky on desktop */
+                width: 1/5; /* Tailwind w-1/5 */
+                max-width: none; /* Remove max-width constraint */
+                transform: translateX(0); /* Always visible */
+                box-shadow: none; /* No shadow on desktop */
             }
         }
 
@@ -159,7 +159,7 @@
 
         /* Hamburger button styling */
         .hamburger-button {
-            display: none; /* Hidden by default (desktop first) */
+            display: block; /* Visible by default on small screens */
             background: none;
             border: none;
             color: var(--text-primary);
@@ -168,9 +168,9 @@
             padding: 0.5rem;
             z-index: 60; /* Ensure it's clickable */
         }
-        @media (max-width: 1023px) { /* Visible only on mobile */
+        @media (min-width: 1024px) {
             .hamburger-button {
-                display: block;
+                display: none; /* Hidden on large screens */
             }
         }
 
@@ -341,7 +341,7 @@
         <div id="overlay" class="overlay"></div>
 
         <!-- Left Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="lg:w-1/5 sidebar">
             <div class="mb-8 text-center lg:text-left">
                 <h2 class="text-3xl font-bold text-white page-heading">Neko Code</h2>
                 <p class="text-gray-400 text-sm">Documentation</p>
@@ -401,7 +401,7 @@
         <main class="w-full lg:w-4/5 main-content-area flex flex-col">
             <!-- Header for settings and hamburger button -->
             <header class="flex justify-between items-center p-4">
-                <button id="hamburger-button" class="hamburger-button">
+                <button id="hamburger-button" class="hamburger-button lg:hidden">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
                 <div class="settings-container ml-auto"> <!-- ml-auto pushes it to the right -->
@@ -905,8 +905,6 @@
             const sidebar = document.querySelector('.sidebar');
             const overlay = document.getElementById('overlay');
 
-            const mobileBreakpoint = 1024; // Corresponds to Tailwind's 'lg' breakpoint
-
             // Function to show/hide search overlay
             function showSearchOverlay() {
                 searchOverlay.classList.remove('hidden');
@@ -924,10 +922,8 @@
 
             // Function to close sidebar on mobile
             function closeSidebar() {
-                if (window.innerWidth < mobileBreakpoint) {
-                    sidebar.classList.remove('sidebar-open');
-                    overlay.classList.remove('overlay-visible');
-                }
+                sidebar.classList.remove('sidebar-open');
+                overlay.classList.remove('overlay-visible');
             }
 
             // Function to load content into the main display area
@@ -979,7 +975,10 @@
                 } else {
                     contentDisplay.innerHTML = `<p class="text-red-400">Content for "${pageId}" not found.</p>`;
                 }
-                closeSidebar(); // This function now checks screen width internally
+                // Close sidebar after loading content on mobile
+                if (window.innerWidth < 1024) { // Check if it's a mobile screen
+                    closeSidebar();
+                }
             }
 
             // Event listener for sidebar navigation clicks
@@ -1155,36 +1154,16 @@
 
             // Hamburger menu functionality
             hamburgerButton.addEventListener('click', () => {
-                if (window.innerWidth < mobileBreakpoint) {
-                    sidebar.classList.add('sidebar-open');
-                    overlay.classList.add('overlay-visible');
-                }
+                sidebar.classList.add('sidebar-open');
+                overlay.classList.add('overlay-visible');
             });
 
             overlay.addEventListener('click', () => {
                 closeSidebar();
             });
 
-            // Handle window resize to adjust sidebar display
-            function handleResize() {
-                if (window.innerWidth >= mobileBreakpoint) {
-                    // If desktop, ensure sidebar is visible and overlay is hidden
-                    sidebar.classList.remove('sidebar-open'); // Remove mobile-specific class
-                    // No need to set transform inline, CSS handles it
-                    overlay.classList.remove('overlay-visible');
-                } else {
-                    // If mobile, ensure sidebar is hidden unless opened
-                    if (!sidebar.classList.contains('sidebar-open')) {
-                        // No need to set transform inline, CSS handles it
-                    }
-                }
-            }
-
-            window.addEventListener('resize', handleResize);
-
-            // Initial load and setup
+            // Initial load
             loadContent('about');
-            handleResize(); // Call on load to set initial state correctly
         });
     </script>
 </body>
