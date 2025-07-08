@@ -126,6 +126,11 @@
             background-repeat: no-repeat;
         }
 
+        /* Hero Section Overlay - Removed gradient, keeping only semi-transparent black for readability */
+        .hero-overlay-gradient {
+            background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black overlay */
+        }
+
         /* Mobile Sidebar */
         .mobile-sidebar {
             position: fixed;
@@ -204,6 +209,38 @@
         #scrollToTopBtn:active {
             transform: translateY(0);
         }
+        
+        /* Dynamic Contact Us Button */
+        #contactUsBtn {
+            position: fixed;
+            bottom: 20px; /* Aligned with scroll to top button */
+            left: 30px; /* Moved to the left */
+            z-index: 99;
+            background: linear-gradient(45deg, var(--theme-primary), var(--theme-hover)); /* Gradient background */
+            color: white;
+            padding: 12px 20px;
+            border-radius: 0.75rem; /* More rounded corners */
+            font-weight: 600;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            transition: all 0.3s ease; /* Smooth transition for all properties */
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none; /* Remove default border */
+            cursor: pointer;
+        }
+
+        #contactUsBtn:hover {
+            background: linear-gradient(45deg, var(--theme-hover), var(--theme-primary)); /* Reverse gradient on hover */
+            transform: translateY(-4px) scale(1.02); /* Lift and slightly enlarge */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Even stronger shadow on hover */
+        }
+
+        #contactUsBtn:active {
+            transform: translateY(0) scale(0.98); /* Press down effect */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
         /* Responsive adjustments for sections */
         @media (min-width: 768px) {
@@ -269,7 +306,8 @@
 
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center hero-section-background">
-        <div class="absolute inset-0 bg-black opacity-70"></div>
+        <!-- This div now acts as the semi-transparent black overlay -->
+        <div class="absolute inset-0 hero-overlay-gradient"></div>
         <div class="relative z-10 p-4 max-w-4xl mx-auto">
             <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up">
                 Neko Code: Your Ultimate Discord Bot
@@ -420,7 +458,13 @@
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" title="Go to top">↑</button>
-
+    
+    <!-- Dynamic Contact Us Button -->
+    <a href="https://nekocode.in/contact-us" target="_blank" id="contactUsBtn">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+        Contact Us
+    </a>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const hamburgerBtn = document.getElementById('hamburger-btn');
