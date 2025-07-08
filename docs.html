@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neko Code Documentation</title>
+    <meta name="description" content="Official documentation for Neko Code Discord Bot. Learn about its features, commands (slash and prefix), and how to get started.">
+    <meta name="theme-color" content="#8B5CF6"> <!-- Purple theme color -->
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nekocode.in/docs"> <!-- Replace with your actual docs URL -->
+    <meta property="og:title" content="Neko Code Documentation">
+    <meta property="og:description" content="Official documentation for Neko Code Discord Bot. Learn about its features, commands (slash and prefix), and how to get started.">
+    <meta property="og:image" content="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288">
+
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nekocode.in/docs"> <!-- Replace with your actual docs URL -->
+    <meta property="twitter:title" content="Neko Code Documentation">
+    <meta property="twitter:description" content="Official documentation for Neko Code Discord Bot. Learn about its features, commands (slash and prefix), and how to get started.">
+    <meta property="twitter:image" content="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Inter (for body text) and Montserrat (for headings) -->
@@ -111,7 +128,7 @@
             color: var(--text-secondary);
             transition: color 0.2s ease, background-color 0.2s ease, border-left 0.2s ease;
             border-radius: 0.25rem;
-            margin-bottom: 0.125rem;
+            margin-bottom: 0; /* Reduced spacing */
         }
         .sidebar-link:hover {
             color: var(--text-primary);
@@ -120,19 +137,39 @@
         .sidebar-link.active {
             color: var(--theme-active-sidebar);
             background-color: transparent;
-            font-weight: 600;
+            font-weight: 700; /* Made bolder */
             border-left: 3px solid var(--theme-active-sidebar);
             padding-left: calc(0.75rem - 3px);
         }
         .sidebar-link.sidebar-parent-active {
             background-color: var(--border-color);
             color: var(--text-primary);
+            font-weight: 700; /* Made bolder */
             border-left: 3px solid var(--theme-active-sidebar);
             padding-left: calc(0.75rem - 3px);
         }
         .sidebar ul ul {
             margin-left: 1.5rem;
+            padding-left: 0.25rem; /* Add some padding to the UL itself */
+            border-left: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for nested section */
+            border-radius: 0.25rem;
+            margin-top: 0.125rem; /* Reduced spacing */
+            margin-bottom: 0.125rem; /* Reduced spacing */
         }
+        .sidebar ul ul .sidebar-link {
+            padding-left: 0.75rem; /* Adjust padding for visual alignment within nested list */
+            font-size: 0.95rem; /* Slightly smaller font for children */
+            color: var(--text-secondary);
+        }
+        .sidebar ul ul ul { /* Grandchild indentation */
+            margin-left: 1rem; /* Further indent for grandchildren */
+            padding-left: 0.25rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.05); /* Lighter border for deeper nesting */
+        }
+        .sidebar ul ul ul .sidebar-link {
+            padding-left: 0.75rem; /* Adjust padding for visual alignment */
+        }
+
         .main-content-area {
             padding: 1.5rem;
             background-color: var(--bg-primary);
@@ -345,8 +382,8 @@
                     <li><a href="#" class="sidebar-link" data-page-id="features">Features</a></li>
                     <li><a href="#" class="sidebar-link" data-page-id="how-to-use">How to Use</a></li>
                     <li><a href="#" class="sidebar-link" data-page-id="commands-overview">Command List Overview</a></li>
-                    <li class="ml-4"><a href="#" class="sidebar-link" data-page-id="commands-slash">Slash Commands</a>
-                        <ul class="ml-4">
+                    <li><a href="#" class="sidebar-link" data-page-id="commands-slash">Slash Commands</a>
+                        <ul>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-moderation">Moderation</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-utility">Utility</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-fun">Fun</a></li>
@@ -362,8 +399,8 @@
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-uncategorized">Uncategorized</a></li>
                         </ul>
                     </li>
-                    <li class="ml-4"><a href="#" class="sidebar-link" data-page-id="commands-prefix">Prefix Commands</a>
-                        <ul class="ml-4">
+                    <li><a href="#" class="sidebar-link" data-page-id="commands-prefix">Prefix Commands</a>
+                        <ul>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-economy">Economy</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-fun-games">Fun and Games</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-utility">Utility</a></li>
@@ -373,7 +410,7 @@
                         </ul>
                     </li>
                     <li><a href="#" class="sidebar-link" data-page-id="other-features">Other Features</a>
-                        <ul class="ml-4">
+                        <ul>
                             <li><a href="#" class="sidebar-link" data-page-id="other-features-detectors">Detectors</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="other-features-quotes-link">Quotes Message Link</a></li>
                         </ul>
@@ -425,7 +462,7 @@
     <!-- Search Overlay/Modal -->
     <div id="search-overlay" class="search-overlay hidden">
         <div class="search-container-modal">
-            <input type="text" id="search-input-modal" placeholder="Search docs..." class="search-input-modal">
+            <input type="text" id="search-input-modal" placeholder="Search docs... (Ctrl + K)" class="search-input-modal">
             <div id="search-results" class="search-results-list">
                 <!-- Search results will be dynamically loaded here -->
             </div>
@@ -561,7 +598,7 @@
                     <li><strong>Server Management:</strong> Tools for managing channels, roles, and user nicknames.</li>
                     <li><strong>Support:</strong> Commands to get help or report issues.</li>
                     <li><strong>Text Tools:</strong> Utilities for text manipulation like translation and anonymous confessions.</li>
-                    <li><strong>Security:</strong> Commands for security-related checks.</li>
+                    <li><strong>Security:</b> Commands for security-related checks.</li>
                     <li><strong>Tools:</strong> General purpose tools like password generation.</li>
                     <li><strong>Other Commands:</strong> Miscellaneous commands.</li>
                     <li><strong>Hire Neko:</strong> Information on hiring the developer.</li>
@@ -1223,4 +1260,3 @@
     </script>
 </body>
 </html>
-    
