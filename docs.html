@@ -70,28 +70,37 @@
         .btn-primary:active {
             transform: translateY(0);
         }
+
+        /* Sidebar styling for responsive behavior */
         .sidebar {
-            background-color: transparent;
+            position: fixed; /* Fixed position for mobile slide-out */
+            top: 0;
+            left: 0;
+            width: 80%; /* Takes up 80% of screen width on mobile */
+            max-width: 300px; /* Max width for sidebar on smaller screens */
+            height: 100vh;
+            background-color: var(--bg-primary); /* Ensure background for slide-out */
+            z-index: 50; /* Above main content, below overlay */
+            transform: translateX(-100%); /* Hidden by default */
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Shadow for slide-out effect */
+            overflow-y: auto;
             padding: 1.5rem;
-            border-radius: 0;
-            box-shadow: none;
-            /* Default for mobile: static, auto height */
-            position: static;
-            height: auto;
-            overflow-y: visible; /* Allow content to push height */
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            border-right: none; /* No border on mobile when stacked */
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar.sidebar-open {
+            transform: translateX(0); /* Slide in */
         }
 
         /* Desktop styles for sidebar */
         @media (min-width: 1024px) {
             .sidebar {
-                position: sticky;
-                top: 0;
-                height: 100vh;
-                overflow-y: auto;
-                border-right: 1px solid var(--border-color);
+                position: sticky; /* Sticky on desktop */
+                width: 1/5; /* Tailwind w-1/5 */
+                max-width: none; /* Remove max-width constraint */
+                transform: translateX(0); /* Always visible */
+                box-shadow: none; /* No shadow on desktop */
             }
         }
 
@@ -126,12 +135,45 @@
         .main-content-area {
             padding: 1.5rem;
             background-color: var(--bg-primary);
+            flex-grow: 1; /* Allow content to take available space */
         }
         @media (min-width: 1024px) {
             .main-content-area {
                 padding: 2.5rem;
             }
         }
+        /* Overlay for mobile sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 40; /* Below sidebar, above main content */
+            display: none; /* Hidden by default */
+        }
+        .overlay.overlay-visible {
+            display: block;
+        }
+
+        /* Hamburger button styling */
+        .hamburger-button {
+            display: block; /* Visible by default on small screens */
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 60; /* Ensure it's clickable */
+        }
+        @media (min-width: 1024px) {
+            .hamburger-button {
+                display: none; /* Hidden on large screens */
+            }
+        }
+
         /* Scroll to top button styles */
         #scrollToTopBtn {
             display: none;
@@ -295,8 +337,11 @@
 </head>
 <body class="antialiased leading-normal">
     <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Overlay for mobile sidebar -->
+        <div id="overlay" class="overlay"></div>
+
         <!-- Left Sidebar Navigation -->
-        <aside class="w-full lg:w-1/5 sidebar">
+        <aside class="lg:w-1/5 sidebar">
             <div class="mb-8 text-center lg:text-left">
                 <h2 class="text-3xl font-bold text-white page-heading">Neko Code</h2>
                 <p class="text-gray-400 text-sm">Documentation</p>
@@ -314,8 +359,8 @@
                     <li><a href="#" class="sidebar-link" data-page-id="features">Features</a></li>
                     <li><a href="#" class="sidebar-link" data-page-id="how-to-use">How to Use</a></li>
                     <li><a href="#" class="sidebar-link" data-page-id="commands-overview">Command List Overview</a></li>
-                    <li class="ml-4"><a href="#" class="sidebar-link" data-page-id="commands-slash">Slash Commands</a>
-                        <ul class="ml-4">
+                    <li><a href="#" class="sidebar-link" data-page-id="commands-slash">Slash Commands</a>
+                        <ul>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-moderation">Moderation</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-utility">Utility</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-fun">Fun</a></li>
@@ -331,8 +376,8 @@
                             <li><a href="#" class="sidebar-link" data-page-id="commands-slash-uncategorized">Uncategorized</a></li>
                         </ul>
                     </li>
-                    <li class="ml-4"><a href="#" class="sidebar-link" data-page-id="commands-prefix">Prefix Commands</a>
-                        <ul class="ml-4">
+                    <li><a href="#" class="sidebar-link" data-page-id="commands-prefix">Prefix Commands</a>
+                        <ul>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-economy">Economy</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-fun-games">Fun and Games</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="commands-prefix-utility">Utility</a></li>
@@ -342,7 +387,7 @@
                         </ul>
                     </li>
                     <li><a href="#" class="sidebar-link" data-page-id="other-features">Other Features</a>
-                        <ul class="ml-4">
+                        <ul>
                             <li><a href="#" class="sidebar-link" data-page-id="other-features-detectors">Detectors</a></li>
                             <li><a href="#" class="sidebar-link" data-page-id="other-features-quotes-link">Quotes Message Link</a></li>
                         </ul>
@@ -354,9 +399,12 @@
 
         <!-- Main Content Area -->
         <main class="w-full lg:w-4/5 main-content-area flex flex-col">
-            <!-- Header for settings button -->
-            <header class="flex justify-end p-4">
-                <div class="settings-container">
+            <!-- Header for settings and hamburger button -->
+            <header class="flex justify-between items-center p-4">
+                <button id="hamburger-button" class="hamburger-button lg:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="settings-container ml-auto"> <!-- ml-auto pushes it to the right -->
                     <button id="settings-button" class="settings-button">
                         SETTINGS
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -853,6 +901,11 @@
             const settingsDropdown = document.getElementById('settings-dropdown');
             const colorSwatches = document.querySelectorAll('.color-swatch');
 
+            const hamburgerButton = document.getElementById('hamburger-button');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('overlay');
+
+            // Function to show/hide search overlay
             function showSearchOverlay() {
                 searchOverlay.classList.remove('hidden');
                 const mainSearchValue = searchInputMain.value;
@@ -867,6 +920,13 @@
                 searchResultsContainer.innerHTML = '';
             }
 
+            // Function to close sidebar on mobile
+            function closeSidebar() {
+                sidebar.classList.remove('sidebar-open');
+                overlay.classList.remove('overlay-visible');
+            }
+
+            // Function to load content into the main display area
             function loadContent(pageId) {
                 if (documentationContent[pageId]) {
                     contentDisplay.innerHTML = documentationContent[pageId];
@@ -915,8 +975,13 @@
                 } else {
                     contentDisplay.innerHTML = `<p class="text-red-400">Content for "${pageId}" not found.</p>`;
                 }
+                // Close sidebar after loading content on mobile
+                if (window.innerWidth < 1024) { // Check if it's a mobile screen
+                    closeSidebar();
+                }
             }
 
+            // Event listener for sidebar navigation clicks
             sidebarNav.addEventListener('click', (event) => {
                 event.preventDefault();
                 const targetLink = event.target.closest('.sidebar-link');
@@ -926,17 +991,22 @@
                 }
             });
 
+            // Keyboard shortcut (Ctrl + K or Cmd + K)
             document.addEventListener('keydown', (event) => {
                 if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
                     event.preventDefault();
                     showSearchOverlay();
                 } else if (event.key === 'Escape' && !searchOverlay.classList.contains('hidden')) {
                     hideSearchOverlay();
+                } else if (event.key === 'Escape' && sidebar.classList.contains('sidebar-open')) {
+                    closeSidebar();
                 }
             });
 
+            // Click main search input to open modal
             searchInputMain.addEventListener('click', showSearchOverlay);
 
+            // Click outside modal to close it
             searchOverlay.addEventListener('click', (event) => {
                 if (event.target === searchOverlay) {
                     hideSearchOverlay();
@@ -1082,7 +1152,18 @@
                 setThemeColor(savedThemeColor);
             }
 
-            loadContent('about');
+            // Hamburger menu functionality
+            hamburgerButton.addEventListener('click', () => {
+                sidebar.classList.add('sidebar-open');
+                overlay.classList.add('overlay-visible');
+            });
+
+            overlay.addEventListener('click', () => {
+                closeSidebar();
+            });
+
+            // Initial load
+            loadContent('getting-started');
         });
     </script>
 </body>
