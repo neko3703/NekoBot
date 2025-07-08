@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://nekocode.in/"> <!-- Replace with your actual website URL -->
     <meta property="og:title" content="Neko Code - Your Ultimate Discord Bot">
-    <meta property="og:description" content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and more to enhance your server experience.">
+    <meta property="og:description" content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and and more to enhance your server experience.">
     <meta property="og:image" content="https://cdn.discordapp.com/attachments/826750466485780492/1392154951899152394/JXlO6i0D3ycd.png?ex=686e80d5&is=686d2f55&hm=8d3a4f003f87ff331c43414e6cb560f4f254928bc6428ecf8f4766cab2fde726&">
 
     <!-- Twitter Meta Tags -->
@@ -118,17 +118,12 @@
             color: var(--text-primary);
         }
 
-        /* Hero Section Dynamic Background */
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-section-dynamic {
-            background: linear-gradient(270deg, var(--theme-primary), var(--bg-primary), var(--theme-hover));
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+        /* Hero Section Background */
+        .hero-section-background {
+            background-image: url('https://cdn.discordapp.com/attachments/826750466485780492/1392169733759045828/hX4oYpVSLgso.png?ex=686e8e99&is=686d3d19&hm=cafa0deaa2b4ec3e3a07afdcab224f4ebac86310555497767386158683b3f4aa&');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
         }
 
         /* Mobile Sidebar */
@@ -235,7 +230,7 @@
     <!-- Mobile Sidebar Menu -->
     <div id="mobile-sidebar" class="mobile-sidebar">
         <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-bold text-white">Menu</h3>
+            <h3 class="text-2xl font-bold text-white">Neko Code Menu</h3>
             <button id="close-mobile-sidebar-btn" class="text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
@@ -273,7 +268,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center hero-section-dynamic">
+    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center hero-section-background">
         <div class="absolute inset-0 bg-black opacity-70"></div>
         <div class="relative z-10 p-4 max-w-4xl mx-auto">
             <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up">
@@ -317,7 +312,7 @@
     <section id="stats" class="section-padding bg-gray-900 text-center">
         <div class="container mx-auto px-4 py-8">
             <h2 class="section-heading">Neko Code Statistics</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div class="feature-card">
                     <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">151k+</h3>
                     <p class="text-gray-300 text-lg">Active Userbase</p>
@@ -325,6 +320,18 @@
                 <div class="feature-card">
                     <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">24/7 Active</h3>
                     <p class="text-gray-300 text-lg">with 98.7% Uptime</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">2500+</h3>
+                    <p class="text-gray-300 text-lg">Servers</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">100+</h3>
+                    <p class="text-gray-300 text-lg">Unique Commands</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">15+</h3>
+                    <p class="text-gray-300 text-lg">Core Features</p>
                 </div>
             </div>
         </div>
