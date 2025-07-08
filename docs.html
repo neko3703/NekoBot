@@ -832,7 +832,7 @@
             "commands-prefix-meta": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Meta</h2>
                 <p class="text-gray-300 mb-4">
-                    Miscellaneous commands providing bot information or general facts.
+                    Miscellaneous commands providing information about the bot or general facts.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><code>!policy</code> - Displays the bot's policy.</li>
@@ -1170,10 +1170,13 @@
                 if (window.innerWidth >= mobileBreakpoint) {
                     // If desktop, ensure sidebar is visible and overlay is hidden
                     sidebar.classList.remove('sidebar-open'); // Remove mobile-specific class
+                    // No need to set transform inline, CSS handles it
                     overlay.classList.remove('overlay-visible');
                 } else {
                     // If mobile, ensure sidebar is hidden unless opened
-                    // No action needed here, CSS handles the default hidden state
+                    if (!sidebar.classList.contains('sidebar-open')) {
+                        // No need to set transform inline, CSS handles it
+                    }
                 }
             }
 
