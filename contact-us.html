@@ -11,17 +11,16 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            /* Dark, subtle animated radial gradient background for a modern feel */
-            background: radial-gradient(circle at top left, #1a202c, #2d3748, #1a202c); /* Darker shades */
-            background-size: 200% 200%; /* Ensures the gradient is large and subtle */
-            animation: gradientAnimation 15s ease infinite; /* Smooth, looping animation */
+            /* Cool, dynamic radial gradient background */
+            background: radial-gradient(circle at 50% 50%, #2c0050, #1a0033, #0d001a); /* Deeper purples/blacks */
+            background-size: 250% 250%; /* Make it larger for subtle movement */
+            animation: coolGradientAnimation 25s ease-in-out infinite alternate; /* Slower, smoother, alternating animation */
             color: #e2e8f0; /* Light text color for the body */
         }
 
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes coolGradientAnimation {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         /* Custom styles for focus states to ensure accessibility and visual feedback */
@@ -108,13 +107,13 @@
             <p class="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">We're here to help and answer any questions you might have. We look forward to hearing from you!</p>
         </header>
 
-        <!-- Main Content Area: Email/FAQ and Form Side-by-Side -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 mb-4">
-            <!-- Left Column: Email and FAQ Boxes -->
-            <div class="flex flex-col gap-3 lg:gap-4">
+        <!-- Main Content Area: Left (4 boxes) and Right (Form) Side-by-Side -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 mb-4">
+            <!-- Left Column: 2x2 Grid of Contact Options -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
                 <!-- Contact Information Section (Email) -->
-                <section class="flex-1 flex">
-                    <div class="gradient-border-card p-2.5 lg:p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                <section class="flex">
+                    <div class="gradient-border-card p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:h-7 lg:w-7 text-indigo-400 mb-0.5 email-icon-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
@@ -125,14 +124,37 @@
                 </section>
 
                 <!-- New Section: FAQ/Knowledge Base -->
-                <section class="flex-1 flex">
-                    <div class="gradient-border-card p-2.5 lg:p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                <section class="flex">
+                    <div class="gradient-border-card p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:h-7 lg:w-7 text-green-400 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9.247a.75.75 0 01.968-.024L12 11.168l2.804-1.945a.75.75 0 01.968.024l3.197 2.804a.75.75 0 01-.024.968l-2.804 3.197a.75.75 0 01-.968.024L12 14.832l-2.804 1.945a.75.75 0 01-.968-.024l-3.197-2.804a.75.75 0 01.024-.968l2.804-3.197z" />
                         </svg>
                         <h3 class="text-base lg:text-lg font-bold text-white mb-0.5">Visit Our FAQ</h3>
                         <p class="text-sm lg:text-base text-gray-300 mb-0.5">Find answers to common questions instantly.</p>
                         <a href="https://nekocode.in/docs#faqs" target="_blank" rel="noopener noreferrer" class="text-base lg:text-lg text-green-400 hover:text-green-300 font-semibold transition duration-300 ease-in-out underline">Go to FAQ</a>
+                    </div>
+                </section>
+
+                <!-- Business Hours (moved into the 2x2 grid) -->
+                <section class="flex">
+                    <div class="gradient-border-card p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:h-7 lg:w-7 text-yellow-400 mx-auto mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="text-base lg:text-lg font-bold text-white mb-0.5">Business Hours</h3>
+                        <p class="text-sm lg:text-base text-gray-300 mb-0.5">Monday - Friday: 9:00 AM - 5:00 PM IST</p>
+                        <p class="text-sm lg:text-base text-gray-300">Saturday - Sunday: Closed</p>
+                    </div>
+                </section>
+                <!-- General Inquiries (moved into the 2x2 grid) -->
+                <section class="flex">
+                    <div class="gradient-border-card p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:h-7 lg:w-7 text-purple-400 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <h3 class="text-base lg:text-lg font-bold text-white mb-0.5">General Inquiries</h3>
+                        <p class="text-sm lg:text-base text-gray-300 mb-0.5">For all other questions or feedback.</p>
+                        <a href="mailto:general@nekocode.in" class="text-base lg:text-lg text-purple-400 hover:text-purple-300 font-semibold transition duration-300 ease-in-out underline">Ask a Question</a>
                     </div>
                 </section>
             </div>
@@ -185,4 +207,3 @@
     </div>
 </body>
 </html>
- 
