@@ -38,11 +38,13 @@
             --border-color: #334155;
             --code-bg: #000000;
 
-            /* Default Theme Color (Lime Green) */
-            --theme-primary: #A3E635; /* Lime Green */
-            --theme-hover: #84CC16;
-            --theme-border: #65A30D;
-            --theme-active-sidebar: #65A30D;
+            /* Default Theme Color (Purple) */
+            --theme-primary: #8B5CF6; /* Purple */
+            --theme-primary-rgb: 139, 92, 246; /* RGB values for rgba() */
+            --theme-hover: #7C3AED;
+            --theme-hover-rgb: 124, 58, 237;
+            --theme-border: #7F00FF;
+            --theme-active-sidebar: #7F00FF;
         }
 
         body {
@@ -77,19 +79,23 @@
             overflow-x: auto;
         }
         .btn-primary {
-            background-color: var(--theme-primary);
+            background-color: transparent;
             color: white;
+            border: 2px solid var(--theme-primary);
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             transition: background-color 0.3s ease, transform 0.1s ease;
         }
+
         .btn-primary:hover {
-            background-color: var(--theme-hover);
+            background-color: rgba(var(--theme-primary-rgb), 0.2);
             transform: translateY(-1px);
         }
+
         .btn-primary:active {
             transform: translateY(0);
         }
+
         .sidebar {
             background-color: transparent;
             padding: 1.5rem;
@@ -175,6 +181,7 @@
         .main-content-area {
             padding: 1.5rem;
             background-color: var(--bg-primary);
+            position: relative; /* Needed for absolute positioning of progress bar */
         }
         @media (min-width: 1024px) {
             .main-content-area {
@@ -337,7 +344,7 @@
         .color-swatch-green { background-color: #10B981; }
         .color-swatch-blue { background-color: #3B82F6; }
         .color-swatch-pink { background-color: #EC4899; }
-        .color-swatch-lime { background-color: #A3E635; } /* New Lime Green Swatch */
+        /* .color-swatch-lime { background-color: #A3E635; } Removed Lime Green Swatch */
 
         /* Overlay for when mobile sidebar is open */
         .sidebar-overlay {
@@ -414,47 +421,22 @@
             color: var(--theme-primary);
         }
 
-        /* Feedback buttons styling */
-        .feedback-container {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-        }
-        .feedback-buttons button {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            margin: 0 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-        }
-        .feedback-buttons button:hover {
-            background-color: var(--border-color);
-            transform: translateY(-1px);
-        }
-        .feedback-buttons button:active {
-            transform: translateY(0);
-        }
-        .feedback-buttons button.disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        .feedback-message {
-            margin-top: 1rem;
-            color: var(--theme-primary);
-            font-weight: 600;
-            font-size: 1rem;
+        /* Reading Progress Bar Styles */
+        #reading-progress-bar {
+            position: fixed; /* Changed from sticky to fixed */
+            top: 0;
+            left: 0;
+            height: 8px; /* Increased thickness of the bar */
+            background-color: var(--theme-primary); /* Use theme color */
+            width: 100vw; /* Ensure it spans the full viewport width */
+            z-index: 9999; /* Increased z-index to be on top of everything */
+            transition: width 0.1s linear; /* Smooth fill */
+            border-radius: 0 2px 2px 0; /* Rounded right end */
         }
     </style>
 </head>
 <body class="antialiased leading-normal">
+    <div id="reading-progress-bar"></div> <!-- Moved here to be a direct child of body -->
     <div class="flex flex-col lg:flex-row min-h-screen">
         <!-- Sidebar Overlay for Mobile -->
         <div id="sidebar-overlay" class="sidebar-overlay"></div>
@@ -542,14 +524,14 @@
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="settings-dropdown" class="settings-dropdown-content">
-                        <div class="mb-4">
-                            <span class="text-white text-sm font-semibold block mb-2">Theme</span>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-white text-sm font-semibold">Theme</span>
                             <div class="flex space-x-2">
-                                <div class="color-swatch color-swatch-purple" data-color="purple"></div>
+                                <div class="color-swatch color-swatch-purple active" data-color="purple"></div>
                                 <div class="color-swatch color-swatch-green" data-color="green"></div>
                                 <div class="color-swatch color-swatch-blue" data-color="blue"></div>
                                 <div class="color-swatch color-swatch-pink" data-color="pink"></div>
-                                <div class="color-swatch color-swatch-lime active" data-color="lime"></div>
+                                <!-- <div class="color-swatch color-swatch-lime active" data-color="lime"></div> Removed Lime Green Swatch -->
                             </div>
                         </div>
                     </div>
@@ -581,24 +563,6 @@
     <button id="scrollToTopBtn" title="Go to top">↑</button>
 
     <script>
-        // HTML for the feedback section to be appended to each page
-        const feedbackSectionHtml = `
-            <div class="feedback-container">
-                <p class="text-gray-300 mb-4">Was this page helpful?</p>
-                <div class="feedback-buttons">
-                    <button class="feedback-button" data-feedback="yes">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21H3v-7a2 2 0 012-2h7.485c.184-.131.369-.21.554-.257L14 10z"></path></svg>
-                        Yes
-                    </button>
-                    <button class="feedback-button" data-feedback="no">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3H21v7a2 2 0 01-2 2h-7.485c-.184.131-.369.21-.554.257L10 14z"></path></svg>
-                        No
-                    </button>
-                </div>
-                <p class="feedback-message hidden">Thank you for your feedback!</p>
-            </div>
-        `;
-
         // Define all documentation content as HTML strings
         const documentationContent = {
             "about": `
@@ -607,7 +571,7 @@
                     Neko Code is designed to enhance your Discord server experience with a wide range of features.
                     From moderation tools to fun commands and utility functions, Neko Code aims to be an all-in-one
                     solution for server management and community engagement. Our goal is to provide a stable,
-                    user-friendly, and constantly evolving bot that meets the needs of various Discord communities.
+                    user-friendly, and constantly evolving bot that resists the needs of various Discord communities.
                 </p>
                 <p class="text-gray-300 leading-relaxed mt-4">
                     Neko Code stands out with its commitment to a seamless user experience, offering intuitive commands and reliable performance. We continuously strive to incorporate feedback from our vibrant community to introduce new functionalities and refine existing ones, ensuring that Neko Code remains a cutting-edge tool for Discord server administration and entertainment. Our development team is dedicated to maintaining high standards of security and efficiency, providing a safe and enjoyable environment for all users. We believe in fostering a strong community around Neko Code, where users can share ideas, get support, and contribute to the bot's growth.
@@ -616,32 +580,32 @@
                     We are committed to regular updates, adding new features based on user feedback, and ensuring
                     the bot runs smoothly 24/7. Join our support server if you have any questions or suggestions!
                 </p>
-            ` + feedbackSectionHtml,
+            `,
             "getting-started": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Getting Started</h2>
                 <p class="text-gray-300 leading-relaxed mb-4">
                     Welcome to Neko Code! This guide will help you get started with adding the bot to your server and understanding its basic functionalities.
                 </p>
                 <h3 class="text-2xl font-medium text-white mb-3">1. Inviting Neko Code</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-2">
                     To invite Neko Code to your Discord server, simply click on the "Invite Neko Code" button. Make sure you have "Manage Server" permissions on the server you wish to add the bot to.
                 </p>
-                <div class="code-block mb-6">
+                <div class="code-block mb-8">
                     <p><strong>Invite Link:</strong> <a href="https://nekocode.in/invite" target="_blank" class="text-blue-400 hover:underline">https://nekocode.in/invite</a></p>
                 </div>
                 <h3 class="text-2xl font-medium text-white mb-3">2. Granting Permissions</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     During the invitation process, you will be asked to grant certain permissions to the bot. For Neko Code to function correctly, it's recommended to grant it the necessary permissions for its features (e.g., Send Messages, Manage Messages, Kick Members, etc.).
                 </p>
                 <h3 class="text-2xl font-medium text-white mb-3">3. Setting Up Your Server</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Once invited, Neko Code will be online in your server. You can then configure specific settings or roles for the bot as needed. Refer to the "How to Use" and "Command List" sections for more details on configuration and commands.
                 </p>
                 <h3 class="text-2xl font-medium text-white mb-3">4. Getting Help</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     If you encounter any issues or have questions, join our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">support server</a>.
                 </p>
-            ` + feedbackSectionHtml,
+            `,
             "features": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Key Features</h2>
                 <ul class="list-disc list-inside text-gray-300 space-y-2">
@@ -654,16 +618,16 @@
                 <p class="text-sm text-gray-400 mt-4">
                     <em>Note: Specific features may vary. Please refer to the command list for the most up-to-date information.</em>
                 </p>
-            ` + feedbackSectionHtml,
+            `,
             "how-to-use": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">How to Use Neko Code</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Using Neko Code is straightforward. Once invited to your server, you can start interacting with it
                     using commands.
                 </p>
 
                 <h3 class="text-2xl font-medium text-white mb-3">1. Inviting the Bot</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     To invite Neko Code to your server, click the "Invite Neko Code" button at the top of this page or refer to the <a class="text-blue-400 hover:underline">Getting Started</a> section.
                     Make sure you have "Manage Server" permissions on the server you wish to invite it to.
                 </p>
@@ -689,10 +653,10 @@
                 </div>
 
                 <h3 class="text-2xl font-medium text-white mb-3">4. Getting Help</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     For a full list of commands and their usage, type <code class="code-block inline-block px-2 py-1 text-sm">/help</code> in your Discord server.
                 </p>
-            ` + feedbackSectionHtml,
+            `,
             "commands-overview": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Command List Overview</h2>
                 <p class="text-gray-300 mb-6">
@@ -700,19 +664,19 @@
                     Below is an overview of the command categories. Click on the specific categories in the navigation to see detailed commands and their usage.
                 </p>
                 <h3 class="text-2xl font-medium text-white mb-3">Slash Commands</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Slash commands are Discord's modern way of interacting with bots, offering auto-completion and integrated command options. They are generally preferred for a smoother user experience.
                     Explore the sub-sections for detailed lists of Moderation, Utility, Fun, GIFs, Image, Server Management, Support, Text Tools, Security, Tools, Other, Hire Neko, and Uncategorized slash commands.
                 </p>
                 <h3 class="text-2xl font-medium text-white mb-3">Prefix Commands</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Prefix commands are the traditional way to interact with bots by typing one of the bot's prefixes (<code>!</code>, <code>$</code>, <code>?</code>, <code>></code>) followed by the command name.
                     Explore the sub-sections for detailed lists of Economy, Fun and Games, Utility, Look-up, Math & Conversion, and Meta prefix commands.
                 </p>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     This section provides an overview of the main slash command categories. For detailed command usage and examples, please navigate to the specific sub-sections in the sidebar.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2">
@@ -730,10 +694,10 @@
                     <li><strong>Hire Neko:</strong> Information on hiring the developer.</li>
                     <li><strong>Uncategorized:</strong> Commands that don't fit into other categories.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-moderation": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Moderation</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     These commands help you maintain order and manage users within your server.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -746,10 +710,10 @@
                     <li><code>/purge</code> - Deletes a set number of messages.</li>
                     <li><code>/timeout</code> - Timeout a user.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-utility": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Utility</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Handy tools for various server and bot-related information.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -764,10 +728,10 @@
                     <li><code>/define</code> - Search the meaning of a word.</li>
                     <li><code>/google</code> - Google something.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-fun": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Fun</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Commands to add a touch of fun and entertainment to your server.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -776,10 +740,10 @@
                     <li><code>/joke</code> - Shares a joke.</li>
                     <li><code>/movie</code> - Suggests a movie.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-gifs": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - GIFs</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Send various anime-themed reaction GIFs.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -789,10 +753,10 @@
                     <li><code>/slap</code> - Sends a slapping anime GIF.</li>
                     <li><code>/wink</code> - Sends a winking anime GIF.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-image": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Image</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Commands related to images and visual content.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -801,10 +765,10 @@
                     <li><code>/dog</code> - Sends a cute dog image.</li>
                     <li><code>/embed</code> - Create an embed.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-server-management": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Server Management</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Tools to help you manage your Discord server's channels, roles, and members.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -817,20 +781,20 @@
                     <li><code>/unmute</code> - Unmute a user in a voice chat.</li>
                     <li><code>/slowmode</code> - Set the slowmode in the current channel.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-support": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Support</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Commands to get assistance or report issues with the bot.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><code>/raise-ticket</code> - Raise a ticket for an ongoing issue.</li>
                     <li><code>/report-issue</code> - Report an issue being faced while using the bot.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-text-tools": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Text Tools</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Useful commands for text manipulation and communication.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -838,56 +802,56 @@
                     <li><code>/whisper</code> - Whispers a user.</li>
                     <li><code>/confess</code> - Confess something anonymously.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-security": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Security</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Commands to help with security-related checks.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><code>/validate-cc</code> - Validate a credit or debit card number.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-tools": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Tools</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     General purpose tools for various tasks.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><code>/generate-password</code> - Create a strong password.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-other": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Other Commands</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Miscellaneous commands that provide general information or functionality.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><code>/info</code> - Some information about me!</li>
                     <li><code>/suggest</code> - Suggest something.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-hire": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Hire Neko</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Information on how to hire the developer for custom Discord bot creation or server setup.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><code>/hire</code> - Hire my developer for creating a discord bot or setting up discord servers.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-slash-uncategorized": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Uncategorized</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Commands that do not fit into specific categories.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><code>/intents-status</code> - Check which intents are enabled.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-prefix": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     This section provides an overview of the main prefix command categories. For detailed command usage and examples, please navigate to the specific sub-sections in the sidebar. Remember the prefixes are <code>!</code>, <code>$</code>, <code>?</code>, and <code>></code>. The prefix <code>!<code> is used as an example. You can use any of the four available prefixes.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2">
@@ -898,10 +862,10 @@
                     <li><strong>Math & Conversion:</strong> Commands for mathematical calculations and unit conversions.</li>
                     <li><strong>Meta:</strong> Miscellaneous commands providing bot information or general facts.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-prefix-economy": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Economy</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Manage your in-game currency "Neko Coins" and interact with the bot's economy system.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -924,10 +888,10 @@
                     <li><code>!leaderboard</code> - See the top 10 richest users on the server.</li>
                     <li><code>!lottery</code> - Try your luck with lottery tickets.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-prefix-fun-games": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Fun and Games</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Engage with interactive games and fun commands.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -940,10 +904,10 @@
                     <li><code>!coinflip</code> - Flip a coin.</li>
                     <li><code>!roulette</code> - Play roulette.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-prefix-utility": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Utility</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     General utility commands for various helpful functions.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -954,10 +918,10 @@
                     <li><code>!weather</code> - Check weather of a city using its postal code.</li>
                     <li><code>!quote-this</code> - Reply to a message to turn it into a quote.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-prefix-lookup": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Look-up</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Commands to fetch information from various external sources.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -968,10 +932,10 @@
                     <li><code>!mars</code> - Gets Mars images.</li>
                     <li><code>!gita</code> - Fetches a verse from the Bhagavad Gita.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-prefix-math-conversion": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Math & Conversion</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Commands for mathematical calculations and unit conversions.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -981,10 +945,10 @@
                     <li><code>!rgb</code> - Converts RGB to HEX.</li>
                     <li><code>!sqrt</code> - Calculates the square root of a number.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "commands-prefix-meta": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Meta</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Miscellaneous commands providing information about the bot or general facts.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
@@ -992,36 +956,36 @@
                     <li><code>!vedicfact</code> - Gives a random Vedic fact.</li>
                     <li><code>!quote</code> - Fetches an inspirational quote.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "other-features": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Other Features</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Beyond commands, Neko Code offers several passive and utility features to enhance your server experience.
                     Explore the sub-sections for detailed information on Detectors and the Quotes Message Link feature.
                 </p>
-            ` + feedbackSectionHtml,
+            `,
             "other-features-detectors": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Other Features - Detectors</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Neko Code includes intelligent detectors to help maintain server safety and transparency.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><strong>Token Detector:</strong> Automatically detects and warns users who accidentally post Discord bot tokens in chat, helping to prevent security breaches.</li>
                     <li><strong>Ghost Ping Detector:</b> Identifies and notifies users when someone "ghost pings" (mentions someone and then quickly deletes the message), promoting transparency.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "other-features-quotes-link": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Other Features - Quotes Message Link</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Enhance your conversation flow with automatic message embedding.
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li>When a Discord message link is posted, Neko Code can automatically embed the content of that message, making it easier to see quoted messages without leaving the current channel.</li>
                 </ul>
-            ` + feedbackSectionHtml,
+            `,
             "support": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Support & Community</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     We are dedicated to providing comprehensive support for all Neko Code users. If you encounter any issues, have questions about bot functionality, or wish to suggest new features, our community and support team are here to help. We encourage you to join our official Discord support server, where you can connect with other users, get real-time assistance from our moderators, and stay updated on the latest news and announcements. Your feedback is invaluable in helping us improve Neko Code and ensure a smooth experience for everyone.
                 </p>
                 <h3 class="text-2xl font-medium text-white mb-3 mt-6">How to Get Support:</h3>
@@ -1033,11 +997,11 @@
                     <li><strong>Suggest Features:</strong> We love hearing your ideas! Use the <code>/suggest</code> slash command or the dedicated suggestion channel in our support server to propose new features or improvements.</li>
                 </ul>
                 <div class="mt-4">
-                    <a href="https://nekocode.in/discord" target="_blank" class="btn-primary inline-block">
+                    <a href="https://nekocode.in/discord" target="_blank" class="btn-primary">
                         Join Support Server
                     </a>
                 </div>
-            ` + feedbackSectionHtml,
+            `,
             // Updated FAQ Section with 20 FAQs and new UI
             "faqs": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Frequently Asked Questions</h2>
@@ -1313,15 +1277,15 @@
                         </div>
                     </div>
                 </div>
-            ` + feedbackSectionHtml,
+            `,
             "troubleshooting-guide": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Troubleshooting Guide</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Encountering issues with Neko Code? This guide provides solutions to common problems.
                 </p>
 
                 <h3 class="text-2xl font-medium text-white mb-3">Bot Not Responding</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-6">
                     If Neko Code isn't responding to your commands, consider the following:
                     <ul class="list-disc list-inside ml-4 mt-2">
                         <li><strong>Check Bot Status:</strong> Verify if Neko Code is online in your server. If it's offline, it might be undergoing maintenance or experiencing an outage. Check our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Support Server</a> for status updates.</li>
@@ -1331,9 +1295,10 @@
                         <li><strong>Discord Outage:</strong> Occasionally, Discord itself might experience issues. Check <a href="https://discordstatus.com/" target="_blank" class="text-blue-400 hover:underline">Discord Status</a> for any ongoing problems.</li>
                     </ul>
                 </p>
-
+                <p class="text-gray-300 mb-8">
+                
                 <h3 class="text-2xl font-medium text-white mb-3">Commands Not Working as Expected</h3>
-                <p class="text-300 mb-4">
+                <p class="text-300 mb-6">
                     If a command is not performing its intended function:
                     <ul class="list-disc list-inside ml-4 mt-2">
                         <li><strong>Command Syntax:</strong> Double-check the command syntax. Many commands require specific arguments or mentions. Refer to the <a data-page-id="commands-overview" class="text-blue-400 hover:underline sidebar-link-in-content">Command List Overview</a> for correct usage.</li>
@@ -1342,9 +1307,10 @@
                         <li><strong>Rate Limits:</strong> Discord has rate limits. If you're sending too many commands too quickly, the bot might temporarily stop responding. Wait a few seconds and try again.</li>
                     </ul>
                 </p>
-
+                <p class="text-gray-300 mb-8">
+                
                 <h3 class="text-2xl font-medium text-white mb-3">"What to do if all else fails"</h3>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-6">
                     If you've tried the above steps and are still experiencing issues:
                     <ol class="list-decimal list-inside ml-4 mt-2">
                         <li><strong>Re-invite the Bot:</strong> Sometimes, a fresh re-invitation can resolve underlying permission or caching issues. You can use the invite link: <a href="https://nekocode.in/invite" target="_blank" class="text-blue-400 hover:underline">https://nekocode.in/invite</a>.</li>
@@ -1360,10 +1326,10 @@
                         <li><strong>Check for Discord Server Issues:</strong> Ensure your Discord client is up to date and try restarting Discord.</li>
                     </ol>
                 </p>
-            ` + feedbackSectionHtml,
+            `,
             "changelog": `
                 <h2 class="text-3xl font-semibold section-title page-heading mb-6">Changelog / Release Notes</h2>
-                <p class="text-gray-300 mb-4">
+                <p class="text-gray-300 mb-8">
                     Stay up-to-date with the latest changes, features, and bug fixes in Neko Code.
                 </p>
 
@@ -1422,7 +1388,7 @@
                         </ul>
                     </div>
                 </div>
-            ` + feedbackSectionHtml
+            `
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1434,6 +1400,7 @@
             const searchInputModal = document.getElementById('search-input-modal');
             const searchResultsContainer = document.getElementById('search-results');
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            const readingProgressBar = document.getElementById('reading-progress-bar');
 
 
             // Settings elements
@@ -1497,71 +1464,6 @@
                         }
                     }
                 });
-            }
-
-            /**
-             * Initializes feedback buttons for the current page.
-             * This function needs to be called every time new content is loaded.
-             */
-            function initializeFeedbackButtons() {
-                const feedbackButtons = contentDisplay.querySelectorAll('.feedback-button');
-                const feedbackMessage = contentDisplay.querySelector('.feedback-message');
-
-                // Check if feedback has already been given for this page in session storage
-                const currentPageId = window.location.hash.substring(1) || 'getting-started';
-                const hasGivenFeedback = sessionStorage.getItem(`feedback_${currentPageId}`);
-
-                if (hasGivenFeedback) {
-                    feedbackButtons.forEach(button => {
-                        button.classList.add('disabled');
-                        button.disabled = true;
-                    });
-                    if (feedbackMessage) {
-                        feedbackMessage.textContent = "Thanks for your feedback!";
-                        feedbackMessage.classList.remove('hidden');
-                    }
-                } else {
-                    feedbackButtons.forEach(button => {
-                        button.classList.remove('disabled');
-                        button.disabled = false;
-                        button.removeEventListener('click', handleFeedbackClick); // Prevent duplicate listeners
-                        button.addEventListener('click', handleFeedbackClick);
-                    });
-                    if (feedbackMessage) {
-                        feedbackMessage.classList.add('hidden');
-                    }
-                }
-            }
-
-            /**
-             * Handles click on feedback buttons.
-             * @param {Event} event - The click event.
-             */
-            function handleFeedbackClick(event) {
-                const clickedButton = event.currentTarget;
-                const feedbackType = clickedButton.dataset.feedback; // 'yes' or 'no'
-                const feedbackContainer = clickedButton.closest('.feedback-container');
-                const buttons = feedbackContainer.querySelectorAll('.feedback-button');
-                const message = feedbackContainer.querySelector('.feedback-message');
-
-                // Disable all buttons
-                buttons.forEach(button => {
-                    button.classList.add('disabled');
-                    button.disabled = true;
-                });
-
-                // Show thank you message
-                if (message) {
-                    message.textContent = "Thank you for your feedback!";
-                    message.classList.remove('hidden');
-                }
-
-                // Log feedback (in a real application, this would send data to a server)
-                const currentPageId = window.location.hash.substring(1) || 'getting-started';
-                console.log(`Feedback for page "${currentPageId}": ${feedbackType}`);
-
-                // Store in session storage that feedback has been given for this page
-                sessionStorage.setItem(`feedback_${currentPageId}`, 'true');
             }
 
 
@@ -1635,9 +1537,6 @@
                         initializeFaqAccordion();
                     }
 
-                    // Initialize feedback buttons for the newly loaded content
-                    initializeFeedbackButtons();
-
                     // Re-attach event listeners for sidebar links within content (e.g., in FAQ answers)
                     contentDisplay.querySelectorAll('.sidebar-link-in-content').forEach(link => {
                         link.addEventListener('click', (e) => {
@@ -1657,7 +1556,14 @@
                         history.pushState(null, '', `#${pageId}`);
                     }
 
+                    // Scroll to top of content area (if it's the main scrollable element)
+                    // contentDisplay.scrollTop = 0; // This is for contentDisplay's internal scroll.
+                    // For global progress bar, we don't reset contentDisplay scroll.
                     window.scrollTo({ top: 0, behavior: 'auto' }); // Scroll entire window to top
+
+                    // Update global reading progress bar
+                    // Use a setTimeout to ensure DOM is rendered before calculating scroll height
+                    setTimeout(updateReadingProgressBar, 0);
 
 
                 } else {
@@ -1669,6 +1575,25 @@
                     sidebarOverlay.classList.remove('show');
                 }
             }
+
+            // Function to update reading progress bar (global scroll)
+            function updateReadingProgressBar() {
+                const docHeight = document.documentElement.scrollHeight;
+                const viewportHeight = document.documentElement.clientHeight;
+                const scrolled = document.documentElement.scrollTop;
+
+                // Only show progress if content is scrollable
+                if (docHeight > viewportHeight) {
+                    const progress = (scrolled / (docHeight - viewportHeight)) * 100;
+                    readingProgressBar.style.width = progress + '%';
+                } else {
+                    readingProgressBar.style.width = '0%'; // No scrollbar, no progress
+                }
+            }
+
+            // Listen for scroll events on the window (global scroll)
+            window.addEventListener('scroll', updateReadingProgressBar);
+            window.addEventListener('resize', updateReadingProgressBar); // Update on resize too
 
             // Event listener for sidebar navigation clicks
             sidebarNav.addEventListener('click', (event) => {
@@ -1805,46 +1730,53 @@
 
             // Function to set theme color
             function setThemeColor(color) {
-                let primaryColor, hoverColor, borderColor, activeSidebarColor;
+                let primaryColor, primaryRgb, hoverColor, hoverRgb, borderColor, activeSidebarColor;
                 switch (color) {
                     case 'purple':
                         primaryColor = '#8B5CF6';
+                        primaryRgb = '139, 92, 246';
                         hoverColor = '#7C3AED';
+                        hoverRgb = '124, 58, 237';
                         borderColor = '#7F00FF';
                         activeSidebarColor = '#7F00FF';
                         break;
                     case 'green':
                         primaryColor = '#10B981';
+                        primaryRgb = '16, 185, 129';
                         hoverColor = '#059669';
+                        hoverRgb = '5, 150, 105';
                         borderColor = '#047857';
                         activeSidebarColor = '#047857';
                         break;
                     case 'blue':
                         primaryColor = '#3B82F6';
+                        primaryRgb = '59, 130, 246';
                         hoverColor = '#2563EB';
+                        hoverRgb = '37, 99, 235';
                         borderColor = '#1D4ED8';
                         activeSidebarColor = '#1D4ED8';
                         break;
                     case 'pink':
                         primaryColor = '#EC4899';
+                        primaryRgb = '236, 72, 153';
                         hoverColor = '#DB2777';
+                        hoverRgb = '219, 39, 119';
                         borderColor = '#BE185D';
                         activeSidebarColor = '#BE185D';
                         break;
-                    case 'lime':
-                        primaryColor = '#A3E635';
-                        hoverColor = '#84CC16';
-                        borderColor = '#65A30D';
-                        activeSidebarColor = '#65A30D';
+                    default: // Default to purple
+                        primaryColor = '#8B5CF6';
+                        primaryRgb = '139, 92, 246';
+                        hoverColor = '#7C3AED';
+                        hoverRgb = '124, 58, 237';
+                        borderColor = '#7F00FF';
+                        activeSidebarColor = '#7F00FF';
                         break;
-                    default:
-                        primaryColor = '#A3E635'; // Default to lime
-                        hoverColor = '#84CC16';
-                        borderColor = '#65A30D';
-                        activeSidebarColor = '#65A30D';
                 }
                 document.documentElement.style.setProperty('--theme-primary', primaryColor);
+                document.documentElement.style.setProperty('--theme-primary-rgb', primaryRgb); /* Set primary RGB */
                 document.documentElement.style.setProperty('--theme-hover', hoverColor);
+                document.documentElement.style.setProperty('--theme-hover-rgb', hoverRgb); /* Set hover RGB */
                 document.documentElement.style.setProperty('--theme-border', borderColor);
                 document.documentElement.style.setProperty('--theme-active-sidebar', activeSidebarColor);
 
@@ -1922,8 +1854,8 @@
             if (savedThemeColor) {
                 setThemeColor(savedThemeColor);
             } else {
-                // Set default theme to lime if no preference is saved
-                setThemeColor('lime');
+                // Set default theme to purple if no preference is saved
+                setThemeColor('purple');
             }
 
             // Load content based on URL hash or default
