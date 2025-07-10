@@ -1,84 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
-    <link rel="stylesheet" href="assets/css/contact.css" />
-    <link
-      rel="shortcut icon"
-      href="./images/nekobg.png"
-      type="image/png"
-    />
-  </head>
-  <body>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      body {
-        background-image: url("images/nekobg.png");
-        background-size: cover; /* Cover the entire page */
-        background-repeat: no-repeat; /* Don't repeat the image */
-        background-position: center; /* Center the image */
-      }
-    </style>
-    <div class="contact-form">
-      <h1 class="centered-heading">Get in touch with us</h1>
-      <form
-        action="https://api.web3forms.com/submit"
-        method="POST"
-        id="contactForm"
-      >
-        <input type="hidden" name="from_name" value="Ticket">
-        
-        <input type="hidden" name="access_key" value="aa2e9230-a9f4-4a9b-9c3b-94d8889e9453" />
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Dark, subtle animated radial gradient background for a modern feel */
+            background: radial-gradient(circle at top left, #1a202c, #2d3748, #1a202c); /* Darker shades */
+            background-size: 200% 200%; /* Ensures the gradient is large and subtle */
+            animation: gradientAnimation 15s ease infinite; /* Smooth, looping animation */
+            color: #e2e8f0; /* Light text color for the body */
+        }
 
-        <input type="text" name="name" placeholder="How should we address you?" required/>
-        
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter your email address..."
-          required
-        />
-        
-<!--         <select name="subject" required>
-          <option value="" disabled selected>Select a subject</option>
-          <option value="General Inquiry">General Inquiry</option>
-          <option value="Bot Not Working/Offline">
-            Bot Not Working/Offline
-          </option>
-          <option value="Report a Bug">Report a Bug</option>
-          <option value="Feedback">Feedback</option>
-          <option value="Other">Other</option>
-        </select> -->
-        
-        <input
-          type="text"
-          name="subject"
-          placeholder="Subject"
-          required
-        />
-        
-        <textarea
-          name="message"
-          placeholder="Describe your issue here."
-          rows="5"
-          maxlength="500"
-          required
-        ></textarea>
-        
-        <button type="submit">Submit</button>
-        <input
-          type="hidden"
-          name="redirect"
-          value="https://nekocode.in/thank-you.html"
-        />
-      </form>
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Custom styles for focus states to ensure accessibility and visual feedback */
+        input:focus, textarea:focus, button:focus {
+            outline: 2px solid #6366f1; /* Indigo 500 */
+            outline-offset: 2px;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5); /* Soft focus ring */
+        }
+        /* Gradient for the submit button */
+        .btn-gradient {
+            background-image: linear-gradient(to right, #6366f1, #8b5cf6); /* Indigo 500 to Violet 500 */
+        }
+        .btn-gradient:hover {
+            background-image: linear-gradient(to right, #4f46e5, #7c3aed); /* Darker shades on hover */
+        }
+
+        /* Keyframe for a subtle fade-in-up animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Apply fade-in-up animation to the main content container */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0; /* Start invisible */
+        }
+
+        /* Keyframe for a subtle pulse on the email icon */
+        @keyframes iconPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Apply pulse animation to the email icon on hover */
+        .email-icon-pulse:hover {
+            animation: iconPulse 0.6s ease-in-out infinite;
+        }
+
+        /* Custom class for the glowing gradient border effect */
+        .gradient-border-card {
+            position: relative;
+            isolation: isolate; /* Create a new stacking context */
+            border-radius: 0.5rem; /* Slightly rounded corners for a "squarer" look */
+            background-color: #2d3748; /* Dark background for the card content */
+            overflow: hidden; /* Ensures pseudo-element doesn't overflow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .gradient-border-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit; /* Inherit border-radius from parent */
+            padding: 2px; /* Thickness of the border */
+            background: linear-gradient(45deg, #a78bfa, #f472b6); /* Purple to pink gradient */
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+            z-index: -1; /* Place behind content */
+            transition: background 0.3s ease-in-out;
+        }
+
+        /* Hover effect for the gradient border */
+        .gradient-border-card:hover::before {
+            background: linear-gradient(45deg, #8b5cf6, #ec4899); /* Slightly different gradient on hover */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-3 sm:p-5 lg:p-6">
+    <div class="bg-gray-800 shadow-2xl rounded-md p-5 sm:p-7 lg:p-9 max-w-6xl w-full mx-auto border border-gray-700 transform transition-all duration-300 hover:scale-[1.005] fade-in-up">
+        <!-- Header Section -->
+        <header class="text-center mb-5 lg:mb-6">
+            <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-0.5 leading-tight">Get in Touch</h1>
+            <p class="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">We're here to help and answer any questions you might have. We look forward to hearing from you!</p>
+        </header>
+
+        <!-- Main Content Area: Email/FAQ and Form Side-by-Side -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4 mb-4">
+            <!-- Left Column: Email and FAQ Boxes -->
+            <div class="flex flex-col gap-3 lg:gap-4">
+                <!-- Contact Information Section (Email) -->
+                <section class="flex-1 flex">
+                    <div class="gradient-border-card p-2.5 lg:p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:h-7 lg:w-7 text-indigo-400 mb-0.5 email-icon-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <h3 class="text-base lg:text-lg font-bold text-white mb-0.5">Email Us Directly</h3>
+                        <p class="text-sm lg:text-base text-gray-300 mb-0.5">For inquiries or feedback, drop us an email.</p>
+                        <a href="mailto:contact@nekocode.in" class="text-base lg:text-lg text-indigo-400 hover:text-indigo-300 font-semibold transition duration-300 ease-in-out underline">contact@nekocode.in</a>
+                    </div>
+                </section>
+
+                <!-- New Section: FAQ/Knowledge Base -->
+                <section class="flex-1 flex">
+                    <div class="gradient-border-card p-2.5 lg:p-3 flex flex-col items-center text-center justify-center w-full transform transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 lg:h-7 lg:w-7 text-green-400 mb-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9.247a.75.75 0 01.968-.024L12 11.168l2.804-1.945a.75.75 0 01.968.024l3.197 2.804a.75.75 0 01-.024.968l-2.804 3.197a.75.75 0 01-.968.024L12 14.832l-2.804 1.945a.75.75 0 01-.968-.024l-3.197-2.804a.75.75 0 01.024-.968l2.804-3.197z" />
+                        </svg>
+                        <h3 class="text-base lg:text-lg font-bold text-white mb-0.5">Visit Our FAQ</h3>
+                        <p class="text-sm lg:text-base text-gray-300 mb-0.5">Find answers to common questions instantly.</p>
+                        <a href="https://nekocode.in/docs#faqs" target="_blank" rel="noopener noreferrer" class="text-base lg:text-lg text-green-400 hover:text-green-300 font-semibold transition duration-300 ease-in-out underline">Go to FAQ</a>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Contact Form Section -->
+            <section class="flex">
+                <div class="gradient-border-card p-4 lg:p-5 w-full transform transition-transform duration-300 hover:shadow-2xl">
+                    <h2 class="text-lg lg:text-xl font-bold text-white text-center mb-2 lg:mb-3">Send Us a Message</h2>
+                    <!-- Web3Forms Integration -->
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" class="space-y-1.5 lg:space-y-2">
+                        <!-- Hidden fields for Web3Forms -->
+                        <input type="hidden" name="from_name" value="Ticket">
+                        <input type="hidden" name="access_key" value="aa2e9230-a9f4-4a9b-9c3b-94d8889e9453" />
+                        <!-- Hidden field for redirection after submission -->
+                        <input type="hidden" name="redirect" value="https://nekocode.in/thank-you.html">
+
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-0.5">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="How should we address you?" required
+                                   class="mt-0.5 block w-full px-2.5 py-1.5 border border-gray-600 rounded-md shadow-sm placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 text-sm transition duration-200 ease-in-out bg-gray-700 text-white">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-0.5">Your Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address..." required
+                                   class="mt-0.5 block w-full px-2.5 py-1.5 border border-gray-600 rounded-md shadow-sm placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 text-sm transition duration-200 ease-in-out bg-gray-700 text-white">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-0.5">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="What is your message about?"
+                                   class="mt-0.5 block w-full px-2.5 py-1.5 border border-gray-600 rounded-md shadow-sm placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 text-sm transition duration-200 ease-in-out bg-gray-700 text-white">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-0.5">Your Message</label>
+                            <textarea id="message" name="message" rows="3" placeholder="Share your thoughts, questions, or feedback here..."
+                                      class="mt-0.5 block w-full px-2.5 py-1.5 border border-gray-600 rounded-md shadow-sm placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500 text-sm transition duration-200 ease-in-out bg-gray-700 text-white"></textarea>
+                        </div>
+                        <div class="text-center pt-1.5 lg:pt-2">
+                            <button type="submit"
+                                    class="inline-flex justify-center items-center py-1.5 px-3.5 lg:py-2 lg:px-4 border border-transparent shadow-lg text-sm font-semibold rounded-full text-white btn-gradient hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:-translate-y-0.5 hover:scale-105">
+                                Send Message
+                                <svg xmlns="http://www.w3.org/2000/svg" class="ml-1.5 h-3.5 w-3.5 lg:h-4 lg:w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
     </div>
-    <script>
-      window.onload = function () {
-        // Reset the form fields when the page loads
-        document.getElementById("form").reset();
-      };
-    </script>
-  </body>
+</body>
 </html>
+ 
