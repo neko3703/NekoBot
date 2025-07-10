@@ -97,6 +97,7 @@
             box-shadow: none;
             position: sticky;
             top: 0;
+            left: 0; /* Ensure it's aligned to the left */
             height: 100vh;
             overflow-y: auto;
             padding-top: 2rem;
@@ -104,8 +105,6 @@
             border-right: 1px solid var(--border-color);
             /* Mobile specific styles */
             position: fixed; /* Make it fixed for mobile overlay */
-            top: 0;
-            left: 0;
             width: 80%; /* Occupy 80% width on mobile */
             max-width: 300px; /* Max width for mobile sidebar */
             z-index: 50; /* Ensure it's above content but below modals */
@@ -352,6 +351,66 @@
         .sidebar-overlay.show {
             display: block;
         }
+
+        /* Styles for the FAQ accordion */
+        .faq-item {
+            background-color: var(--bg-secondary);
+            border-radius: 0.75rem; /* More rounded corners */
+            margin-bottom: 1rem; /* More spacing between cards */
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+            border: 1px solid var(--border-color); /* Light border */
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        .faq-item:hover {
+            transform: translateY(-3px); /* Lift on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+            border-color: var(--theme-primary); /* Highlight border on hover */
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.25rem 1.5rem; /* More padding */
+            text-align: left;
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: var(--text-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+        .faq-question:hover {
+            color: var(--theme-primary);
+        }
+        .faq-question.open {
+            background-color: var(--border-color); /* Slightly different background when open */
+            color: var(--theme-primary); /* Keep theme color when open */
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+            padding: 0 1.5rem; /* Match question padding */
+            color: var(--text-secondary);
+            font-size: 0.95rem; /* Slightly smaller text for answers */
+            line-height: 1.6;
+        }
+        .faq-answer.open {
+            max-height: 500px; /* A sufficiently large value to accommodate content */
+            padding-bottom: 1.5rem; /* More padding at the bottom */
+        }
+        .faq-question svg {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-question.open svg {
+            transform: rotate(180deg);
+            color: var(--theme-primary);
+        }
     </style>
 </head>
 <body class="antialiased leading-normal">
@@ -419,6 +478,8 @@
                         </ul>
                     </li>
                     <li><a href="#" class="sidebar-link" data-page-id="support">Support & Community</a></li>
+                    <!-- New FAQ Link -->
+                    <li><a href="#faqs" class="sidebar-link" data-page-id="faqs">FAQs</a></li>
                 </ul>
             </nav>
         </aside>
@@ -884,7 +945,7 @@
                 </p>
                 <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
                     <li><strong>Token Detector:</strong> Automatically detects and warns users who accidentally post Discord bot tokens in chat, helping to prevent security breaches.</li>
-                    <li><strong>Ghost Ping Detector:</strong> Identifies and notifies users when someone "ghost pings" (mentions someone and then quickly deletes the message), promoting transparency.</li>
+                    <li><strong>Ghost Ping Detector:</b> Identifies and notifies users when someone "ghost pings" (mentions someone and then quickly deletes the message), promoting transparency.</li>
                 </ul>
             `,
             "other-features-quotes-link": `
@@ -914,6 +975,282 @@
                         Join Support Server
                     </a>
                 </div>
+            `,
+            // Updated FAQ Section with 20 FAQs and new UI
+            "faqs": `
+                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Frequently Asked Questions</h2>
+                <p class="text-gray-300 mb-6">
+                    Here are some common questions about Neko Code. If you can't find your answer here, please visit our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">support server</a>.
+                </p>
+                <div id="faq-accordion" class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What is Neko Code?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Neko Code is a versatile Discord bot designed to enhance your server with a wide array of features, including moderation tools, fun commands, utility functions, and an in-built economy system. It aims to be an all-in-one solution for server management and community engagement.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How do I invite Neko Code to my server?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>You can invite Neko Code by clicking on the official invite link: <a href="https://nekocode.in/invite" target="_blank" class="text-blue-400 hover:underline">https://nekocode.in/invite</a>. Ensure you have "Manage Server" permissions on the server you wish to add the bot to.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What are the command prefixes for Neko Code?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Neko Code supports multiple prefixes: <code class="code-block inline-block px-2 py-1 text-sm">!</code>, <code class="code-block inline-block px-2 py-1 text-sm">$</code>, <code class="code-block inline-block px-2 py-1 text-sm">?</code>, and <code class="code-block inline-block px-2 py-1 text-sm">></code>. You can use any of these before a command, for example: <code>!balance</code> or <code>$ping</code>.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Does Neko Code support Discord Slash Commands?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, Neko Code fully supports Discord's native slash commands. Simply type <code class="code-block inline-block px-2 py-1 text-sm">/</code> in your Discord chat, and a list of available commands will appear for easy auto-completion.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How can I get support or report a bug?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>For support, we recommend joining our official <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Discord Support Server</a>. You can also use the <code class="code-block inline-block px-2 py-1 text-sm">/report-issue</code> slash command in your server to report bugs or <code class="code-block inline-block px-2 py-1 text-sm">/suggest</code> to propose new features.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 6 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What are the main features of Neko Code?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Neko Code offers a wide range of features including robust moderation tools, various utility commands (like server info, user info), fun and interactive games, an economy system, and unique features like token and ghost ping detectors. For a full list, please see the <a data-page-id="features" class="text-blue-400 hover:underline sidebar-link-in-content">Features</a> section.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 7 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Is Neko Code free to use?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, Neko Code is completely free to use for all its core functionalities. There are no hidden fees or subscriptions required to access its main features.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 8 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Can I customize Neko Code's settings for my server?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>No, at this time, we do not support customization to the bot. Keep an eye out for such <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">announcements</a> in the future.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 9 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How often is Neko Code updated?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>We strive to update Neko Code regularly with new features, bug fixes, and performance improvements. Updates are typically rolled out weekly or bi-weekly, but critical fixes may be deployed sooner.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 10 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What is the Neko Code economy system?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The Neko Code economy system allows users to earn "Neko Coins" through various activities like daily rewards, working, or playing games. These coins can then be used to buy items from the bot's shop or interact with other economy-related commands. See the <a data-page-id="commands-prefix-economy" class="text-blue-400 hover:underline sidebar-link-in-content">Economy Commands</a> section for more.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 11 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Can Neko Code play music?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Currently, Neko Code does not offer music playback features. Our focus is on moderation, utility, and fun commands. For music, we recommend using dedicated music bots.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 12 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>What are "Ghost Ping Detectors"?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Ghost Ping Detectors are a feature that identifies when a user mentions someone (pings them) and then quickly deletes the message. Neko Code will then notify the mentioned user about the ghost ping, promoting transparency in your server. More details can be found in <a data-page-id="other-features-detectors" class="text-blue-400 hover:underline sidebar-link-in-content">Other Features - Detectors</a>.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 13 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How do I use the <code class="code-block inline-block px-2 py-1 text-sm">!convert</code> command?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The <code class="code-block inline-block px-2 py-1 text-sm">!convert</code> command is used for currency conversions. The syntax is <code class="code-block inline-block px-2 py-1 text-sm">!convert &lt;amount&gt; &lt;from_currency&gt; &lt;to_currency&gt;</code>. For example: <code class="code-block inline-block px-2 py-1 text-sm">!convert 100 USD EUR</code>. For a full list of supported currencies, please refer to the <a data-page-id="commands-prefix-math-conversion" class="text-blue-400 hover:underline sidebar-link-in-content">Math & Conversion Commands</a> section.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 14 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Can I suggest new features for Neko Code?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, absolutely! We highly encourage feature suggestions. You can use the <code class="code-block inline-block px-2 py-1 text-sm">/suggest</code> slash command in your server or join our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Discord Support Server</a> and post your ideas in the dedicated suggestion channel.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 15 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Is Neko Code open source?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Neko Code is currently not open source. However, we are always transparent about our features and development process on our support server.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 16 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How do I report a user misusing the bot?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>If you encounter a user misusing Neko Code, example using the <code class="code-block inline-block px-2 py-1 text-sm">/embed</code> or <code class="code-block inline-block px-2 py-1 text-sm">/confess</code> command, please report it to your server administrators. The Neko Code Team does not take responsibility for any misuse of the bot by any user.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 17 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Does Neko Code collect user data?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Neko Code collects minimal user data necessary for its functionality, such as user IDs for economy features or moderation logs. We are committed to user privacy and adhere to <a href="https://support-dev.discord.com/hc/en-us/articles/8562894815383-Discord-Developer-Terms-of-Service" target="_blank" class="text-blue-400 hover:underline"> Discord's Developer Terms of Service</a>. For more details, please refer to our bot's policy using the <code class="code-block inline-block px-2 py-1 text-sm">!policy</code> command.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 18 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Can Neko Code be used in DMs?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Most of Neko Code's commands are designed for server use and will not function in direct messages (DMs). Some utility commands might work, but the bot's full functionality is experienced within a Discord server.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 19 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>How do I set up auto-moderation with Neko Code?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Neko Code offers various moderation features. While a dedicated "auto-moderation" command does not exist, features like the Token Detector and specific moderation commands (e.g., <code class="code-block inline-block px-2 py-1 text-sm">/timeout</code>, <code class="code-block inline-block px-2 py-1 text-sm">/purge</code>) can be used to set up a semi-automated moderation system. For advanced auto-moderation, consider combining Neko Code with Discord's built-in AutoMod or other specialized bots.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 20 -->
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Why isn't Neko Code responding to my commands?</span>
+                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>There could be several reasons:
+                                <ul class="list-disc list-inside ml-4 mt-2">
+                                    <li><strong>Incorrect Prefix:</strong> Ensure you are using one of the correct prefixes (<code class="code-block inline-block px-2 py-1 text-sm">!</code>, <code class="code-block inline-block px-2 py-1 text-sm">$</code>, <code class="code-block inline-block px-2 py-1 text-sm">?</code>, <code class="code-block inline-block px-2 py-1 text-sm">></code>) or a slash command (<code class="code-block inline-block px-2 py-1 text-sm">/</code>).</li>
+                                    <li><strong>Missing Permissions:</strong> Neko Code might not have the necessary permissions in the channel or server to respond. Check its role permissions.</li>
+                                    <li><strong>Bot Offline:</strong> The bot might be temporarily offline for maintenance or due to an issue. Check our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Support Server</a> for status updates.</li>
+                                    <li><strong>Discord Outage:</strong> Rarely, Discord itself might be experiencing issues.</li>
+                                </ul>
+                                If the issue persists, please contact support on our Discord server.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             `
         };
 
@@ -938,6 +1275,59 @@
             const sidebar = document.getElementById('sidebar');
             const sidebarOverlay = document.getElementById('sidebar-overlay');
 
+            /**
+             * Initializes the FAQ accordion functionality.
+             * This function needs to be called every time new content is loaded, especially the FAQ page.
+             */
+            function initializeFaqAccordion() {
+                const faqQuestions = contentDisplay.querySelectorAll('.faq-question');
+
+                faqQuestions.forEach(question => {
+                    // Remove existing listeners to prevent duplicates if called multiple times
+                    question.removeEventListener('click', toggleFaqAnswer);
+                    // Add new listener
+                    question.addEventListener('click', toggleFaqAnswer);
+                });
+            }
+
+            /**
+             * Toggles the visibility of an FAQ answer.
+             * Ensures only one FAQ answer is open at a time.
+             * @param {Event} event - The click event.
+             */
+            function toggleFaqAnswer(event) {
+                const clickedQuestion = event.currentTarget;
+                const clickedAnswer = clickedQuestion.nextElementSibling;
+                const allFaqItems = contentDisplay.querySelectorAll('.faq-item');
+
+                allFaqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    const answer = item.querySelector('.faq-answer');
+
+                    if (question === clickedQuestion) {
+                        // Toggle the clicked item
+                        question.classList.toggle('open');
+                        answer.classList.toggle('open');
+                        if (answer.classList.contains('open')) {
+                            answer.style.maxHeight = answer.scrollHeight + "px";
+                            question.setAttribute('aria-expanded', 'true');
+                        } else {
+                            answer.style.maxHeight = "0";
+                            question.setAttribute('aria-expanded', 'false');
+                        }
+                    } else {
+                        // Close other open items
+                        if (question.classList.contains('open')) {
+                            question.classList.remove('open');
+                            answer.classList.remove('open');
+                            answer.style.maxHeight = "0";
+                            question.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            }
+
+
             // Function to show/hide search overlay
             function showSearchOverlay() {
                 searchOverlay.classList.remove('hidden');
@@ -954,7 +1344,7 @@
             }
 
             // Function to load content into the main display area
-            function loadContent(pageId) {
+            function loadContent(pageId, updateHistory = true) {
                 if (documentationContent[pageId]) {
                     contentDisplay.innerHTML = documentationContent[pageId];
 
@@ -1002,6 +1392,31 @@
                             }
                         }
                     }
+
+                    // If the loaded content is the FAQ page, initialize its accordion
+                    if (pageId === 'faqs') {
+                        initializeFaqAccordion();
+                    }
+
+                    // Re-attach event listeners for sidebar links within content (e.g., in FAQ answers)
+                    contentDisplay.querySelectorAll('.sidebar-link-in-content').forEach(link => {
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const targetPageId = e.target.dataset.pageId;
+                            if (targetPageId) {
+                                loadContent(targetPageId);
+                                if (updateHistory) {
+                                    history.pushState(null, '', `#${targetPageId}`);
+                                }
+                            }
+                        });
+                    });
+
+                    // Update URL hash
+                    if (updateHistory) {
+                        history.pushState(null, '', `#${pageId}`);
+                    }
+
                 } else {
                     contentDisplay.innerHTML = `<p class="text-red-400">Content for "${pageId}" not found.</p>`;
                 }
@@ -1014,19 +1429,21 @@
 
             // Event listener for sidebar navigation clicks
             sidebarNav.addEventListener('click', (event) => {
-                console.log('Sidebar click detected.');
                 event.preventDefault();
                 const targetLink = event.target.closest('.sidebar-link');
-                console.log('Target Link:', targetLink);
                 if (targetLink) {
                     const pageId = targetLink.dataset.pageId;
-                    console.log('Page ID:', pageId);
-                    if (documentationContent[pageId]) {
-                        console.log('Content found for Page ID:', pageId);
-                    } else {
-                        console.log('Content NOT found for Page ID:', pageId);
-                    }
-                    loadContent(pageId);
+                    loadContent(pageId); // updateHistory is true by default
+                }
+            });
+
+            // Handle browser back/forward buttons
+            window.addEventListener('popstate', (event) => {
+                const pageIdFromHash = window.location.hash.substring(1); // Remove '#'
+                if (pageIdFromHash) {
+                    loadContent(pageIdFromHash, false); // Don't update history again
+                } else {
+                    loadContent('getting-started', false); // Default if no hash
                 }
             });
 
@@ -1257,8 +1674,9 @@
                 setThemeColor(savedThemeColor);
             }
 
-            // Load the default page on initial load (e.g., "about" page)
-            loadContent('getting-started');
+            // Load content based on URL hash or default
+            const initialPageId = window.location.hash.substring(1) || 'getting-started';
+            loadContent(initialPageId, false); // Don't push state on initial load
         });
     </script>
 </body>
