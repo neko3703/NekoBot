@@ -3,26 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neko Code Documentation</title>
-    <meta name="description" content="Official documentation for Neko Code Discord Bot. Learn about its features, commands (slash and prefix), and how to get started.">
-    <meta name="theme-color" content="##F48FB1"> <!-- Light Pink theme color -->
+    <title>Neko Code - Your Ultimate Discord Bot</title>
+    <meta name="description" content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and more to enhance your server experience.">
+    <meta name="theme-color" content="#F48FB1"> <!-- Soft Pink Theme Color for embeds -->
 
     <!-- Favicon / Tab Icon -->
     <link rel="icon" href="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288" type="image/webp">
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nekocode.in/docs"> <!-- Replace with your actual docs URL -->
-    <meta property="og:title" content="Neko Code Documentation">
-    <meta property="og:description" content="Official documentation for Neko Code Discord Bot. Learn about its features, commands (slash and prefix), and how to get started.">
+    <meta property="og:url" content="https://nekocode.in/"> <!-- Replace with your actual website URL -->
+    <meta property="og:title" content="Neko Code - Your Ultimate Discord Bot">
+    <meta property="og:description" content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and and more to enhance your server experience.">
     <meta property="og:image" content="https://cdn.discordapp.com/attachments/826750466485780492/1392154951899152394/JXlO6i0D3ycd.png?ex=686e80d5&is=686d2f55&hm=8d3a4f003f87ff331c43414e6cb560f4f254928bc6428ecf8f4766cab2fde726&">
 
     <!-- Twitter Meta Tags -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://nekocode.in/docs"> <!-- Replace with your actual docs URL -->
-    <meta property="twitter:title" content="Neko Code Documentation">
-    <meta property="twitter:description" content="Official documentation for Neko Code Discord Bot. Learn about its features, commands (slash and prefix), and how to get started.">
-    <meta property="twitter:image" content="https://cdn.discordapp.com/attachments/826750466485780492/1392154951899152394/JXlO6i0D3ycd.png?ex=686e80d5&is=686d2f55&hm=8d3a4f003f87ff331c43414e6cb560f4f254928bc6428ecf8f4766cab2fde726&">
+    <meta property="twitter:url" content="https://nekocode.in/"> <!-- Replace with your actual website URL -->
+    <meta property="twitter:title" content="Neko Code - Your Ultimate Discord Bot">
+    <meta property="twitter:description" content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and more to enhance your server experience.">
+    <meta property="twitter:image" content="https://cdn.discordapp.com/attachments/826750466485780492/1392164575012454410/WfdJU8cQe8N4.png?ex=686e89cb&is=686d384b&hm=a77321edc9923969577df7eddd0797568ab7d47cbf4c78ae671b4fd09656da8d&">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -38,13 +38,11 @@
             --border-color: #334155;
             --code-bg: #000000;
 
-            /* Default Theme Color (Purple) */
-            --theme-primary: #8B5CF6; /* Purple */
-            --theme-primary-rgb: 139, 92, 246; /* RGB values for rgba() */
-            --theme-hover: #7C3AED;
-            --theme-hover-rgb: 124, 58, 237;
-            --theme-border: #7F00FF;
-            --theme-active-sidebar: #7F00FF;
+            /* Theme Color (Vibrant Soft Blue) */
+            --theme-primary: #6A8EE8; /* Soft Blue */
+            --theme-hover: #5A7CD8; /* Slightly darker Blue */
+            --theme-border: #4A6AC8; /* Even darker for borders/accents */
+            --theme-active-sidebar: #4A6AC8; /* Not used on landing page, but kept for consistency */
         }
 
         body {
@@ -52,142 +50,140 @@
             background-color: var(--bg-primary);
             color: var(--text-primary);
             transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
         }
-        .section-title {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .page-heading {
+
+        h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
             color: var(--text-primary);
         }
 
-        .card {
-            background-color: var(--bg-secondary);
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .code-block {
-            background-color: var(--code-bg);
-            color: var(--text-secondary);
-            padding: 1rem;
-            border-radius: 0.375rem;
-            font-family: monospace;
-            overflow-x: auto;
-        }
         .btn-primary {
-            background-color: transparent;
+            background-color: var(--theme-primary);
             color: white;
-            border: 2px solid var(--theme-primary);
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             transition: background-color 0.3s ease, transform 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
         }
-
         .btn-primary:hover {
-            background-color: rgba(var(--theme-primary-rgb), 0.2);
-            transform: translateY(-1px);
+            background-color: var(--theme-hover);
+            transform: translateY(-2px);
         }
-
         .btn-primary:active {
             transform: translateY(0);
         }
 
-        .sidebar {
-            background-color: transparent;
-            padding: 1.5rem;
-            border-radius: 0;
-            box-shadow: none;
-            position: sticky;
+        .section-heading {
+            font-size: 2.5rem; /* Equivalent to text-4xl */
+            font-weight: 800; /* Extra bold */
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--theme-primary);
+        }
+
+        .feature-card {
+            background-color: var(--bg-secondary);
+            border-radius: 0.75rem; /* More rounded */
+            padding: 2rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid var(--border-color);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+        .feature-card h3 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section Background */
+        .hero-section-background {
+            background-image: url('https://cdn.discordapp.com/attachments/826750466485780492/1392169733759045828/hX4oYpVSLgso.png?ex=686e8e99&is=686d3d19&hm=cafa0deaa2b4ec3e3a07afdcab224f4ebac86310555497767386158683b3f4aa&');
+            background-size: cover;
+            background-position: center center; /* Changed to center center for better mobile visibility */
+            background-repeat: no-repeat;
+            background-color: var(--bg-primary); /* Fallback background color */
+        }
+
+        /* Hero Section Overlay - Removed gradient, keeping only semi-transparent black for readability */
+        .hero-overlay-gradient {
+            background-color: rgba(0, 0, 0, 0.6); /* Slightly reduced opacity for better background visibility */
+        }
+
+        /* Mobile Sidebar */
+        .mobile-sidebar {
+            position: fixed;
             top: 0;
-            left: 0; /* Ensure it's aligned to the left */
-            height: 100vh;
-            overflow-y: auto;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            border-right: 1px solid var(--border-color);
-            /* Mobile specific styles */
-            position: fixed; /* Make it fixed for mobile overlay */
-            width: 80%; /* Occupy 80% width on mobile */
-            max-width: 300px; /* Max width for mobile sidebar */
-            z-index: 50; /* Ensure it's above content but below modals */
-            background-color: var(--bg-primary); /* Solid background for mobile overlay */
-            transform: translateX(-100%); /* Start off-screen */
-            transition: transform 0.3s ease-in-out;
-        }
-        .sidebar.open {
-            transform: translateX(0); /* Slide in */
-        }
-        @media (min-width: 1024px) { /* Desktop styles */
-            .sidebar {
-                position: sticky; /* Revert to sticky on desktop */
-                width: 1/5; /* Keep desktop width */
-                transform: translateX(0); /* Always visible */
-                border-right: 1px solid var(--border-color);
-            }
-        }
-
-        .sidebar-link {
-            display: block;
-            padding: 0.5rem 0.75rem;
-            color: var(--text-secondary);
-            transition: color 0.2s ease, background-color 0.2s ease, border-left 0.2s ease;
-            border-radius: 0.25rem;
-            margin-bottom: 0; /* Reduced spacing */
-        }
-        .sidebar-link:hover {
-            color: var(--text-primary);
-            background-color: var(--border-color);
-        }
-        .sidebar-link.active {
-            color: var(--theme-active-sidebar);
-            background-color: transparent;
-            font-weight: 700; /* Made bolder */
-            border-left: 3px solid var(--theme-active-sidebar);
-            padding-left: calc(0.75rem - 3px);
-        }
-        .sidebar-link.sidebar-parent-active {
-            background-color: var(--border-color);
-            color: var(--text-primary);
-            font-weight: 700; /* Made bolder */
-            border-left: 3px solid var(--theme-active-sidebar);
-            padding-left: calc(0.75rem - 3px);
-        }
-        .sidebar ul ul {
-            margin-left: 1.5rem;
-            padding-left: 0.25rem; /* Add some padding to the UL itself */
-            border-left: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for nested section */
-            border-radius: 0.25rem;
-            margin-top: 0.125rem; /* Reduced spacing */
-            margin-bottom: 0.125rem; /* Reduced spacing */
-        }
-        .sidebar ul ul .sidebar-link {
-            padding-left: 0.75rem; /* Adjust padding for visual alignment within nested list */
-            font-size: 0.95rem; /* Slightly smaller font for children */
-            color: var(--text-secondary);
-        }
-        .sidebar ul ul ul { /* Grandchild indentation */
-            margin-left: 1rem; /* Further indent for grandchildren */
-            padding-left: 0.25rem;
-            border-left: 1px solid rgba(255, 255, 255, 0.05); /* Lighter border for deeper nesting */
-        }
-        .sidebar ul ul ul .sidebar-link {
-            padding-left: 0.75rem; /* Adjust padding for visual alignment */
-        }
-
-        .main-content-area {
-            padding: 1.5rem;
+            left: 0;
+            width: 80%; /* Adjust as needed */
+            max-width: 300px;
+            height: 100%;
             background-color: var(--bg-primary);
-            position: relative; /* Needed for absolute positioning of progress bar */
+            z-index: 50;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            padding: 1.5rem;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
         }
-        @media (min-width: 1024px) {
-            .main-content-area {
-                padding: 2.5rem;
-            }
+
+        .mobile-sidebar.open {
+            transform: translateX(0);
         }
+
+        .mobile-sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 40;
+            display: none;
+        }
+
+        .mobile-sidebar-overlay.show {
+            display: block;
+        }
+
+        .mobile-sidebar-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+        }
+
+        .mobile-sidebar-link:hover {
+            background-color: var(--border-color);
+        }
+
+        /* Scroll to Top Button */
         #scrollToTopBtn {
             display: none;
             position: fixed;
@@ -196,7 +192,7 @@
             z-index: 99;
             border: 1px solid var(--theme-border);
             outline: none;
-            background-color: rgba(127, 0, 255, 0.2);
+            background-color: rgba(106, 142, 232, 0.2); /* Blue with transparency */
             color: var(--theme-border);
             cursor: pointer;
             padding: 10px 15px;
@@ -214,1490 +210,295 @@
         #scrollToTopBtn:active {
             transform: translateY(0);
         }
-
-        .search-overlay {
+        
+        /* Dynamic Contact Us Button */
+        #contactUsBtn {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            z-index: 100;
-            padding-top: 10vh;
-        }
-
-        .search-container-modal {
-            background-color: var(--bg-secondary);
-            border-radius: 0.5rem;
-            box-shadow: 0 8px 16px 0px rgba(0,0,0,0.4);
-            width: 90%;
-            max-width: 600px;
-            padding: 1.5rem;
-            position: relative;
-        }
-
-        .search-input-modal {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.375rem;
-            background-color: var(--code-bg);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            outline: none;
-            font-size: 1.125rem;
-            margin-bottom: 1rem;
-        }
-
-        .search-results-list {
-            max-height: 400px;
-            overflow-y: auto;
-            border-top: 1px solid var(--border-color);
-            padding-top: 0.5rem;
-        }
-
-        .search-result-item {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-            border-radius: 0.25rem;
-            transition: background-color 0.2s ease;
-            margin-bottom: 0.25rem;
-        }
-
-        .search-result-item:hover {
-            background-color: var(--border-color);
-        }
-
-        .search-result-item .title {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .search-result-item .snippet {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
-        }
-
-
-        .settings-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .settings-button {
-            background-color: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 0.375rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background-color 0.2s ease;
-        }
-
-        .settings-button:hover {
-            background-color: var(--border-color);
-        }
-
-        .settings-dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--bg-secondary);
-            min-width: 180px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            right: 0;
-            top: 100%;
-            margin-top: 0.5rem;
-        }
-
-        .settings-dropdown-content.show {
-            display: block;
-        }
-
-        .color-swatch {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: border-color 0.2s ease, transform 0.1s ease;
-        }
-
-        .color-swatch:hover {
-            transform: scale(1.1);
-        }
-
-        .color-swatch.active {
-            border-color: var(--text-primary);
-        }
-
-        .color-swatch-purple { background-color: #8B5CF6; }
-        .color-swatch-green { background-color: #10B981; }
-        .color-swatch-blue { background-color: #3B82F6; }
-        .color-swatch-pink { background-color: #EC4899; }
-        /* .color-swatch-lime { background-color: #A3E635; } Removed Lime Green Swatch */
-
-        /* Overlay for when mobile sidebar is open */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 40; /* Below sidebar, above content */
-            display: none; /* Hidden by default */
-        }
-        .sidebar-overlay.show {
-            display: block;
-        }
-
-        /* Styles for the FAQ accordion */
-        .faq-item {
-            background-color: var(--bg-secondary);
+            bottom: 20px; /* Aligned with scroll to top button */
+            left: 30px; /* Moved to the left */
+            z-index: 99;
+            background: linear-gradient(45deg, var(--theme-primary), var(--theme-hover)); /* Gradient background */
+            color: white;
+            padding: 12px 20px;
             border-radius: 0.75rem; /* More rounded corners */
-            margin-bottom: 1rem; /* More spacing between cards */
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-            border: 1px solid var(--border-color); /* Light border */
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
-        }
-        .faq-item:hover {
-            transform: translateY(-3px); /* Lift on hover */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
-            border-color: var(--theme-primary); /* Highlight border on hover */
-        }
-
-        .faq-question {
-            width: 100%;
-            padding: 1.25rem 1.5rem; /* More padding */
-            text-align: left;
-            font-size: 1.125rem; /* text-lg */
-            font-weight: 600; /* font-semibold */
-            color: var(--text-primary);
+            font-weight: 600;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            transition: all 0.3s ease; /* Smooth transition for all properties */
+            text-decoration: none;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 8px;
+            border: none; /* Remove default border */
             cursor: pointer;
-            background-color: transparent;
-            border: none;
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-        }
-        .faq-question:hover {
-            color: var(--theme-primary);
-        }
-        .faq-question.open {
-            background-color: var(--border-color); /* Slightly different background when open */
-            color: var(--theme-primary); /* Keep theme color when open */
         }
 
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
-            padding: 0 1.5rem; /* Match question padding */
-            color: var(--text-secondary);
-            font-size: 0.95rem; /* Slightly smaller text for answers */
-            line-height: 1.6;
-        }
-        .faq-answer.open {
-            max-height: 500px; /* A sufficiently large value to accommodate content */
-            padding-bottom: 1.5rem; /* More padding at the bottom */
-        }
-        .faq-question svg {
-            transition: transform 0.3s ease-in-out;
-        }
-        .faq-question.open svg {
-            transform: rotate(180deg);
-            color: var(--theme-primary);
+        #contactUsBtn:hover {
+            background: linear-gradient(45deg, var(--theme-hover), var(--theme-primary)); /* Reverse gradient on hover */
+            transform: translateY(-4px) scale(1.02); /* Lift and slightly enlarge */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Even stronger shadow on hover */
         }
 
-        /* Reading Progress Bar Styles */
-        #reading-progress-bar {
-            position: fixed; /* Changed from sticky to fixed */
-            top: 0;
-            left: 0;
-            height: 8px; /* Increased thickness of the bar */
-            background-color: var(--theme-primary); /* Use theme color */
-            width: 100vw; /* Ensure it spans the full viewport width */
-            z-index: 9999; /* Increased z-index to be on top of everything */
-            transition: width 0.1s linear; /* Smooth fill */
-            border-radius: 0 2px 2px 0; /* Rounded right end */
+        #contactUsBtn:active {
+            transform: translateY(0) scale(0.98); /* Press down effect */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive adjustments for sections */
+        @media (min-width: 768px) {
+            .section-padding {
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+            }
+        }
+        @media (max-width: 767px) {
+            .section-padding {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+            .section-heading {
+                font-size: 2rem; /* Smaller on mobile */
+            }
         }
     </style>
 </head>
 <body class="antialiased leading-normal">
-    <div id="reading-progress-bar"></div> <!-- Moved here to be a direct child of body -->
-    <div class="flex flex-col lg:flex-row min-h-screen">
-        <!-- Sidebar Overlay for Mobile -->
-        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <!-- Mobile Sidebar Overlay -->
+    <div id="mobile-sidebar-overlay" class="mobile-sidebar-overlay"></div>
 
-        <!-- Left Sidebar Navigation -->
-        <!-- The 'hidden' class is removed by JS on desktop, and added/removed on mobile -->
-        <aside id="sidebar" class="w-full lg:w-1/5 sidebar hidden lg:block">
-            <div class="mb-8 text-center lg:text-left flex items-center justify-between">
-                <div>
-                    <h2 class="text-3xl font-bold text-white page-heading">Neko Code</h2>
-                    <p class="text-gray-400 text-sm">Documentation</p>
-                </div>
-                <!-- Close button for mobile sidebar (visible only on mobile) -->
-                <button id="close-sidebar-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-
-            <div class="mb-6 relative">
-                <input type="text" id="search-input-main" placeholder="Search docs... (Ctrl + K)"
-                       class="w-full p-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--theme-border)]">
-            </div>
-
-            <nav id="sidebar-nav">
-                <ul>
-                    <li><a href="#about" class="sidebar-link active" data-page-id="about">About</a></li>
-                    <li><a href="#getting-started" class="sidebar-link" data-page-id="getting-started">Getting Started</a></li>
-                    <li><a href="#features" class="sidebar-link" data-page-id="features">Features</a></li>
-                    <li><a href="#how-to-use" class="sidebar-link" data-page-id="how-to-use">How to Use</a></li>
-                    <li><a href="#commands-overview" class="sidebar-link" data-page-id="commands-overview">Command List Overview</a></li>
-                    <li><a href="#commands-slash" class="sidebar-link" data-page-id="commands-slash">Slash Commands</a>
-                        <ul>
-                            <li><a href="#commands-slash-moderation" class="sidebar-link" data-page-id="commands-slash-moderation">Moderation</a></li>
-                            <li><a href="#commands-slash-utility" class="sidebar-link" data-page-id="commands-slash-utility">Utility</a></li>
-                            <li><a href="#commands-slash-fun" class="sidebar-link" data-page-id="commands-slash-fun">Fun</a></li>
-                            <li><a href="#commands-slash-gifs" class="sidebar-link" data-page-id="commands-slash-gifs">GIFs</a></li>
-                            <li><a href="#commands-slash-image" class="sidebar-link" data-page-id="commands-slash-image">Image</a></li>
-                            <li><a href="#commands-slash-server-management" class="sidebar-link" data-page-id="commands-slash-server-management">Server Management</a></li>
-                            <li><a href="#commands-slash-support" class="sidebar-link" data-page-id="commands-slash-support">Support</a></li>
-                            <li><a href="#commands-slash-text-tools" class="sidebar-link" data-page-id="commands-slash-text-tools">Text Tools</a></li>
-                            <li><a href="#commands-slash-security" class="sidebar-link" data-page-id="commands-slash-security">Security</a></li>
-                            <li><a href="#commands-slash-tools" class="sidebar-link" data-page-id="commands-slash-tools">Tools</a></li>
-                            <li><a href="#commands-slash-other" class="sidebar-link" data-page-id="commands-slash-other">Other Commands</a></li>
-                            <li><a href="#commands-slash-hire" class="sidebar-link" data-page-id="commands-slash-hire">Hire Neko</a></li>
-                            <li><a href="#commands-slash-uncategorized" class="sidebar-link" data-page-id="commands-slash-uncategorized">Uncategorized</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#commands-prefix" class="sidebar-link" data-page-id="commands-prefix">Prefix Commands</a>
-                        <ul>
-                            <li><a href="#commands-prefix-economy" class="sidebar-link" data-page-id="commands-prefix-economy">Economy</a></li>
-                            <li><a href="#commands-prefix-fun-games" class="sidebar-link" data-page-id="commands-prefix-fun-games">Fun and Games</a></li>
-                            <li><a href="#commands-prefix-utility" class="sidebar-link" data-page-id="commands-prefix-utility">Utility</a></li>
-                            <li><a href="#commands-prefix-lookup" class="sidebar-link" data-page-id="commands-prefix-lookup">Look-up</a></li>
-                            <li><a href="#commands-prefix-math-conversion" class="sidebar-link" data-page-id="commands-prefix-math-conversion">Math & Conversion</a></li>
-                            <li><a href="#commands-prefix-meta" class="sidebar-link" data-page-id="commands-prefix-meta">Meta</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#other-features" class="sidebar-link" data-page-id="other-features">Other Features</a>
-                        <ul>
-                            <li><a href="#other-features-detectors" class="sidebar-link" data-page-id="other-features-detectors">Detectors</a></li>
-                            <li><a href="#other-features-quotes-link" class="sidebar-link" data-page-id="other-features-quotes-link">Quotes Message Link</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#support" class="sidebar-link" data-page-id="support">Support & Community</a></li>
-                    <li><a href="#faqs" class="sidebar-link" data-page-id="faqs">FAQs</a></li>
-                    <!-- New Sidebar Links -->
-                    <li><a href="#troubleshooting-guide" class="sidebar-link" data-page-id="troubleshooting-guide">Troubleshooting Guide</a></li>
-                    <li><a href="#changelog" class="sidebar-link" data-page-id="changelog">Changelog</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="w-full lg:w-4/5 main-content-area flex flex-col flex-grow">
-            <!-- Header for settings button and hamburger icon -->
-            <header class="flex justify-between items-center p-4">
-                <!-- Hamburger Icon (visible on mobile, hidden on desktop) -->
-                <button id="hamburger-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-
-                <div class="settings-container ml-auto">
-                    <button id="settings-button" class="settings-button">
-                        SETTINGS
-                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div id="settings-dropdown" class="settings-dropdown-content">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-white text-sm font-semibold">Theme</span>
-                            <div class="flex space-x-2">
-                                <div class="color-swatch color-swatch-purple active" data-color="purple"></div>
-                                <div class="color-swatch color-swatch-green" data-color="green"></div>
-                                <div class="color-swatch color-swatch-blue" data-color="blue"></div>
-                                <div class="color-swatch color-swatch-pink" data-color="pink"></div>
-                                <!-- <div class="color-swatch color-swatch-lime active" data-color="lime"></div> Removed Lime Green Swatch -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Dynamic Content Area -->
-            <div id="content-display" class="flex-grow min-h-[60vh] p-6 overflow-y-auto">
-                <!-- Content will be loaded here dynamically by JavaScript -->
-            </div>
-
-            <!-- Footer -->
-            <footer class="text-center text-gray-500 mt-10 pt-6 border-t border-gray-700">
-            </footer>
-        </main>
+    <!-- Mobile Sidebar Menu -->
+    <div id="mobile-sidebar" class="mobile-sidebar">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold text-white">Neko Code Menu</h3>
+            <button id="close-mobile-sidebar-btn" class="text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <nav class="flex-grow">
+            <ul class="space-y-2">
+                <li><a href="https://nekocode.instatus.com/" target="_blank" class="mobile-sidebar-link">Status</a></li>
+                <li><a href="https://nekocode.in/about-me" target="_blank" class="mobile-sidebar-link">About me</a></li>
+                <li><a href="https://nekocode.in/docs" target="_blank" class="mobile-sidebar-link">Docs</a></li>
+                <li><a href="https://nekocode.in/support-me" target="_blank" class="mobile-sidebar-link">Support me</a></li>
+            </ul>
+        </nav>
     </div>
 
-    <!-- Search Overlay/Modal -->
-    <div id="search-overlay" class="search-overlay hidden">
-        <div class="search-container-modal">
-            <input type="text" id="search-input-modal" placeholder="Search docs... (Ctrl + K)" class="search-input-modal">
-            <div id="search-results" class="search-results-list">
-                <!-- Search results will be dynamically loaded here -->
+    <!-- Navigation Bar -->
+    <nav class="bg-[var(--bg-secondary)] p-4 flex justify-between items-center relative z-10">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <!-- Hamburger Icon (visible on mobile, hidden on desktop) -->
+            <button id="hamburger-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+
+            <a href="#" class="flex items-center space-x-2">
+                <img src="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288" alt="Neko Code Icon" class="w-10 h-10 rounded-full">
+                <span class="text-3xl font-bold text-white page-heading">Neko Code</span>
+            </a>
+            <!-- Desktop Navigation Links (visible on desktop, hidden on mobile) -->
+            <div class="hidden lg:flex space-x-6">
+                <a href="https://nekocode.instatus.com/" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Status</a>
+                <a href="https://nekocode.in/about-me" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">About me</a>
+                <a href="https://nekocode.in/docs" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Docs</a>
+                <a href="https://nekocode.in/support-me" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Support me</a>
             </div>
         </div>
-    </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center hero-section-background">
+        <!-- This div now acts as the semi-transparent black overlay -->
+        <div class="absolute inset-0 hero-overlay-gradient"></div>
+        <div class="relative z-10 p-4 max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up">
+                Neko Code: Your Ultimate Discord Bot
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in-up delay-200">
+                Enhance your server with powerful moderation, fun commands, and essential utilities.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400">
+                <a href="https://nekocode.in/invite" target="_blank" class="btn-primary">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    Invite Neko Code
+                </a>
+                <a href="#features" class="btn-primary !bg-transparent border-2 border-[var(--theme-primary)] hover:!bg-[var(--theme-hover)]">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-gray-900 text-center">
+        <div class="container mx-auto px-4 py-8">
+            <h2 class="section-heading">About Neko Code</h2>
+            <div class="max-w-3xl mx-auto text-gray-300 text-lg">
+                <p class="mb-4">
+                    Neko Code is designed to enhance your Discord server experience with a wide range of features.
+                    From powerful moderation tools to engaging fun commands and essential utility functions, Neko Code aims to be an all-in-one solution for server management and community engagement.
+                </p>
+                <p class="mb-4">
+                    Our goal is to provide a stable, user-friendly, and constantly evolving bot that meets the diverse needs of various Discord communities. We are committed to regular updates, incorporating user feedback, and ensuring the bot runs smoothly 24/7.
+                </p>
+                <p>
+                    Join our vibrant community and support server if you have any questions, suggestions, or just want to connect with other Neko Code users!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="section-padding bg-gray-900 text-center">
+        <div class="container mx-auto px-4 py-8">
+            <h2 class="section-heading">Neko Code Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="feature-card">
+                    <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">151k+</h3>
+                    <p class="text-gray-300 text-lg">Active Userbase</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">24/7 Active</h3>
+                    <p class="text-gray-300 text-lg">with 98.7% Uptime</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">100+</h3>
+                    <p class="text-gray-300 text-lg">Unique Commands</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding bg-gray-800">
+        <div class="container mx-auto px-4 py-8">
+            <h2 class="section-heading">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card">
+                    <h3 class="mb-4">Moderation</h3>
+                    <p>Keep your server clean and orderly with powerful moderation commands like kick, ban, mute, warn, and more.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-4">Utilities</h3>
+                    <p>Handy tools for everyday server tasks, including user info, server info, avatar lookup, and role management.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-4">Fun & Games</h3>
+                    <p>Engage your community with entertaining commands, mini-games, and interactive elements to keep the fun going.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-4">Economy System</h3>
+                    <p>Participate in a server-wide economy with various ways to earn and spend virtual currency, adding a new layer of interaction.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-4">Automated Messages</h3>
+                    <p>Automate welcome and goodbye messages for new and leaving members, ensuring a warm and organized server environment.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-4">Advanced Detectors</h3>
+                    <p>Utilize intelligent detectors for token leaks and ghost pings, enhancing server security and transparency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commands Section (Simplified for landing page) -->
+    <section id="commands" class="section-padding bg-gray-900 text-center">
+        <div class="container mx-auto px-4 py-8">
+            <h2 class="section-heading">Explore Commands</h2>
+            <p class="max-w-3xl mx-auto text-gray-300 text-lg mb-8">
+                Neko Code offers a comprehensive suite of commands, available as both modern slash commands and traditional prefix commands.
+                Dive into our detailed documentation to discover every command and its usage.
+            </p>
+            <a href="https://nekocode.in/docs" target="_blank" class="btn-primary">
+                View Full Documentation
+            </a>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="section-padding bg-gray-800 text-center">
+        <div class="container mx-auto px-4 py-8">
+            <h2 class="section-heading">Need Help? Join Our Community!</h2>
+            <p class="max-w-3xl mx-auto text-gray-300 text-lg mb-8">
+                If you have any questions, need assistance, or want to suggest new features, our friendly support team and community are here to help. Join our official Discord server today!
+            </p>
+            <a href="https://nekocode.in/discord" target="_blank" class="btn-primary">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.394 2.08a1 1 0 01-.788 0L.245 5.503a1 1 0 00.358 1.83l.297.086A1 1 0 001 7v6a1 1 0 001 1h16a1 1 0 001-1V7a1 1 0 00-.09.417l-.297-.086a1 1 0 00-.358-1.83L10.394 2.08zM10 16a6 6 0 100-12 6 6 0 000 12z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                Join Our Discord Server
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-500 py-8 text-center">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2025 Neko Code. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center space-x-4 mt-4">
+                <div class="w-full md:w-auto mb-4 md:mb-0">
+                    <h4 class="text-white font-semibold mb-2">Important Links</h4>
+                    <ul class="space-y-1">
+                        <li><a href="https://nekocode.in/discord" target="_blank" class="footer-link">Discord Server</a></li>
+                        <li><a href="https://github.com/Neko3703" target="_blank" class="footer-link">GitHub</a></li>
+                        <li><a href="https://www.youtube.com/@neko_code" target="_blank" class="footer-link">YouTube</a></li>
+                        <li><a href="https://twitter.com/Neko3703" target="_blank" class="footer-link">X (Twitter)</a></li>
+                        <li><a href="https://www.instagram.com/neko_3703" target="_blank" class="footer-link">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/in/tejasva-sharma2402/" target="_blank" class="footer-link">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-auto">
+                    <h4 class="text-white font-semibold mb-2">Legal</h4>
+                    <ul class="space-y-1">
+                        <li><a href="https://nekocode.in/privacy-policy" target="_blank" class="footer-link">Privacy Policy</a></li>
+                        <li><a href="https://nekocode.in/terms-of-service" target="_blank" class="footer-link">Terms of Service</a></li>
+                        <li><a href="https://nekocode.in/cancellations-and-refund-policy" target="_blank" class="footer-link">Cancellation & Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" title="Go to top">↑</button>
-
+    
+    <!-- Dynamic Contact Us Button -->
+    <a href="https://nekocode.in/contact-us" target="_blank" id="contactUsBtn">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+        Contact Us
+    </a>
+    
     <script>
-        // Define all documentation content as HTML strings
-        const documentationContent = {
-            "about": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">About Neko Code</h2>
-                <p class="text-gray-300 leading-relaxed">
-                    Neko Code is designed to enhance your Discord server experience with a wide range of features.
-                    From moderation tools to fun commands and utility functions, Neko Code aims to be an all-in-one
-                    solution for server management and community engagement. Our goal is to provide a stable,
-                    user-friendly, and constantly evolving bot that resists the needs of various Discord communities.
-                </p>
-                <p class="text-gray-300 leading-relaxed mt-4">
-                    Neko Code stands out with its commitment to a seamless user experience, offering intuitive commands and reliable performance. We continuously strive to incorporate feedback from our vibrant community to introduce new functionalities and refine existing ones, ensuring that Neko Code remains a cutting-edge tool for Discord server administration and entertainment. Our development team is dedicated to maintaining high standards of security and efficiency, providing a safe and enjoyable environment for all users. We believe in fostering a strong community around Neko Code, where users can share ideas, get support, and contribute to the bot's growth.
-                </p>
-                <p class="text-gray-300 leading-relaxed mt-4">
-                    We are committed to regular updates, adding new features based on user feedback, and ensuring
-                    the bot runs smoothly 24/7. Join our support server if you have any questions or suggestions!
-                </p>
-            `,
-            "getting-started": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Getting Started</h2>
-                <p class="text-gray-300 leading-relaxed mb-4">
-                    Welcome to Neko Code! This guide will help you get started with adding the bot to your server and understanding its basic functionalities.
-                </p>
-                <h3 class="text-2xl font-medium text-white mb-3">1. Inviting Neko Code</h3>
-                <p class="text-gray-300 mb-2">
-                    To invite Neko Code to your Discord server, simply click on the "Invite Neko Code" button. Make sure you have "Manage Server" permissions on the server you wish to add the bot to.
-                </p>
-                <div class="code-block mb-8">
-                    <p><strong>Invite Link:</strong> <a href="https://nekocode.in/invite" target="_blank" class="text-blue-400 hover:underline">https://nekocode.in/invite</a></p>
-                </div>
-                <h3 class="text-2xl font-medium text-white mb-3">2. Granting Permissions</h3>
-                <p class="text-gray-300 mb-8">
-                    During the invitation process, you will be asked to grant certain permissions to the bot. For Neko Code to function correctly, it's recommended to grant it the necessary permissions for its features (e.g., Send Messages, Manage Messages, Kick Members, etc.).
-                </p>
-                <h3 class="text-2xl font-medium text-white mb-3">3. Setting Up Your Server</h3>
-                <p class="text-gray-300 mb-8">
-                    Once invited, Neko Code will be online in your server. You can then configure specific settings or roles for the bot as needed. Refer to the "How to Use" and "Command List" sections for more details on configuration and commands.
-                </p>
-                <h3 class="text-2xl font-medium text-white mb-3">4. Getting Help</h3>
-                <p class="text-gray-300 mb-8">
-                    If you encounter any issues or have questions, join our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">support server</a>.
-                </p>
-            `,
-            "features": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Key Features</h2>
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
-                    <li><strong>Moderation:</strong> Keep your server clean and orderly with powerful moderation commands like kick, ban, mute, warn, and more.</li>
-                    <li><strong>Utilities:</strong> Handy tools for everyday server tasks, including user info, server info, avatar lookup, and role management.</li>
-                    <li><strong>Fun & Games:</strong> Engage your community with entertaining commands, mini-games, and interactive elements.</li>
-                    <li><strong>Welcome and Goodbye:</strong> Automate welcome and goodbye messages for new and leaving members.</li>
-                    <li><strong>Economy:</strong> Participate in a server-wide economy with various ways to earn and spend currency.</li>
-                </ul>
-                <p class="text-sm text-gray-400 mt-4">
-                    <em>Note: Specific features may vary. Please refer to the command list for the most up-to-date information.</em>
-                </p>
-            `,
-            "how-to-use": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">How to Use Neko Code</h2>
-                <p class="text-gray-300 mb-8">
-                    Using Neko Code is straightforward. Once invited to your server, you can start interacting with it
-                    using commands.
-                </p>
-
-                <h3 class="text-2xl font-medium text-white mb-3">1. Inviting the Bot</h3>
-                <p class="text-gray-300 mb-8">
-                    To invite Neko Code to your server, click the "Invite Neko Code" button at the top of this page or refer to the <a class="text-blue-400 hover:underline">Getting Started</a> section.
-                    Make sure you have "Manage Server" permissions on the server you wish to invite it to.
-                </p>
-
-                <h3 class="text-2xl font-medium text-white mb-3">2. Bot Prefixes</h3>
-                <p class="text-gray-300 mb-4">
-                    Neko Code's prefixes are <strong>not customizable</strong>. You can use any of the following prefixes before a command: <code class="code-block inline-block px-2 py-1 text-sm">!</code>, <code class="code-block inline-block px-2 py-1 text-sm">$</code>, <code class="code-block inline-block px-2 py-1 text-sm">?</code>, <code class="code-block inline-block px-2 py-1 text-sm">></code>.
-                </p>
-                <div class="code-block mb-6">
-                    <p>Example: <code>!quote-this</code></p>
-                    <p>Example: <code>$balance</code></p>
-                </div>
-
-                <h3 class="text-2xl font-medium text-white mb-3">3. Slash Commands</h3>
-                <p class="text-gray-300 mb-4">
-                    Neko Code also supports Discord's native slash commands. These commands start with <code class="code-block inline-block px-2 py-1 text-sm">/</code>.
-                    Slash commands cannot be used as prefix commands. Simply type <code class="code-block inline-block px-2 py-1 text-sm">/</code>
-                    in your Discord chat, and a list of available commands will appear.
-                </p>
-                <div class="code-block mb-6">
-                    <p>Example: <code>/help</code></p>
-                    <p>Example: <code>/ping</code></p>
-                </div>
-
-                <h3 class="text-2xl font-medium text-white mb-3">4. Getting Help</h3>
-                <p class="text-gray-300 mb-8">
-                    For a full list of commands and their usage, type <code class="code-block inline-block px-2 py-1 text-sm">/help</code> in your Discord server.
-                </p>
-            `,
-            "commands-overview": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Command List Overview</h2>
-                <p class="text-gray-300 mb-6">
-                    Neko Code offers a wide array of commands accessible via both slash commands (Discord's native commands starting with <code>/</code>) and traditional prefix commands (starting with <code>!</code>, <code>$</code>, <code>?</code>, <code>></code>).
-                    Below is an overview of the command categories. Click on the specific categories in the navigation to see detailed commands and their usage.
-                </p>
-                <h3 class="text-2xl font-medium text-white mb-3">Slash Commands</h3>
-                <p class="text-gray-300 mb-8">
-                    Slash commands are Discord's modern way of interacting with bots, offering auto-completion and integrated command options. They are generally preferred for a smoother user experience.
-                    Explore the sub-sections for detailed lists of Moderation, Utility, Fun, GIFs, Image, Server Management, Support, Text Tools, Security, Tools, Other, Hire Neko, and Uncategorized slash commands.
-                </p>
-                <h3 class="text-2xl font-medium text-white mb-3">Prefix Commands</h3>
-                <p class="text-gray-300 mb-8">
-                    Prefix commands are the traditional way to interact with bots by typing one of the bot's prefixes (<code>!</code>, <code>$</code>, <code>?</code>, <code>></code>) followed by the command name.
-                    Explore the sub-sections for detailed lists of Economy, Fun and Games, Utility, Look-up, Math & Conversion, and Meta prefix commands.
-                </p>
-            `,
-            "commands-slash": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands</h2>
-                <p class="text-gray-300 mb-8">
-                    This section provides an overview of the main slash command categories. For detailed command usage and examples, please navigate to the specific sub-sections in the sidebar.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
-                    <li><strong>Moderation:</strong> Commands to help you manage and moderate your server.</li>
-                    <li><strong>Utility:</b> General utility commands for server and user information, giveaways, and more.</li>
-                    <li><strong>Fun:</strong> Engaging commands for entertainment and interaction.</li>
-                    <li><strong>GIFs:</strong> Commands to send various anime-themed GIFs.</li>
-                    <li><strong>Image:</strong> Commands related to images, including avatars and random animal pictures.</li>
-                    <li><strong>Server Management:</strong> Tools for managing channels, roles, and user nicknames.</li>
-                    <li><strong>Support:</strong> Commands to get help or report issues.</li>
-                    <li><strong>Text Tools:</strong> Utilities for text manipulation like translation and anonymous confessions.</li>
-                    <li><strong>Security:</b> Commands for security-related checks.</li>
-                    <li><strong>Tools:</strong> General purpose tools like password generation.</li>
-                    <li><strong>Other Commands:</strong> Miscellaneous commands.</li>
-                    <li><strong>Hire Neko:</strong> Information on hiring the developer.</li>
-                    <li><strong>Uncategorized:</strong> Commands that don't fit into other categories.</li>
-                </ul>
-            `,
-            "commands-slash-moderation": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Moderation</h2>
-                <p class="text-gray-300 mb-8">
-                    These commands help you maintain order and manage users within your server.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/kick</code> - Kick a user from the server.</li>
-                    <li><code>/ban</code> - Ban a user from the server.</li>
-                    <li><code>/unban</code> - Unban a user from the server.</li>
-                    <li><code>/warn</code> - Warn a user in the server.</li>
-                    <li><code>/warn-count</code> - Get the number of warnings a user in the server has.</li>
-                    <li><code>/warn-clear</code> - Clear all warnings of a user in the server.</li>
-                    <li><code>/purge</code> - Deletes a set number of messages.</li>
-                    <li><code>/timeout</code> - Timeout a user.</li>
-                </ul>
-            `,
-            "commands-slash-utility": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Utility</h2>
-                <p class="text-gray-300 mb-8">
-                    Handy tools for various server and bot-related information.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/giveaway</code> - Host a giveaway.</li>
-                    <li><code>/ping</code> - Returns the latency of the bot.</li>
-                    <li><code>/server-info</code> - Get information about this server.</li>
-                    <li><code>/user-info</code> - Get a user's information.</li>
-                    <li><code>/guilds</code> - List out guilds I am in.</li>
-                    <li><code>/help</code> - Pops-up the help menu or specific command help.</li>
-                    <li><code>/invite</code> - Invite me to your server.</li>
-                    <li><code>/create-invite</code> - Create an invite link for this server.</li>
-                    <li><code>/define</code> - Search the meaning of a word.</li>
-                    <li><code>/google</code> - Google something.</li>
-                </ul>
-            `,
-            "commands-slash-fun": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Fun</h2>
-                <p class="text-gray-300 mb-8">
-                    Commands to add a touch of fun and entertainment to your server.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/anime-quote</code> - Random anime quote.</li>
-                    <li><code>/8ball</code> - Ask a question to decide something.</li>
-                    <li><code>/joke</code> - Shares a joke.</li>
-                    <li><code>/movie</code> - Suggests a movie.</li>
-                </ul>
-            `,
-            "commands-slash-gifs": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - GIFs</h2>
-                <p class="text-gray-300 mb-8">
-                    Send various anime-themed reaction GIFs.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/cry</code> - Sends crying anime GIF.</li>
-                    <li><code>/dance</code> - Sends dancing anime GIF.</li>
-                    <li><code>/happy</code> - Sends a happy anime GIF.</li>
-                    <li><code>/slap</code> - Sends a slapping anime GIF.</li>
-                    <li><code>/wink</code> - Sends a winking anime GIF.</li>
-                </ul>
-            `,
-            "commands-slash-image": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Image</h2>
-                <p class="text-gray-300 mb-8">
-                    Commands related to images and visual content.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/avatar</code> - View avatar of a user.</li>
-                    <li><code>/cat</code> - Sends a random cute cat picture!</li>
-                    <li><code>/dog</code> - Sends a cute dog image.</li>
-                    <li><code>/embed</code> - Create an embed.</li>
-                </ul>
-            `,
-            "commands-slash-server-management": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Server Management</h2>
-                <p class="text-gray-300 mb-8">
-                    Tools to help you manage your Discord server's channels, roles, and members.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/create-channel</code> - Create a channel.</li>
-                    <li><code>/delete-channel</code> - Delete a channel with its ID.</li>
-                    <li><code>/add-role</code> - Add a role to a user.</li>
-                    <li><code>/remove-role</code> - Remove a role from a user.</li>
-                    <li><code>/set-nickname</code> - Set a user's nickname.</li>
-                    <li><code>/mute</code> - Mute a user in a voice chat.</li>
-                    <li><code>/unmute</code> - Unmute a user in a voice chat.</li>
-                    <li><code>/slowmode</code> - Set the slowmode in the current channel.</li>
-                </ul>
-            `,
-            "commands-slash-support": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Support</h2>
-                <p class="text-gray-300 mb-8">
-                    Commands to get assistance or report issues with the bot.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/raise-ticket</code> - Raise a ticket for an ongoing issue.</li>
-                    <li><code>/report-issue</code> - Report an issue being faced while using the bot.</li>
-                </ul>
-            `,
-            "commands-slash-text-tools": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Text Tools</h2>
-                <p class="text-gray-300 mb-8">
-                    Useful commands for text manipulation and communication.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/translate</code> - Translate something!</li>
-                    <li><code>/whisper</code> - Whispers a user.</li>
-                    <li><code>/confess</code> - Confess something anonymously.</li>
-                </ul>
-            `,
-            "commands-slash-security": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Security</h2>
-                <p class="text-gray-300 mb-8">
-                    Commands to help with security-related checks.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/validate-cc</code> - Validate a credit or debit card number.</li>
-                </ul>
-            `,
-            "commands-slash-tools": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Tools</h2>
-                <p class="text-gray-300 mb-8">
-                    General purpose tools for various tasks.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/generate-password</code> - Create a strong password.</li>
-                </ul>
-            `,
-            "commands-slash-other": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Other Commands</h2>
-                <p class="text-gray-300 mb-8">
-                    Miscellaneous commands that provide general information or functionality.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/info</code> - Some information about me!</li>
-                    <li><code>/suggest</code> - Suggest something.</li>
-                </ul>
-            `,
-            "commands-slash-hire": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Hire Neko</h2>
-                <p class="text-gray-300 mb-8">
-                    Information on how to hire the developer for custom Discord bot creation or server setup.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/hire</code> - Hire my developer for creating a discord bot or setting up discord servers.</li>
-                </ul>
-            `,
-            "commands-slash-uncategorized": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Slash Commands - Uncategorized</h2>
-                <p class="text-gray-300 mb-8">
-                    Commands that do not fit into specific categories.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>/intents-status</code> - Check which intents are enabled.</li>
-                </ul>
-            `,
-            "commands-prefix": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands</h2>
-                <p class="text-gray-300 mb-8">
-                    This section provides an overview of the main prefix command categories. For detailed command usage and examples, please navigate to the specific sub-sections in the sidebar. Remember the prefixes are <code>!</code>, <code>$</code>, <code>?</code>, and <code>></code>. The prefix <code>!<code> is used as an example. You can use any of the four available prefixes.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2">
-                    <li><strong>Economy:</strong> Commands related to the bot's in-built economy system.</li>
-                    <li><strong>Fun and Games:</strong> Interactive games and fun commands to engage users.</li>
-                    <li><strong>Utility:</strong> General purpose tools for various tasks.</li>
-                    <li><strong>Look-up:</strong> Commands to fetch information from external sources.</li>
-                    <li><strong>Math & Conversion:</strong> Commands for mathematical calculations and unit conversions.</li>
-                    <li><strong>Meta:</strong> Miscellaneous commands providing bot information or general facts.</li>
-                </ul>
-            `,
-            "commands-prefix-economy": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Economy</h2>
-                <p class="text-gray-300 mb-8">
-                    Manage your in-game currency "Neko Coins" and interact with the bot's economy system.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>!balance</code> - Check your current balance.</li>
-                    <li><code>!daily</code> - Claim your daily reward.</li>
-                    <li><code>!buy</code> - Buy an item from the shop.</li>
-                    <li><code>!work</code> - Work to earn money.</li>
-                    <li><code>!beg</code> - Beg for money.</li>
-                    <li><code>!crime</code> - Commit a crime.</li>
-                    <li><code>!sell</code> - Sell items from your inventory.</li>
-                    <li><code>!sellall</code> - Sell your entire inventory.</li>
-                    <li><code>!use</code> - Use an item from your inventory.</li>
-                    <li><code>!jobs</code> - See the list of available jobs.</li>
-                    <li><code>!pay</code> - Pay some amount to another person.</li>
-                    <li><code>!paytax</code> - Pay your taxes.</li>
-                    <li><code>!payrent</code> - Pay your rent.</li>
-                    <li><code>!inventory</code> - View items in your inventory.</li>
-                    <li><code>!gift</code> - Gift items from your inventory to someone.</li>
-                    <li><code>!shop</code> - Browse items available in the shop.</li>
-                    <li><code>!leaderboard</code> - See the top 10 richest users on the server.</li>
-                    <li><code>!lottery</code> - Try your luck with lottery tickets.</li>
-                </ul>
-            `,
-            "commands-prefix-fun-games": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Fun and Games</h2>
-                <p class="text-gray-300 mb-8">
-                    Engage with interactive games and fun commands.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>!blackjack</code> - Compete against the dealer to get closest to 21.</li>
-                    <li><code>!kiss</code> - Sends an anime kissing GIF.</li>
-                    <li><code>!rps</code> - Rock Paper Scissors.</li>
-                    <li><code>!tictactoe</code> - Play Tic Tac Toe game with anyone in the server.</li>
-                    <li><code>!typerace</code> - Starts a typing race.</li>
-                    <li><code>!slots</code> - Play the slot machine game.</li>
-                    <li><code>!coinflip</code> - Flip a coin.</li>
-                    <li><code>!roulette</code> - Play roulette.</li>
-                </ul>
-            `,
-            "commands-prefix-utility": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Utility</h2>
-                <p class="text-gray-300 mb-8">
-                    General utility commands for various helpful functions.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>!remindme</code> - Sets a reminder for you.</li>
-                    <li><code>!render</code> - Render a chemical compound by name or formula.</li>
-                    <li><code>!shorten</code> - Shortens a URL.</li>
-                    <li><code>!uptime</code> - Shows the bot's uptime.</li>
-                    <li><code>!weather</code> - Check weather of a city using its postal code.</li>
-                    <li><code>!quote-this</code> - Reply to a message to turn it into a quote.</li>
-                </ul>
-            `,
-            "commands-prefix-lookup": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Look-up</h2>
-                <p class="text-gray-300 mb-8">
-                    Commands to fetch information from various external sources.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>!lyrics</code> - Search lyrics of a song.</li>
-                    <li><code>!block-info</code> - Gives information about a Minecraft block.</li>
-                    <li><code>!mcserver</code> - Checks the status of a Minecraft server.</li>
-                    <li><code>!nasa</code> - Fetches NASA's Astronomy Picture of the Day.</li>
-                    <li><code>!mars</code> - Gets Mars images.</li>
-                    <li><code>!gita</code> - Fetches a verse from the Bhagavad Gita.</li>
-                </ul>
-            `,
-            "commands-prefix-math-conversion": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Math & Conversion</h2>
-                <p class="text-gray-300 mb-8">
-                    Commands for mathematical calculations and unit conversions.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>!convert</code> - Convert currencies.</li>
-                    <li><code>!factor</code> - Calculates the factors of a number.</li>
-                    <li><code>!hex</code> - Converts a number to hexadecimal.</li>
-                    <li><code>!rgb</code> - Converts RGB to HEX.</li>
-                    <li><code>!sqrt</code> - Calculates the square root of a number.</li>
-                </ul>
-            `,
-            "commands-prefix-meta": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Prefix Commands - Meta</h2>
-                <p class="text-gray-300 mb-8">
-                    Miscellaneous commands providing information about the bot or general facts.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><code>!policy</code> - Displays the bot's policy.</li>
-                    <li><code>!vedicfact</code> - Gives a random Vedic fact.</li>
-                    <li><code>!quote</code> - Fetches an inspirational quote.</li>
-                </ul>
-            `,
-            "other-features": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Other Features</h2>
-                <p class="text-gray-300 mb-8">
-                    Beyond commands, Neko Code offers several passive and utility features to enhance your server experience.
-                    Explore the sub-sections for detailed information on Detectors and the Quotes Message Link feature.
-                </p>
-            `,
-            "other-features-detectors": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Other Features - Detectors</h2>
-                <p class="text-gray-300 mb-8">
-                    Neko Code includes intelligent detectors to help maintain server safety and transparency.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><strong>Token Detector:</strong> Automatically detects and warns users who accidentally post Discord bot tokens in chat, helping to prevent security breaches.</li>
-                    <li><strong>Ghost Ping Detector:</b> Identifies and notifies users when someone "ghost pings" (mentions someone and then quickly deletes the message), promoting transparency.</li>
-                </ul>
-            `,
-            "other-features-quotes-link": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Other Features - Quotes Message Link</h2>
-                <p class="text-gray-300 mb-8">
-                    Enhance your conversation flow with automatic message embedding.
-                </p>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li>When a Discord message link is posted, Neko Code can automatically embed the content of that message, making it easier to see quoted messages without leaving the current channel.</li>
-                </ul>
-            `,
-            "support": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Support & Community</h2>
-                <p class="text-gray-300 mb-8">
-                    We are dedicated to providing comprehensive support for all Neko Code users. If you encounter any issues, have questions about bot functionality, or wish to suggest new features, our community and support team are here to help. We encourage you to join our official Discord support server, where you can connect with other users, get real-time assistance from our moderators, and stay updated on the latest news and announcements. Your feedback is invaluable in helping us improve Neko Code and ensure a smooth experience for everyone.
-                </p>
-                <h3 class="text-2xl font-medium text-white mb-3 mt-6">How to Get Support:</h3>
-                <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
-                    <li><strong>Join our Discord Server:</strong> The fastest way to get help is by joining our official <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Support Server</a>. Here, you can ask questions in dedicated support channels, report bugs, and interact directly with the Neko Code team and other experienced users.</li>
-                    <li><strong>Check the FAQ:</strong> Before asking a question, please refer to our Frequently Asked Questions (FAQ) section (if available) on the Discord server or within the documentation. Many common issues are addressed there.</li>
-                    <li><strong>Use Command Help:</b> For specific command usage, remember you can always type <code>/help [command_name]</code> in your Discord server to get detailed information about any command.</li>
-                    <li><strong>Report an Issue:</strong> If you find a bug or an unexpected behavior, please use the <code>/report-issue</code> slash command in your server or report it directly in the support server's bug report channel. Provide as much detail as possible, including steps to reproduce the issue.</li>
-                    <li><strong>Suggest Features:</strong> We love hearing your ideas! Use the <code>/suggest</code> slash command or the dedicated suggestion channel in our support server to propose new features or improvements.</li>
-                </ul>
-                <div class="mt-4">
-                    <a href="https://nekocode.in/discord" target="_blank" class="btn-primary">
-                        Join Support Server
-                    </a>
-                </div>
-            `,
-            // Updated FAQ Section with 20 FAQs and new UI
-            "faqs": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Frequently Asked Questions</h2>
-                <p class="text-gray-300 mb-6">
-                    Here are some common questions about Neko Code. If you can't find your answer here, please visit our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">support server</a>.
-                </p>
-                <div id="faq-accordion" class="space-y-4">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>1. What is Neko Code?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Neko Code is a versatile Discord bot designed to enhance your server with a wide array of features, including moderation tools, fun commands, utility functions, and an in-built economy system. It aims to be an all-in-one solution for server management and community engagement.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>2. How do I invite Neko Code to my server?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>You can invite Neko Code by clicking on the official invite link: <a href="https://nekocode.in/invite" target="_blank" class="text-blue-400 hover:underline">https://nekocode.in/invite</a>. Ensure you have "Manage Server" permissions on the server you wish to add the bot to.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>3. What are the command prefixes for Neko Code?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Neko Code supports multiple prefixes: <code class="code-block inline-block px-2 py-1 text-sm">!</code>, <code class="code-block inline-block px-2 py-1 text-sm">$</code>, <code class="code-block inline-block px-2 py-1 text-sm">?</code>, and <code class="code-block inline-block px-2 py-1 text-sm">></code>. You can use any of these before a command, for example: <code>!balance</code> or <code>$ping</code>.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 4 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>4. Does Neko Code support Discord Slash Commands?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes, Neko Code fully supports Discord's native slash commands. Simply type <code class="code-block inline-block px-2 py-1 text-sm">/</code> in your Discord chat, and a list of available commands will appear for easy auto-completion.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 5 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>5. How can I get support or report a bug?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>For support, we recommend joining our official <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Discord Support Server</a>. You can also use the <code class="code-block inline-block px-2 py-1 text-sm">/report-issue</code> slash command in your server to report bugs or <code class="code-block inline-block px-2 py-1 text-sm">/suggest</code> to propose new features.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 6 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>6. What are the main features of Neko Code?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Neko Code offers a wide range of features including robust moderation tools, various utility commands (like server info, user info), fun and interactive games, an economy system, and unique features like token and ghost ping detectors. For a full list, please see the <a data-page-id="features" class="text-blue-400 hover:underline sidebar-link-in-content">Features</a> section.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 7 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>7. Is Neko Code free to use?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes, Neko Code is completely free to use for all its core functionalities. There are no hidden fees or subscriptions required to access its main features.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 8 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>8. Can I customize Neko Code's settings for my server?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>No, at this time, we do not support customization to the bot. Keep an eye out for such <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">announcements</a> in the future.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 9 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>9. How often is Neko Code updated?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>We strive to update Neko Code regularly with new features, bug fixes, and performance improvements. Updates are typically rolled out weekly or bi-weekly, but critical fixes may be deployed sooner.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 10 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>10. What is the Neko Code economy system?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>The Neko Code economy system allows users to earn "Neko Coins" through various activities like daily rewards, working, or playing games. These coins can then be used to buy items from the bot's shop or interact with other economy-related commands. See the <a data-page-id="commands-prefix-economy" class="text-blue-400 hover:underline sidebar-link-in-content">Economy Commands</a> section for more.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 11 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>11. Can Neko Code play music?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Currently, Neko Code does not offer music playback features. Our focus is on moderation, utility, and fun commands. For music, we recommend using dedicated music bots.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 12 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>12. What are "Ghost Ping Detectors"?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Ghost Ping Detectors are a feature that identifies when a user mentions someone (pings them) and then quickly deletes the message. Neko Code will then notify the mentioned user about the ghost ping, promoting transparency in your server. More details can be found in <a data-page-id="other-features-detectors" class="text-blue-400 hover:underline sidebar-link-in-content">Other Features - Detectors</a>.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 13 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>13. How do I use the !convert command?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>The <code class="code-block inline-block px-2 py-1 text-sm">!convert</code> command is used for currency conversions. The syntax is <code class="code-block inline-block px-2 py-1 text-sm">!convert &lt;amount&gt; &lt;from_currency&gt; &lt;to_currency&gt;</code>. For example: <code class="code-block inline-block px-2 py-1 text-sm">!convert 100 USD EUR</code>. For a full list of supported currencies, please refer to the <a data-page-id="commands-prefix-math-conversion" class="text-blue-400 hover:underline sidebar-link-in-content">Math & Conversion Commands</a> section.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 14 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>14. Can I suggest new features for Neko Code?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Yes, absolutely! We highly encourage feature suggestions. You can use the <code class="code-block inline-block px-2 py-1 text-sm">/suggest</code> slash command in your server or join our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Discord Support Server</a> and post your ideas in the dedicated suggestion channel.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 15 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>15. Is Neko Code open source?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Neko Code is currently not open source. However, we are always transparent about our features and development process on our support server.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 16 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>16. How do I report a user misusing the bot?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>If you encounter a user misusing Neko Code, example using the <code class="code-block inline-block px-2 py-1 text-sm">/embed</code> or <code class="code-block inline-block px-2 py-1 text-sm">/confess</code> command, please report it to your server administrators. The Neko Code Team does not take responsibility for any misuse of the bot by any user.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 17 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>17. Does Neko Code collect user data?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Neko Code collects minimal user data necessary for its functionality, such as user IDs for economy features or moderation logs. We are committed to user privacy and adhere to <a href="https://support-dev.discord.com/hc/en-us/articles/8562894815383-Discord-Developer-Terms-of-Service" target="_blank" class="text-blue-400 hover:underline"> Discord's Developer Terms of Service</a>. For more details, please refer to our bot's policy using the <code class="code-block inline-block px-2 py-1 text-sm">!policy</code> command.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 18 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>18. Can Neko Code be used in DMs?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Most of Neko Code's commands are designed for server use and will not function in direct messages (DMs). Some utility commands might work, but the bot's full functionality is experienced within a Discord server.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 19 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>19. How do I set up auto-moderation with Neko Code?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>Neko Code offers various moderation features. While a dedicated "auto-moderation" command does not exist, features like the Token Detector and specific moderation commands (e.g., <code class="code-block inline-block px-2 py-1 text-sm">/timeout</code>, <code class="code-block inline-block px-2 py-1 text-sm">/purge</code>) can be used to set up a semi-automated moderation system. For advanced auto-moderation, consider combining Neko Code with Discord's built-in AutoMod or other specialized bots.</p>
-                        </div>
-                    </div>
-
-                    <!-- FAQ Item 20 -->
-                    <div class="faq-item">
-                        <button class="faq-question" aria-expanded="false">
-                            <span>20. Why isn't Neko Code responding to my commands?</span>
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="faq-answer">
-                            <p>There could be several reasons:
-                                <ul class="list-disc list-inside ml-4 mt-2">
-                                    <li><strong>Incorrect Prefix:</strong> Ensure you are using one of the correct prefixes (<code class="code-block inline-block px-2 py-1 text-sm">!</code>, <code class="code-block inline-block px-2 py-1 text-sm">$</code>, <code class="code-block inline-block px-2 py-1 text-sm">?</code>, <code class="code-block inline-block px-2 py-1 text-sm">></code>) or a slash command (<code class="code-block inline-block px-2 py-1 text-sm">/</code>).</li>
-                                    <li><strong>Missing Permissions:</strong> Neko Code might not have the necessary permissions in the channel or server to respond. Check its role permissions.</li>
-                                    <li><strong>Bot Offline:</strong> The bot might be temporarily offline for maintenance or due to an issue. Check our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Support Server</a> for status updates.</li>
-                                    <li><strong>Discord Outage:</strong> Rarely, Discord itself might be experiencing issues.</li>
-                                </ul>
-                                If the issue persists, please contact support on our Discord server.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            `,
-            "troubleshooting-guide": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Troubleshooting Guide</h2>
-                <p class="text-gray-300 mb-8">
-                    Encountering issues with Neko Code? This guide provides solutions to common problems.
-                </p>
-
-                <h3 class="text-2xl font-medium text-white mb-3">Bot Not Responding</h3>
-                <p class="text-gray-300 mb-6">
-                    If Neko Code isn't responding to your commands, consider the following:
-                    <ul class="list-disc list-inside ml-4 mt-2">
-                        <li><strong>Check Bot Status:</strong> Verify if Neko Code is online in your server. If it's offline, it might be undergoing maintenance or experiencing an outage. Check our <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Support Server</a> for status updates.</li>
-                        <li><strong>Correct Prefix/Slash Command:</strong> Ensure you are using the correct prefix (<code>!</code>, <code>$</code>, <code>?</code>, <code>></code>) or the native slash command (<code>/</code>). Remember, prefixes are not customizable.</li>
-                        <li><strong>Bot Permissions:</strong> Neko Code needs appropriate permissions to read messages and send replies in the channel you're using it. Ensure it has "Read Message History", "Send Messages", and "Use Slash Commands" permissions at minimum.</li>
-                        <li><strong>Channel Overrides:</strong> Check if there are any channel-specific permission overrides that might be preventing the bot from responding.</li>
-                        <li><strong>Discord Outage:</strong> Occasionally, Discord itself might experience issues. Check <a href="https://discordstatus.com/" target="_blank" class="text-blue-400 hover:underline">Discord Status</a> for any ongoing problems.</li>
-                    </ul>
-                </p>
-                <p class="text-gray-300 mb-8">
-                
-                <h3 class="text-2xl font-medium text-white mb-3">Commands Not Working as Expected</h3>
-                <p class="text-300 mb-6">
-                    If a command is not performing its intended function:
-                    <ul class="list-disc list-inside ml-4 mt-2">
-                        <li><strong>Command Syntax:</strong> Double-check the command syntax. Many commands require specific arguments or mentions. Refer to the <a data-page-id="commands-overview" class="text-blue-400 hover:underline sidebar-link-in-content">Command List Overview</a> for correct usage.</li>
-                        <li><strong>User Permissions:</strong> Some commands (e.g., moderation commands) require specific user permissions (e.g., "Kick Members", "Ban Members"). Ensure you have the necessary roles.</li>
-                        <li><strong>Bot's Role Position:</strong> For moderation commands, Neko Code's highest role must be above the roles of the users it is trying to moderate. Adjust role hierarchy if necessary.</li>
-                        <li><strong>Rate Limits:</strong> Discord has rate limits. If you're sending too many commands too quickly, the bot might temporarily stop responding. Wait a few seconds and try again.</li>
-                    </ul>
-                </p>
-                <p class="text-gray-300 mb-8">
-                
-                <h3 class="text-2xl font-medium text-white mb-3">"What to do if all else fails"</h3>
-                <p class="text-gray-300 mb-6">
-                    If you've tried the above steps and are still experiencing issues:
-                    <ol class="list-decimal list-inside ml-4 mt-2">
-                        <li><strong>Re-invite the Bot:</strong> Sometimes, a fresh re-invitation can resolve underlying permission or caching issues. You can use the invite link: <a href="https://nekocode.in/invite" target="_blank" class="text-blue-400 hover:underline">https://nekocode.in/invite</a>.</li>
-                        <li><strong>Join our Support Server:</strong> The best course of action is to join our official <a href="https://nekocode.in/discord" target="_blank" class="text-blue-400 hover:underline">Discord Support Server</a>. Our team can provide personalized assistance. When reporting an issue, please include:
-                            <ul class="list-disc list-inside ml-6 mt-1">
-                                <li>The command you were trying to use.</li>
-                                <li>The exact error message (if any).</li>
-                                <li>Screenshots or video recordings of the issue.</li>
-                                <li>The channel ID and server ID where the issue occurred.</li>
-                                <li>Any troubleshooting steps you've already tried.</li>
-                            </ul>
-                        </li>
-                        <li><strong>Check for Discord Server Issues:</strong> Ensure your Discord client is up to date and try restarting Discord.</li>
-                    </ol>
-                </p>
-            `,
-            "changelog": `
-                <h2 class="text-3xl font-semibold section-title page-heading mb-6">Changelog / Release Notes</h2>
-                <p class="text-gray-300 mb-8">
-                    Stay up-to-date with the latest changes, features, and bug fixes in Neko Code.
-                </p>
-
-                <div class="space-y-6">
-                    <!-- Latest Update: Alt Account Detection System -->
-                    <div class="card">
-                        <h3 class="text-xl font-semibold text-white mb-2">Version 2.3.0 - July 6, 2025 (9:30 PM)</h3>
-                        <ul class="list-disc list-inside text-gray-300 space-y-1">
-                            <li><strong>New Feature: Alt Account Detection System:</strong> Introduced a risk-based alt detection system to protect your server from suspicious accounts. Accounts are scored (0-100) based on factors like account age, profile picture, suspicious usernames, discriminator, mutual servers, and role assignment.</li>
-                            <li><strong>Risk Levels & Actions:</strong>
-                                <ul>
-                                    <li>30–59 (Suspicious): Logged for mod review.</li>
-                                    <li>60–79 (Likely Alt): Logged + DM warning to user.</li>
-                                    <li>80+ (High-Risk Alt): Logged + User timed out for 5 minutes.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Logging:</strong> All detections are logged in a private <code>#alt-logs</code> channel (auto-created if missing).</li>
-                        </ul>
-                    </div>
-
-                    <!-- Latest Update: Ghost Ping Detector -->
-                    <div class="card">
-                        <h3 class="text-xl font-semibold text-white mb-2">Version 2.2.1 - July 6, 2025 (8:23 PM)</h3>
-                        <ul class="list-disc list-inside text-gray-300 space-y-1">
-                            <li><strong>New Feature: Ghost Ping Detector:</strong> Implemented a system to detect and log "ghost pings" (mentions followed by quick message deletion).</li>
-                            <li><strong>Logging:</strong> Detected ghost pings are logged in a dedicated <code>ghost-ping-logs</code> channel (auto-created if missing).</li>
-                            <li><strong>Logged Information:</strong> Includes user who sent ping, pinged user/role, original message content, channel, and timestamp.</li>
-                            <li><strong>Important Note:</strong> Requires "Send Messages" and "Create Channels" permissions. Channel name must contain "ghost-ping-logs".</li>
-                        </ul>
-                    </div>
-
-                    <!-- Previous Update: Economy System & UX -->
-                    <div class="card">
-                        <h3 class="text-xl font-semibold text-white mb-2">Version 2.2.0 - June 27, 2025 (1:51 PM)</h3>
-                        <ul class="list-disc list-inside text-gray-300 space-y-1">
-                            <li><strong>New Feature: Economy System:</strong> Launched a comprehensive in-bot economy with commands like <code>!balance</code>, <code>!daily</code>, <code>!beg</code>, <code>!pay</code>, <code>!buy</code>, <code>!sell</code>, <code>!use</code>, <code>!inventory</code>, <code>!shop</code>, and <code>!leaderboard</code>.</li>
-                            <li><strong>Improved User Experience (UX):</strong> Enhanced existing commands with cleaner outputs, improved layouts, and more intuitive interactions.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Previous Update: Web Search Integration -->
-                    <div class="card">
-                        <h3 class="text-xl font-semibold text-white mb-2">Version 2.1.1 - June 21, 2025 (9:39 PM)</h3>
-                        <ul class="list-disc list-inside text-gray-300 space-y-1">
-                            <li><strong>New Feature: Web Search Integration:</strong> Added the <code>/google</code> command to perform Google searches directly within Discord.</li>
-                            <li><strong>Enhanced <code>/google</code> Command:</strong> Introduced <code>/google videos:</code> prefix for targeted YouTube video searches.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Previous Update: Token Detection System -->
-                    <div class="card">
-                        <h3 class="text-xl font-semibold text-white mb-2">Version 2.0.0 - June 7, 2025 (11:50 AM)</h3>
-                        <ul class="list-disc list-inside text-gray-300 space-y-1">
-                            <li><strong>Security Update: Token Detection System:</strong> Implemented automatic scanning for leaked Discord Bot/User Tokens in messages.</li>
-                            <li><strong>Security Action:</strong> If a token is detected, a warning prompt is sent with an option to delete the token.</li>
-                        </ul>
-                    </div>
-                </div>
-            `
-        };
-
         document.addEventListener('DOMContentLoaded', () => {
-            const contentDisplay = document.getElementById('content-display');
-            const sidebarNav = document.getElementById('sidebar-nav');
-            const sidebarLinks = sidebarNav.querySelectorAll('.sidebar-link');
-            const searchInputMain = document.getElementById('search-input-main');
-            const searchOverlay = document.getElementById('search-overlay');
-            const searchInputModal = document.getElementById('search-input-modal');
-            const searchResultsContainer = document.getElementById('search-results');
-            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-            const readingProgressBar = document.getElementById('reading-progress-bar');
-
-
-            // Settings elements
-            const settingsButton = document.getElementById('settings-button');
-            const settingsDropdown = document.getElementById('settings-dropdown');
-            const colorSwatches = document.querySelectorAll('.color-swatch');
-
-            // Hamburger menu elements
             const hamburgerBtn = document.getElementById('hamburger-btn');
-            const closeSidebarBtn = document.getElementById('close-sidebar-btn');
-            const sidebar = document.getElementById('sidebar');
-            const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const mobileSidebar = document.getElementById('mobile-sidebar');
+            const closeMobileSidebarBtn = document.getElementById('close-mobile-sidebar-btn');
+            const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
+            const mobileSidebarLinks = mobileSidebar.querySelectorAll('.mobile-sidebar-link');
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
 
-            /**
-             * Initializes the FAQ accordion functionality.
-             * This function needs to be called every time new content is loaded, especially the FAQ page.
-             */
-            function initializeFaqAccordion() {
-                const faqQuestions = contentDisplay.querySelectorAll('.faq-question');
+            // Open sidebar
+            hamburgerBtn.addEventListener('click', () => {
+                mobileSidebar.classList.add('open');
+                mobileSidebarOverlay.classList.add('show');
+            });
 
-                faqQuestions.forEach(question => {
-                    // Remove existing listeners to prevent duplicates if called multiple times
-                    question.removeEventListener('click', toggleFaqAnswer);
-                    // Add new listener
-                    question.addEventListener('click', toggleFaqAnswer);
+            // Close sidebar
+            closeMobileSidebarBtn.addEventListener('click', () => {
+                mobileSidebar.classList.remove('open');
+                mobileSidebarOverlay.classList.remove('show');
+            });
+
+            // Close sidebar when clicking overlay
+            mobileSidebarOverlay.addEventListener('click', () => {
+                mobileSidebar.classList.remove('open');
+                mobileSidebarOverlay.classList.remove('show');
+            });
+
+            // Close sidebar when clicking a link inside it
+            mobileSidebarLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileSidebar.classList.remove('open');
+                    mobileSidebarOverlay.classList.remove('show');
                 });
-            }
-
-            /**
-             * Toggles the visibility of an FAQ answer.
-             * Ensures only one FAQ answer is open at a time.
-             * @param {Event} event - The click event.
-             */
-            function toggleFaqAnswer(event) {
-                const clickedQuestion = event.currentTarget;
-                const clickedAnswer = clickedQuestion.nextElementSibling;
-                const allFaqItems = contentDisplay.querySelectorAll('.faq-item');
-
-                allFaqItems.forEach(item => {
-                    const question = item.querySelector('.faq-question');
-                    const answer = item.querySelector('.faq-answer');
-
-                    if (question === clickedQuestion) {
-                        // Toggle the clicked item
-                        question.classList.toggle('open');
-                        answer.classList.toggle('open');
-                        if (answer.classList.contains('open')) {
-                            answer.style.maxHeight = answer.scrollHeight + "px";
-                            question.setAttribute('aria-expanded', 'true');
-                        } else {
-                            answer.style.maxHeight = "0";
-                            question.setAttribute('aria-expanded', 'false');
-                        }
-                    } else {
-                        // Close other open items
-                        if (question.classList.contains('open')) {
-                            question.classList.remove('open');
-                            answer.classList.remove('open');
-                            answer.style.maxHeight = "0";
-                            question.setAttribute('aria-expanded', 'false');
-                        }
-                    }
-                });
-            }
-
-
-            // Function to show/hide search overlay
-            function showSearchOverlay() {
-                searchOverlay.classList.remove('hidden');
-                const mainSearchValue = searchInputMain.value;
-                searchInputModal.value = mainSearchValue;
-                searchInputModal.focus();
-                filterSearchResultsModal(mainSearchValue);
-            }
-
-            function hideSearchOverlay() {
-                searchOverlay.classList.add('hidden');
-                searchInputModal.value = ''; // Clear modal search input
-                searchResultsContainer.innerHTML = ''; // Clear modal results
-            }
-
-            // Function to load content into the main display area
-            function loadContent(pageId, updateHistory = true) {
-                if (documentationContent[pageId]) {
-                    contentDisplay.innerHTML = documentationContent[pageId];
-
-                    // Remove all active and parent-active classes first
-                    sidebarLinks.forEach(link => {
-                        link.classList.remove('active');
-                        link.classList.remove('sidebar-parent-active');
-                    });
-
-                    // Set active class for the clicked link
-                    const activeLink = document.querySelector(`[data-page-id="${pageId}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-
-                        // Highlight parent if it's a sub-command category
-                        const parentPageIds = {
-                            'commands-slash-moderation': 'commands-slash',
-                            'commands-slash-utility': 'commands-slash',
-                            'commands-slash-fun': 'commands-slash',
-                            'commands-slash-gifs': 'commands-slash',
-                            'commands-slash-image': 'commands-slash',
-                            'commands-slash-server-management': 'commands-slash',
-                            'commands-slash-support': 'commands-slash',
-                            'commands-slash-text-tools': 'commands-slash',
-                            'commands-slash-security': 'commands-slash',
-                            'commands-slash-tools': 'commands-slash',
-                            'commands-slash-other': 'commands-slash',
-                            'commands-slash-hire': 'commands-slash',
-                            'commands-slash-uncategorized': 'commands-slash',
-                            'commands-prefix-economy': 'commands-prefix',
-                            'commands-prefix-fun-games': 'commands-prefix',
-                            'commands-prefix-utility': 'commands-prefix',
-                            'commands-prefix-lookup': 'commands-prefix',
-                            'commands-prefix-math-conversion': 'commands-prefix',
-                            'commands-prefix-meta': 'commands-prefix',
-                            'other-features-detectors': 'other-features',
-                            'other-features-quotes-link': 'other-features'
-                        };
-
-                        const parentId = parentPageIds[pageId];
-                        if (parentId) {
-                            const parentLink = document.querySelector(`[data-page-id="${parentId}"]`);
-                            if (parentLink) {
-                                parentLink.classList.add('sidebar-parent-active');
-                            }
-                        }
-                    }
-
-                    // If the loaded content is the FAQ page, initialize its accordion
-                    if (pageId === 'faqs') {
-                        initializeFaqAccordion();
-                    }
-
-                    // Re-attach event listeners for sidebar links within content (e.g., in FAQ answers)
-                    contentDisplay.querySelectorAll('.sidebar-link-in-content').forEach(link => {
-                        link.addEventListener('click', (e) => {
-                            e.preventDefault();
-                            const targetPageId = e.target.dataset.pageId;
-                            if (targetPageId) {
-                                loadContent(targetPageId);
-                                if (updateHistory) {
-                                    history.pushState(null, '', `#${targetPageId}`);
-                                }
-                            }
-                        });
-                    });
-
-                    // Update URL hash
-                    if (updateHistory) {
-                        history.pushState(null, '', `#${pageId}`);
-                    }
-
-                    // Scroll to top of content area (if it's the main scrollable element)
-                    // contentDisplay.scrollTop = 0; // This is for contentDisplay's internal scroll.
-                    // For global progress bar, we don't reset contentDisplay scroll.
-                    window.scrollTo({ top: 0, behavior: 'auto' }); // Scroll entire window to top
-
-                    // Update global reading progress bar
-                    // Use a setTimeout to ensure DOM is rendered before calculating scroll height
-                    setTimeout(updateReadingProgressBar, 0);
-
-
-                } else {
-                    contentDisplay.innerHTML = `<p class="text-red-400">Content for "${pageId}" not found.</p>`;
-                }
-                // Close sidebar after loading content on mobile
-                if (window.innerWidth < 1024) {
-                    sidebar.classList.remove('open');
-                    sidebarOverlay.classList.remove('show');
-                }
-            }
-
-            // Function to update reading progress bar (global scroll)
-            function updateReadingProgressBar() {
-                const docHeight = document.documentElement.scrollHeight;
-                const viewportHeight = document.documentElement.clientHeight;
-                const scrolled = document.documentElement.scrollTop;
-
-                // Only show progress if content is scrollable
-                if (docHeight > viewportHeight) {
-                    const progress = (scrolled / (docHeight - viewportHeight)) * 100;
-                    readingProgressBar.style.width = progress + '%';
-                } else {
-                    readingProgressBar.style.width = '0%'; // No scrollbar, no progress
-                }
-            }
-
-            // Listen for scroll events on the window (global scroll)
-            window.addEventListener('scroll', updateReadingProgressBar);
-            window.addEventListener('resize', updateReadingProgressBar); // Update on resize too
-
-            // Event listener for sidebar navigation clicks
-            sidebarNav.addEventListener('click', (event) => {
-                event.preventDefault();
-                const targetLink = event.target.closest('.sidebar-link');
-                if (targetLink) {
-                    const pageId = targetLink.dataset.pageId;
-                    loadContent(pageId); // updateHistory is true by default
-                }
-            });
-
-            // Handle browser back/forward buttons
-            window.addEventListener('popstate', (event) => {
-                const pageIdFromHash = window.location.hash.substring(1); // Remove '#'
-                if (pageIdFromHash) {
-                    loadContent(pageIdFromHash, false); // Don't update history again
-                } else {
-                    loadContent('getting-started', false); // Default if no hash
-                }
-            });
-
-            // Keyboard shortcut (Ctrl + K or Cmd + K)
-            document.addEventListener('keydown', (event) => {
-                if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
-                    event.preventDefault();
-                    showSearchOverlay();
-                } else if (event.key === 'Escape' && !searchOverlay.classList.contains('hidden')) {
-                    hideSearchOverlay();
-                } else if (event.key === 'Escape' && sidebar.classList.contains('open')) {
-                    sidebar.classList.remove('open');
-                    sidebarOverlay.classList.remove('show');
-                }
-            });
-
-            // Click main search input to open modal
-            searchInputMain.addEventListener('click', showSearchOverlay);
-
-            // Click outside modal to close it
-            searchOverlay.addEventListener('click', (event) => {
-                if (event.target === searchOverlay) {
-                    hideSearchOverlay();
-                }
-            });
-
-            // Function to filter and display search results in the modal popup
-            function filterSearchResultsModal(searchTerm) {
-                searchResultsContainer.innerHTML = ''; // Clear previous results
-                const lowerCaseSearchTerm = searchTerm.toLowerCase();
-
-                const matchingResults = [];
-                for (const pageId in documentationContent) {
-                    const content = documentationContent[pageId];
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = content;
-                    const titleElement = tempDiv.querySelector('h2');
-                    const title = titleElement ? titleElement.textContent : pageId.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-
-                    // Get a snippet of the content
-                    const snippetText = tempDiv.textContent.replace(/\s+/g, ' ').trim(); // Remove extra whitespace
-                    let snippet = '';
-                    const snippetLength = 150; // Max length of snippet
-                    const startIndex = snippetText.toLowerCase().indexOf(lowerCaseSearchTerm);
-
-                    if (startIndex !== -1 && lowerCaseSearchTerm.length > 0) {
-                        // If search term found, show snippet around it
-                        const start = Math.max(0, startIndex - (snippetLength / 2));
-                        const end = Math.min(snippetText.length, startIndex + lowerCaseSearchTerm.length + (snippetLength / 2));
-                        snippet = snippetText.substring(start, end);
-                        if (start > 0) snippet = '...' + snippet;
-                        if (end < snippetText.length) snippet = snippet + '...';
-                    } else {
-                        // If no search term or empty, just take the beginning
-                        snippet = snippetText.substring(0, snippetLength);
-                        if (snippetText.length > snippetLength) snippet += '...';
-                    }
-
-
-                    if (title.toLowerCase().includes(lowerCaseSearchTerm) || content.toLowerCase().includes(lowerCaseSearchTerm)) {
-                        matchingResults.push({ id: pageId, title: title, snippet: snippet });
-                    }
-                }
-
-                if (matchingResults.length > 0) {
-                    matchingResults.forEach(result => {
-                        const resultDiv = document.createElement('div');
-                        resultDiv.classList.add('search-result-item');
-                        resultDiv.innerHTML = `<div class="title">${result.title}</div><div class="snippet">${result.snippet}</div>`;
-                        resultDiv.addEventListener('click', () => {
-                            loadContent(result.id);
-                            hideSearchOverlay(); // Close popup after selection
-                        });
-                        searchResultsContainer.appendChild(resultDiv);
-                    });
-                } else {
-                    const noResultsDiv = document.createElement('div');
-                    noResultsDiv.classList.add('p-2', 'text-gray-400');
-                    noResultsDiv.textContent = 'No results found.';
-                    searchResultsContainer.appendChild(noResultsDiv);
-                }
-            }
-
-            // Event listener for typing in modal search input
-            searchInputModal.addEventListener('input', (event) => {
-                filterSearchResultsModal(event.target.value);
             });
 
             // Scroll to top button logic
@@ -1712,155 +513,6 @@
             scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-
-            // Settings Dropdown and Theme Logic
-            settingsButton.addEventListener('click', (event) => {
-                event.stopPropagation(); // Prevent click from closing dropdown immediately
-                settingsDropdown.classList.toggle('show');
-            });
-
-            // Close the dropdown if the user clicks outside of it
-            window.addEventListener('click', (event) => {
-                if (!event.target.matches('#settings-button') && !event.target.closest('.settings-dropdown-content')) {
-                    if (settingsDropdown.classList.contains('show')) {
-                        settingsDropdown.classList.remove('show');
-                    }
-                }
-            });
-
-            // Function to set theme color
-            function setThemeColor(color) {
-                let primaryColor, primaryRgb, hoverColor, hoverRgb, borderColor, activeSidebarColor;
-                switch (color) {
-                    case 'purple':
-                        primaryColor = '#8B5CF6';
-                        primaryRgb = '139, 92, 246';
-                        hoverColor = '#7C3AED';
-                        hoverRgb = '124, 58, 237';
-                        borderColor = '#7F00FF';
-                        activeSidebarColor = '#7F00FF';
-                        break;
-                    case 'green':
-                        primaryColor = '#10B981';
-                        primaryRgb = '16, 185, 129';
-                        hoverColor = '#059669';
-                        hoverRgb = '5, 150, 105';
-                        borderColor = '#047857';
-                        activeSidebarColor = '#047857';
-                        break;
-                    case 'blue':
-                        primaryColor = '#3B82F6';
-                        primaryRgb = '59, 130, 246';
-                        hoverColor = '#2563EB';
-                        hoverRgb = '37, 99, 235';
-                        borderColor = '#1D4ED8';
-                        activeSidebarColor = '#1D4ED8';
-                        break;
-                    case 'pink':
-                        primaryColor = '#EC4899';
-                        primaryRgb = '236, 72, 153';
-                        hoverColor = '#DB2777';
-                        hoverRgb = '219, 39, 119';
-                        borderColor = '#BE185D';
-                        activeSidebarColor = '#BE185D';
-                        break;
-                    default: // Default to purple
-                        primaryColor = '#8B5CF6';
-                        primaryRgb = '139, 92, 246';
-                        hoverColor = '#7C3AED';
-                        hoverRgb = '124, 58, 237';
-                        borderColor = '#7F00FF';
-                        activeSidebarColor = '#7F00FF';
-                        break;
-                }
-                document.documentElement.style.setProperty('--theme-primary', primaryColor);
-                document.documentElement.style.setProperty('--theme-primary-rgb', primaryRgb); /* Set primary RGB */
-                document.documentElement.style.setProperty('--theme-hover', hoverColor);
-                document.documentElement.style.setProperty('--theme-hover-rgb', hoverRgb); /* Set hover RGB */
-                document.documentElement.style.setProperty('--theme-border', borderColor);
-                document.documentElement.style.setProperty('--theme-active-sidebar', activeSidebarColor);
-
-                // Update active class for swatches
-                colorSwatches.forEach(swatch => {
-                    swatch.classList.remove('active');
-                });
-                document.querySelector(`.color-swatch[data-color="${color}"]`).classList.add('active');
-
-                localStorage.setItem('themeColor', color); // Persist preference
-            }
-
-            // Event listeners for color swatches
-            colorSwatches.forEach(swatch => {
-                swatch.addEventListener('click', () => {
-                    const color = swatch.dataset.color;
-                    setThemeColor(color);
-                });
-            });
-
-            // Mobile sidebar toggle logic
-            hamburgerBtn.addEventListener('click', () => {
-                sidebar.classList.add('open');
-                sidebar.classList.remove('hidden'); // Ensure it's not hidden by the initial setup
-                sidebarOverlay.classList.add('show');
-            });
-
-            closeSidebarBtn.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                sidebarOverlay.classList.remove('show');
-                // Re-add hidden class after transition for mobile if not desktop
-                if (window.innerWidth < 1024) {
-                    setTimeout(() => {
-                        sidebar.classList.add('hidden');
-                    }, 300); // Match CSS transition duration
-                }
-            });
-
-            sidebarOverlay.addEventListener('click', () => {
-                sidebar.classList.remove('open');
-                sidebarOverlay.classList.remove('show');
-                // Re-add hidden class after transition for mobile if not desktop
-                if (window.innerWidth < 1024) {
-                    setTimeout(() => {
-                        sidebar.classList.add('hidden');
-                    }, 300); // Match CSS transition duration
-                }
-            });
-
-            // Handle resize to ensure correct sidebar visibility on desktop
-            window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1024) { // Desktop view
-                    sidebar.classList.remove('hidden');
-                    sidebar.classList.remove('open'); // Ensure it's not in mobile open state
-                    sidebarOverlay.classList.remove('show'); // Hide overlay
-                } else { // Mobile view
-                    // If the sidebar is not explicitly open, keep it hidden
-                    if (!sidebar.classList.contains('open')) {
-                        sidebar.classList.add('hidden');
-                    }
-                }
-            });
-
-            // Initial setup for sidebar visibility based on screen size
-            // This ensures the correct state on page load without flickering
-            if (window.innerWidth >= 1024) {
-                sidebar.classList.remove('hidden'); // Ensure sidebar is visible on desktop initially
-            } else {
-                sidebar.classList.add('hidden'); // Hide sidebar on mobile initially
-            }
-
-
-            // Load saved preferences on startup
-            const savedThemeColor = localStorage.getItem('themeColor');
-            if (savedThemeColor) {
-                setThemeColor(savedThemeColor);
-            } else {
-                // Set default theme to purple if no preference is saved
-                setThemeColor('purple');
-            }
-
-            // Load content based on URL hash or default
-            const initialPageId = window.location.hash.substring(1) || 'getting-started';
-            loadContent(initialPageId, false); // Don't push state on initial load
         });
     </script>
 </body>
