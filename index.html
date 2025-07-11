@@ -45,12 +45,24 @@
             --theme-active-sidebar: #4A6AC8; /* Not used on landing page, but kept for consistency */
         }
 
+        html, body {
+            height: 100%; /* Ensure html and body take full height */
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             transition: background-color 0.3s ease, color 0.3s ease;
             line-height: 1.6;
+            /* Applying background image directly to body */
+            background-image: url('https://cdn.discordapp.com/attachments/826750466485780492/1392169733759045828/hX4oYpVSLgso.png?ex=686e8e99&is=686d3d19&hm=cafa0deaa2b4ec3e3a07afdcab224f4ebac86310555497767386158683b3f4aa&');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Keeps background fixed when scrolling */
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -118,18 +130,21 @@
             color: var(--text-primary);
         }
 
-        /* Hero Section Background */
+        /* Hero Section Background - Now just a container for content, background is on body */
         .hero-section-background {
-            background-image: url('https://cdn.discordapp.com/attachments/826750466485780492/1392169733759045828/hX4oYpVSLgso.png?ex=686e8e99&is=686d3d19&hm=cafa0deaa2b4ec3e3a07afdcab224f4ebac86310555497767386158683b3f4aa&');
-            background-size: cover;
-            background-position: center center; /* Changed to center center for better mobile visibility */
-            background-repeat: no-repeat;
-            background-color: var(--bg-primary); /* Fallback background color */
+            position: relative; /* Needed for overlay positioning */
+            min-height: 100vh; /* Ensures it takes full viewport height */
+            background-color: transparent; /* Make it transparent to show body background */
+            display: flex; /* Ensure content is centered */
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
-        /* Hero Section Overlay - Removed gradient, keeping only semi-transparent black for readability */
+        /* Hero Section Overlay */
         .hero-overlay-gradient {
-            background-color: rgba(0, 0, 0, 0.6); /* Slightly reduced opacity for better background visibility */
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+            z-index: 1; /* Ensure it's above the background image */
         }
 
         /* Mobile Sidebar */
@@ -284,7 +299,7 @@
     </div>
 
     <!-- Navigation Bar -->
-    <nav class="bg-[var(--bg-secondary)] p-4 flex justify-between items-center relative z-10">
+    <nav class="bg-[var(--bg-secondary)] p-4 flex justify-between items-center relative z-20">
         <div class="container mx-auto flex justify-between items-center px-4">
             <!-- Hamburger Icon (visible on mobile, hidden on desktop) -->
             <button id="hamburger-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
@@ -306,10 +321,10 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center text-center bg-cover bg-center hero-section-background">
+    <section class="hero-section-background">
         <!-- This div now acts as the semi-transparent black overlay -->
         <div class="absolute inset-0 hero-overlay-gradient"></div>
-        <div class="relative z-10 p-4 max-w-4xl mx-auto">
+        <div class="relative z-20 p-4 max-w-4xl mx-auto">
             <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up">
                 Neko Code: Your Ultimate Discord Bot
             </h1>
