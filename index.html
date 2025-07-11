@@ -33,15 +33,15 @@
             /* Default Dark Mode Colors */
             --bg-primary: #1D1D1D;
             --bg-secondary: #1E293B;
-            --text-primary: #E2E8F0;
+            --text-primary: #9333ea; /* Changed to purple */
             --text-secondary: #94A3B8;
             --border-color: #334155;
             --code-bg: #000000;
 
-            /* Theme Color (Vibrant Soft Blue) */
-            --theme-primary: #6A8EE8; /* Soft Blue */
-            --theme-hover: #5A7CD8; /* Slightly darker Blue */
-            --theme-border: #4A6AC8; /* Even darker for borders/accents */
+            /* Theme Color (Vibrant Purple Gradient) */
+            --theme-primary: #8B5CF6; /* Vibrant Violet */
+            --theme-hover: #A78BFA; /* Lighter Purple */
+            --theme-border: #7C3AED; /* Deeper Purple */
             --theme-active-sidebar: #4A6AC8; /* Not used on landing page, but kept for consistency */
         }
 
@@ -58,7 +58,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
             line-height: 1.6;
             /* Applying background image directly to body */
-            background-image: url('./images/neko code logo.png');
+            background-image: url('./images/neko code logo.png'); /* Using the provided image path */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -71,11 +71,11 @@
         }
 
         .btn-primary {
-            background-color: var(--theme-primary);
+            background: linear-gradient(45deg, var(--theme-primary), var(--theme-hover)); /* Updated gradient for primary buttons */
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
-            transition: background-color 0.3s ease, transform 0.1s ease;
+            transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -84,11 +84,13 @@
             text-decoration: none;
         }
         .btn-primary:hover {
-            background-color: var(--theme-hover);
+            background: linear-gradient(45deg, var(--theme-hover), var(--theme-primary)); /* Reverse gradient on hover */
             transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
         .btn-primary:active {
             transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .section-heading {
@@ -100,17 +102,26 @@
         }
 
         .feature-card {
-            background-color: var(--bg-secondary);
-            border-radius: 0.75rem; /* More rounded */
+            background-color: var(--bg-secondary); /* This will be the inner solid color */
+            border-radius: 1.5rem; 
             padding: 2rem;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             text-align: center;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            border: 1px solid var(--border-color);
+            
+            /* Gradient border that follows border-radius */
+            border: 2px solid transparent; /* Creates space for the gradient border */
+            background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), /* Inner solid background */
+                              linear-gradient(45deg, #a855f7, #ec4899, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6); /* Re-added premium gradient border */
+            background-origin: border-box;
+            background-clip: padding-box, border-box; /* Clips inner background to padding-box, gradient to border-box */
         }
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+            /* Reduced shine on hover glow with gradient effect */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), /* Existing dark shadow */
+                        0 0 8px 2px rgba(139, 92, 246, 0.5), /* Primary glow from theme-primary */
+                        0 0 12px 3px rgba(167, 139, 250, 0.3); /* Secondary glow from theme-hover */
         }
         .feature-card h3 {
             font-size: 1.5rem; /* text-2xl */
@@ -299,7 +310,7 @@
     </div>
 
     <!-- Navigation Bar -->
-    <nav class="bg-[var(--bg-secondary)] p-4 flex justify-between items-center relative z-20">
+    <nav class="bg-[#1A1A2E] p-4 flex justify-between items-center relative z-20"> <!-- Changed nav background color to better match theme -->
         <div class="container mx-auto flex justify-between items-center px-4">
             <!-- Hamburger Icon (visible on mobile, hidden on desktop) -->
             <button id="hamburger-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
@@ -307,8 +318,10 @@
             </button>
 
             <a href="#" class="flex items-center space-x-2">
-                <img src="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288" alt="Neko Code Icon" class="w-10 h-10 rounded-full">
-                <span class="text-3xl font-bold text-white page-heading">Neko Code</span>
+                <!-- Logo: Shrunk from w-10 h-10 to w-8 h-8 -->
+                <img src="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288" alt="Neko Code Icon" class="w-8 h-8 rounded-full">
+                <!-- Neko Code text: Reduced from text-3xl to text-2xl -->
+                <span class="text-2xl font-bold text-white page-heading">Neko Code</span>
             </a>
             <!-- Desktop Navigation Links (visible on desktop, hidden on mobile) -->
             <div class="hidden lg:flex space-x-6">
@@ -333,7 +346,8 @@
             </p>
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400">
                 <a href="https://nekocode.in/invite" target="_blank" class="btn-primary">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <!-- Updated SVG icon for the "Invite Neko Code" button -->
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
                     Invite Neko Code
                 </a>
                 <a href="#features" class="btn-primary !bg-transparent border-2 border-[var(--theme-primary)] hover:!bg-[var(--theme-hover)]">
@@ -477,7 +491,8 @@
     
     <!-- Dynamic Contact Us Button -->
     <a href="https://nekocode.in/contact-us" target="_blank" id="contactUsBtn">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+        <!-- Replaced the SVG icon for the "Contact Us" button -->
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884zM18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
         Contact Us
     </a>
     
