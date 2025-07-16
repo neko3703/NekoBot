@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neko Code - Your Ultimate Discord Bot</title>
     <meta name="description" content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and more to enhance your server experience.">
-    <meta name="theme-color" content="#F48FB1"> <!-- Soft Pink Theme Color for embeds -->
+    <meta name="theme-color" content="#d4af37"> <!-- Updated Theme Color to Gold -->
 
     <!-- Favicon / Tab Icon -->
     <link rel="icon" href="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288" type="image/webp">
@@ -30,19 +30,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Default Dark Mode Colors */
+            /* Default Dark Mode Colors - Original values */
             --bg-primary: #1D1D1D;
             --bg-secondary: #1E293B;
-            --text-primary: #9333ea; /* Changed to purple */
+            --text-primary: #9333ea; /* Original purple */
             --text-secondary: #94A3B8;
             --border-color: #334155;
             --code-bg: #000000;
 
-            /* Theme Color (Vibrant Purple Gradient) */
+            /* Theme Color (Vibrant Purple Gradient) - Original values */
             --theme-primary: #8B5CF6; /* Vibrant Violet */
             --theme-hover: #A78BFA; /* Lighter Purple */
             --theme-border: #7C3AED; /* Deeper Purple */
             --theme-active-sidebar: #4A6AC8; /* Not used on landing page, but kept for consistency */
+
+            /* New Gold Theme Colors for Header and related elements */
+            --header-gold-primary: #d4af37; /* Gold */
+            --header-gold-hover: #fcd34d; /* Lighter Gold */
+            --header-gold-border: #b8860b; /* Darker Gold/Goldenrod */
         }
 
         html, body {
@@ -71,7 +76,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, var(--theme-primary), var(--theme-hover)); /* Updated gradient for primary buttons */
+            background: linear-gradient(45deg, var(--theme-primary), var(--theme-hover)); /* Original gradient for primary buttons */
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
@@ -103,16 +108,16 @@
 
         .feature-card {
             background-color: var(--bg-secondary); /* This will be the inner solid color */
-            border-radius: 1.5rem; 
+            border-radius: 1.5rem;
             padding: 2rem;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             text-align: center;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            
+
             /* Gradient border that follows border-radius */
             border: 2px solid transparent; /* Creates space for the gradient border */
             background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), /* Inner solid background */
-                              linear-gradient(45deg, #a855f7, #ec4899, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6); /* Re-added premium gradient border */
+                               linear-gradient(45deg, #a855f7, #ec4899, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6); /* Original premium gradient border */
             background-origin: border-box;
             background-clip: padding-box, border-box; /* Clips inner background to padding-box, gradient to border-box */
         }
@@ -236,14 +241,14 @@
         #scrollToTopBtn:active {
             transform: translateY(0);
         }
-        
+
         /* Dynamic Contact Us Button */
         #contactUsBtn {
             position: fixed;
             bottom: 20px; /* Aligned with scroll to top button */
             left: 30px; /* Moved to the left */
             z-index: 99;
-            background: linear-gradient(45deg, var(--theme-primary), var(--theme-hover)); /* Gradient background */
+            background: linear-gradient(45deg, var(--theme-primary), var(--theme-hover)); /* Original Gradient background */
             color: white;
             padding: 12px 20px;
             border-radius: 0.75rem; /* More rounded corners */
@@ -267,6 +272,23 @@
         #contactUsBtn:active {
             transform: translateY(0) scale(0.98); /* Press down effect */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header background elements - subtle glow (NEW) */
+        .header-bg-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1), rgba(15, 23, 42, 0) 70%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Responsive adjustments for sections */
@@ -309,29 +331,39 @@
         </nav>
     </div>
 
-    <!-- Navigation Bar -->
-    <nav class="bg-[#1A1A2E] p-4 flex justify-between items-center relative z-20"> <!-- Changed nav background color to better match theme -->
-        <div class="container mx-auto flex justify-between items-center px-4">
+    <!-- Navigation Bar (Updated Header) -->
+    <header class="bg-gray-900 text-white p-4 md:p-6 shadow-xl relative overflow-hidden">
+        <div class="header-bg-glow"></div>
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center relative z-10 animate-fadeIn">
             <!-- Hamburger Icon (visible on mobile, hidden on desktop) -->
-            <button id="hamburger-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700">
+            <button id="hamburger-btn" class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700 absolute left-4 top-1/2 -translate-y-1/2 md:static md:translate-y-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
 
-            <a href="#" class="flex items-center space-x-2">
-                <!-- Logo: Shrunk from w-10 h-10 to w-8 h-8 -->
-                <img src="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288" alt="Neko Code Icon" class="w-8 h-8 rounded-full">
-                <!-- Neko Code text: Reduced from text-3xl to text-2xl -->
-                <span class="text-2xl font-bold text-white page-heading">Neko Code</span>
+            <a href="https://nekocode.in" class="flex items-center space-x-2 mb-2 md:mb-0">
+                <img src="https://images-ext-1.discordapp.net/external/ZWkBCAg3laOW71OI-j4Fk0pe6u6-tHuufDOxcrfecXc/%3Fsize%3D256/https/cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?width=288&height=288" alt="Neko Code Icon" class="w-7 h-7 rounded-full">
+                <h1 class="text-2xl lg:text-3xl font-extrabold tracking-wide text-amber-400">Neko Code</h1>
             </a>
-            <!-- Desktop Navigation Links (visible on desktop, hidden on mobile) -->
-            <div class="hidden lg:flex space-x-6">
-                <a href="https://nekocode.instatus.com/" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Status</a>
-                <a href="https://nekocode.in/about-me" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">About me</a>
-                <a href="https://docs.nekocode.in/" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Docs</a>
-                <a href="https://nekocode.in/support-me" target="_blank" class="text-gray-300 hover:text-white transition-colors duration-200">Support me</a>
-            </div>
+            <nav class="space-x-4 text-base hidden lg:flex"> <!-- Desktop navigation hidden on mobile -->
+                <a href="https://nekocode.instatus.com/" target="_blank" class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1">
+                    Status
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="https://nekocode.in/about-me" target="_blank" class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1">
+                    About me
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="https://docs.nekocode.in/" target="_blank" class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1">
+                    Docs
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="https://nekocode.in/support-me" target="_blank" class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1">
+                    Support me
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero-section-background">
@@ -488,14 +520,14 @@
 
     <!-- Scroll to Top Button -->
     <button id="scrollToTopBtn" title="Go to top">↑</button>
-    
+
     <!-- Dynamic Contact Us Button -->
     <a href="https://nekocode.in/contact-us" target="_blank" id="contactUsBtn">
         <!-- Replaced the SVG icon for the "Contact Us" button -->
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884zM18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
         Contact Us
     </a>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -543,6 +575,9 @@
             scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // Header animation
+            document.querySelector('header').classList.add('animate-fadeIn');
         });
     </script>
 </body>
