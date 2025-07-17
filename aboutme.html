@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Neko Code's Creator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1e1e2e; /* Deep, slightly warm dark background */
+            color: #e2e8f0; /* Light gray for main text */
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b; /* Darker track */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a1a1aa; /* Medium gray thumb */
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #71717a; /* Darker gray on hover */
+        }
+
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform = translateY(0px); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-slideInUp {
+            animation: slideInUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .animate-float {
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        /* Delay for sequential animations */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+
+        /* Profile image styling */
+        .profile-image-wrapper {
+            position: relative;
+            width: 200px; /* Larger size */
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid #d4af37; /* Gold border */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease-out, border-color 0.3s ease-out;
+        }
+        .profile-image-wrapper:hover {
+            transform: scale(1.05) rotate(3deg);
+            border-color: #fcd34d; /* Brighter gold on hover */
+        }
+        .profile-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Social icons hover */
+        .social-icon {
+            transition: transform 0.2s ease-out, color 0.2s ease-out;
+        }
+        .social-icon:hover {
+            transform: scale(1.25);
+            color: #fcd34d; /* Gold on hover */
+        }
+
+        /* Button specific hover effect */
+        .btn-primary {
+            background-color: #2c3e50; /* Darker blue-gray */
+            color: #e2e8f0; /* Light text */
+            padding: 0.85rem 2.2rem;
+            font-size: 1.125rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #4a5568; /* Subtle border */
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            background-color: #3e526a; /* Slightly lighter blue-gray on hover */
+            color: #f8fafc;
+            border-color: #718096; /* Slightly lighter border on hover */
+        }
+
+        .btn-secondary {
+            background-color: #2c3e50; /* Darker blue-gray */
+            color: #e2e8f0; /* Light text */
+            padding: 0.85rem 2.2rem;
+            font-size: 1.125rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid #4a5568; /* Subtle border */
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        .btn-secondary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            background-color: #3e526a; /* Slightly lighter blue-gray on hover */
+            color: #f8fafc;
+            border-color: #718096; /* Slightly lighter border on hover */
+        }
+
+
+        /* Header background elements - subtle glow */
+        .header-bg-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1), rgba(15, 23, 42, 0) 70%);
+            animation: rotateGlow 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Glowing text effect - removed text-shadow */
+        .glowing-text {
+            /* text-shadow has been removed */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header Section -->
+    <header class="bg-gray-900 text-white p-4 md:p-6 shadow-xl relative overflow-hidden">
+        <div class="header-bg-glow"></div>
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center relative z-10 animate-fadeIn">
+            <h1 class="text-xl lg:text-2xl font-extrabold mb-3 md:mb-0 tracking-wide text-amber-400">Neko Code</h1>
+            <nav class="space-x-4 text-base md:text-lg">
+                <a href="https://nekocode.in" class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1">
+                    Home
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="https://docs.nekocode.in" class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1">
+                    Documents
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+                <a href="#" class="text-amber-400 font-bold border-b-2 border-amber-400 pb-1 transition-all duration-300 relative group">
+                    The Creator
+                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-amber-400"></span>
+                </a>
+                <a href="https://nekocode.in/contact-us" class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1">
+                    Support
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"></span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Section - Hero -->
+    <main class="flex-grow container mx-auto px-4 py-16 md:py-20 max-w-7xl">
+        <section class="text-center mb-16 md:mb-20 animate-slideInUp">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-gray-100 mb-6 leading-tight">
+                <span class="text-amber-400">Meet the Creator of Neko Code</span>
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Journey into the mind behind Neko Code. I am the sole visionary and craftsman,
+                dedicated to building an unparalleled Discord bot experience.
+            </p>
+        </section>
+
+        <!-- Creator Profile Section -->
+        <section class="mx-auto flex flex-col md:flex-row items-center md:items-start space-y-10 md:space-y-0 md:space-x-16 animate-slideInUp delay-200 py-8 px-4">
+            <div class="profile-image-wrapper flex-shrink-0">
+                <img src="./images/neko.webp" alt="Neko's Avatar" class="profile-image">
+            </div>
+            <div class="flex flex-col items-center md:items-start text-center md:text-left flex-grow">
+                <h3 class="text-4xl font-bold text-amber-400 mb-3">Neko</h3>
+                <p id="original-bio-text" class="text-gray-300 font-semibold text-xl mb-6">Solo Developer & Visionary</p>
+                <p id="dynamic-bio-content" class="text-gray-400 mb-8 leading-relaxed text-lg">
+                    As the sole creator of Neko Code, every single line of code, every feature, and every design choice comes straight from my passion and dedication. I personally handle the entire development process, making sure everything is not just innovative but also super stable. My goal is simple: to create a sophisticated and reliable bot that doesn't just meet your expectations, but totally blows them away, making your Discord server even better.
+                </p>
+
+                <!-- My Journey Section -->
+                <div class="w-full mt-6 text-center md:text-left">
+                    <h4 class="text-3xl font-bold text-amber-400 mb-4">My Journey</h4>
+                    <p class="text-gray-400 leading-relaxed text-lg mb-4">
+                        My adventure into the world of programming began with a fascination for how digital tools could enhance communication and interaction. JavaScript quickly became my language of choice, its versatility allowing me to build dynamic web experiences and, eventually, powerful Discord bots. Over the years, I've dived deep into full-stack development, mastering HTML, CSS, Node.js, and various database solutions like Google Sheets to craft seamless and robust applications.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed text-lg">
+                        The challenge of problem-solving and the joy of creating something impactful drive my continuous learning. Each project is an opportunity to experiment with new technologies and refine my craft, always aiming to deliver intuitive and high-performance solutions.
+                    </p>
+                </div>
+
+                <!-- Philosophy Section -->
+                <div class="w-full mt-6 text-center md:text-left">
+                    <h4 class="text-3xl font-bold text-amber-400 mb-4">Development Philosophy</h4>
+                    <p class="text-gray-400 leading-relaxed text-lg mb-4">
+                        At the heart of Neko Code's development is a commitment to **innovation, reliability, and user experience**. I believe a truly great bot isn't just about features; it's about how those features integrate seamlessly into your server, making interactions intuitive and enjoyable. I prioritize clean code, efficient performance, and robust error handling to ensure Neko Code is a stable and trustworthy addition to your community.
+                    </p>
+                    <p class="text-gray-400 leading-relaxed text-lg">
+                        I also strongly advocate for **community-driven development**. Your feedback and suggestions are not just welcome; they are essential. They directly influence Neko Code's evolution, ensuring it grows in ways that genuinely benefit its users.
+                    </p>
+                </div>
+
+                <!-- Future Vision Section -->
+                <div class="w-full mt-6 text-center md:text-left">
+                    <h4 class="text-3xl font-bold text-amber-400 mb-4">Future Vision</h4>
+                    <p class="text-gray-400 leading-relaxed text-lg">
+                        The journey with Neko Code is just beginning. My vision includes expanding its capabilities with even more intelligent and interactive features, exploring new integrations, and continuously optimizing for speed and scalability. I'm excited to continue building, learning, and evolving Neko Code into the most comprehensive and indispensable bot for Discord servers.
+                    </p>
+                </div>
+
+                <div class="flex space-x-8 mt-auto pt-8 border-t border-gray-700">
+                    <a href="https://github.com/neko3703/" class="social-icon text-gray-400 hover:text-amber-400" aria-label="GitHub Profile">
+                        <i class="bi bi-github w-8 h-8 flex items-center justify-center text-3xl"></i>
+                    </a>
+                    <a href="https://x.com/neko3703" class="social-icon text-gray-400 hover:text-amber-400" aria-label="X (Twitter) Profile">
+                        <i class="bi bi-twitter-x w-8 h-8 flex items-center justify-center text-3xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tejasva-sharma2402/" class="social-icon text-gray-400 hover:text-amber-400" aria-label="LinkedIn Profile">
+                        <i class="bi bi-linkedin w-8 h-8 flex items-center justify-center text-3xl"></i>
+                    </a>
+                    <span class="text-gray-400 text-xl flex items-center whitespace-nowrap">
+                        <i class="bi bi-discord w-7 h-7 mr-2 text-amber-400 text-2xl"></i>
+                        neko.code
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action / Support Section - Redesigned -->
+        <section class="mt-20 md:mt-24 text-center py-12 px-8 border-t-2 border-b-2 border-amber-400 animate-slideInUp delay-600">
+            <h3 class="text-4xl md:text-5xl font-bold text-gray-100 mb-6 leading-tight">
+                <span class="text-amber-400">Your Voice, My Vision</span>
+            </h3>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Your feedback is the compass guiding Neko Code's evolution.
+                Whether it's an innovative suggestion, a request for assistance,
+                or reporting an anomaly, your direct engagement is invaluable.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="https://nekocode.in/discord" class="btn-primary inline-flex items-center justify-center text-center py-3 px-8 rounded-full text-lg">
+                    <i class="bi bi-discord mr-2"></i> Join Our Discord
+                </a>
+                <a href="https://docs.nekocode.in" class="btn-secondary inline-flex items-center justify-center text-center py-3 px-8 rounded-full text-lg">
+                    <i class="bi bi-book mr-2"></i> Read the Docs
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Intersection Observer for animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-slideInUp');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+                // Apply animation to header
+                document.querySelector('header').classList.add('animate-fadeIn');
+            });
+
+            // Apply animation to main sections (hero text, creator profile, CTA)
+            document.querySelectorAll('main section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
