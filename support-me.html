@@ -15,7 +15,6 @@
       rel="stylesheet"
     />
     <style>
-      /* General body styling */
       body {
         font-family: "Inter", sans-serif;
         display: flex;
@@ -31,10 +30,9 @@
         overflow: auto;
       }
 
-      /* Main wrapper for the two-column layout on desktop */
       .main-wrapper {
         display: flex;
-        flex-direction: column; /* Stack vertically on mobile */
+        flex-direction: column;
         align-items: center;
         gap: 40px;
         width: 100%;
@@ -42,12 +40,11 @@
         box-sizing: border-box;
       }
 
-      /* Container styling for the main card (left side on desktop) */
       .container {
-        background: rgba(255, 255, 255, 0.1); /* Matched with qrcode-section background */
+        background: rgba(255, 255, 255, 0.1);
         padding: 40px;
         border-radius: 25px;
-        box-shadow: 0 15px 40px rgba(47, 209, 254, 0.4); /* Matched with qrcode-section shadow */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         text-align: center;
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.2);
@@ -57,7 +54,6 @@
         animation: fadeIn 0.8s ease-out;
       }
 
-      /* Keyframe animation for fade-in effect */
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -69,7 +65,6 @@
         }
       }
 
-      /* Heading styling */
       h2 {
         margin-bottom: 30px;
         font-size: 2.2em;
@@ -78,8 +73,7 @@
         letter-spacing: 0.5px;
       }
 
-      /* Input field styling */
-      input, select { /* Apply styles to select as well */
+      input, select {
         width: calc(100% - 30px);
         padding: 18px;
         margin-bottom: 25px;
@@ -91,10 +85,10 @@
         background: rgba(255, 255, 255, 0.08);
         color: #fff;
         transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-        -webkit-appearance: none; /* Remove default select arrow */
+        -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>'); /* Custom arrow */
+        background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
         background-repeat: no-repeat;
         background-position: right 15px center;
         background-size: 20px;
@@ -110,7 +104,6 @@
         box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.3);
       }
 
-      /* Button general styling */
       button {
         padding: 16px 35px;
         color: #fff;
@@ -125,7 +118,6 @@
         letter-spacing: 0.5px;
       }
 
-      /* Primary action button styling */
       button:not(.quick-pay-button) {
         background: linear-gradient(45deg, #ff6b6b, #ee4c7c);
       }
@@ -136,7 +128,6 @@
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
       }
 
-      /* QR code display area */
       #qrcode-section {
         background: rgba(255, 255, 255, 0.1);
         padding: 30px;
@@ -151,7 +142,7 @@
         min-width: 280px;
         min-height: 280px;
         animation: fadeIn 0.8s ease-out;
-        position: relative; /* Essential for absolute positioning of the icon */
+        position: relative;
       }
 
       #qrcode-section p {
@@ -162,48 +153,45 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       }
 
-      #qrcode-canvas-container { /* New container for the QR code canvas */
+      #qrcode-canvas-container {
         padding: 15px;
-        background: #8788db; /* Pure white background for the QR code */
+        background: rgba(255, 255, 255, 0.1); /* Matched with main container background */
         border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        position: relative; /* For the QR code icon to be centered relative to this */
-        display: flex; /* To center the canvas if it's smaller than its container */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Matched with main container shadow */
+        position: relative;
+        display: flex;
         justify-content: center;
         align-items: center;
       }
 
-      #qrcode-canvas-container canvas { /* Style the canvas directly */
-        border-radius: 8px; /* Rounded corners for the QR code image */
+      #qrcode-canvas-container canvas {
+        border-radius: 8px;
         display: block;
       }
 
-      #qrcode-icon { /* Styling for the icon overlaid on QR code */
+      #qrcode-icon {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 60px; /* Adjust size as needed */
-        height: 60px; /* Adjust size as needed */
-        border-radius: 50%; /* Make it circular */
-        z-index: 10; /* Ensure it's on top of the QR code */
-        background-color: #FFFFFF; /* White background to make it pop */
-        padding: 5px; /* Small padding around the icon */
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-        display: none; /* Hidden by default, shown with QR code */
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        z-index: 10;
+        background-color: #FFFFFF;
+        padding: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        display: none;
       }
 
-
-      /* Button group for layout */
       .button-group {
         display: flex;
-        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        flex-wrap: wrap;
         justify-content: center;
         margin-top: 25px;
         gap: 15px;
       }
 
-      /* Quick pay button styling */
       .quick-pay-button {
         flex: 1 1 auto;
         max-width: 130px;
@@ -219,7 +207,6 @@
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       }
 
-      /* Currency conversion display */
       #amount-in-inr-display {
         margin-top: -15px;
         margin-bottom: 20px;
@@ -229,7 +216,6 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       }
 
-      /* Media queries for responsiveness */
       @media (max-width: 768px) {
         .container {
           padding: 30px;
@@ -260,7 +246,7 @@
           margin-top: 40px;
         }
         #qrcode-icon {
-          width: 50px; /* Smaller icon on mobile */
+          width: 50px;
           height: 50px;
         }
       }
@@ -288,14 +274,13 @@
         .desktop-only-button {
           display: inline-block;
         }
-        /* Ensure quick pay buttons stay in one line on desktop */
         .button-group.quick-pay-group {
           flex-wrap: nowrap;
           justify-content: center;
           max-width: 480px;
           margin-left: auto;
           margin-right: auto;
-          gap: 8px; /* Reduced gap between buttons */
+          gap: 8px;
         }
         .quick-pay-button {
           flex-shrink: 0;
@@ -309,7 +294,7 @@
   <body>
     <div class="main-wrapper">
       <div class="container">
-        <h2>Support My Work ✨</h2> <!-- Changed title here -->
+        <h2>Support My Work ✨</h2>
         <input
           type="number"
           id="amount"
@@ -340,33 +325,22 @@
       <div id="qrcode-section">
         <p>Scan to Pay</p>
         <div id="qrcode-canvas-container">
-            <img id="qrcode-icon" src="https://cdn.discordapp.com/avatars/1022419550664400978/038c8decf81743fcb950e6099e6f11e5.webp?size=1024" alt="Icon">
-        </div> <!-- Container for QR code canvas -->
+            <img id="qrcode-icon" src="./images/nekocode.jpg" alt="Icon">
+        </div>
       </div>
     </div>
 
     <script>
-      // Hardcoded exchange rates for demonstration purposes.
-      // In a real application, these would be fetched from a reliable API.
       const EXCHANGE_RATES = {
-        "USD_TO_INR": 83.50, // 1 USD = 83.50 INR
-        "EUR_TO_INR": 90.00, // 1 EUR = 90.00 INR
+        "USD_TO_INR": 83.50,
+        "EUR_TO_INR": 90.00,
       };
 
-      /**
-       * Retrieves a query parameter from the URL.
-       * @param {string} name - The name of the query parameter.
-       * @returns {string|null} The value of the query parameter, or null if not found.
-       */
       function getQueryParam(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
       }
 
-      /**
-       * Updates the URL with the current amount from the input field.
-       * This function is called on input change to keep the URL in sync.
-       */
       function updateURL() {
         const amountInput = document.getElementById("amount");
         const url = new URL(window.location);
@@ -382,10 +356,6 @@
         window.history.replaceState(null, "", url.toString());
       }
 
-      /**
-       * Converts the entered amount (in selected currency) to INR
-       * and updates the display and a data attribute for payment functions.
-       */
       function convertAmountForPayment() {
         const amountInput = document.getElementById("amount");
         const currencySelect = document.getElementById("currency-select");
@@ -396,15 +366,15 @@
 
         if (isNaN(enteredAmount) || enteredAmount <= 0) {
           amountInINRDisplay.textContent = "";
-          amountInput.dataset.amountInInr = ""; // Clear stored INR amount
+          amountInput.dataset.amountInInr = "";
           return;
         }
 
-        let amountForUPI = 0; // This will be the amount in INR
+        let amountForUPI = 0;
 
         if (selectedCurrency === "INR") {
           amountForUPI = enteredAmount;
-          amountInINRDisplay.textContent = ""; // No need to show conversion if already INR
+          amountInINRDisplay.textContent = "";
         } else if (selectedCurrency === "USD") {
           amountForUPI = enteredAmount * EXCHANGE_RATES.USD_TO_INR;
           amountInINRDisplay.textContent = `(Approx. ₹${amountForUPI.toFixed(2)})`;
@@ -413,110 +383,92 @@
           amountInINRDisplay.textContent = `(Approx. ₹${amountForUPI.toFixed(2)})`;
         }
 
-        // Store the INR amount in a data attribute for payment functions to use
         amountInput.dataset.amountInInr = amountForUPI.toFixed(2);
       }
 
-      /**
-       * Generates and displays a QR code for UPI payment using the converted INR amount.
-       */
       function generateQRCode() {
         const amountInput = document.getElementById("amount");
         const qrCodeSectionDiv = document.getElementById("qrcode-section");
         const qrCodeCanvasContainer = document.getElementById("qrcode-canvas-container");
         const qrCodeIcon = document.getElementById("qrcode-icon");
 
-        qrCodeCanvasContainer.innerHTML = ""; // Clear previous QR code canvas
-        // Re-append the icon to ensure it's always available within the container
+        qrCodeCanvasContainer.innerHTML = "";
         qrCodeCanvasContainer.appendChild(qrCodeIcon);
-        qrCodeIcon.style.display = "none"; // Hide icon initially
+        qrCodeIcon.style.display = "none";
 
-        const amountForPayment = parseFloat(amountInput.dataset.amountInInr); // Get INR amount from data attribute
+        const amountForPayment = parseFloat(amountInput.dataset.amountInInr);
 
         if (isNaN(amountForPayment) || amountForPayment <= 0) {
           qrCodeSectionDiv.style.display = "none";
           return;
         }
 
-        const upiId = "neko@barodampay"; // Updated UPI ID
-        const payeeName = "Neko"; // Encoded Payee Name
+        const upiId = "neko@barodampay";
+        const payeeName = "Neko";
         const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(
           payeeName
-        )}&am=${amountForPayment.toFixed(2)}&cu=INR`; // Use the converted INR amount
+        )}&am=${amountForPayment.toFixed(2)}&cu=INR`;
 
-        new QRCode(qrCodeCanvasContainer, { // Generate QR code inside the new container
+        new QRCode(qrCodeCanvasContainer, {
           text: payUrl,
           width: 200,
           height: 200,
-          colorDark : "#000000", // Dark color of the QR code
-          colorLight : "#FFFFFF", // Light color of the QR code (background of QR code itself)
-          correctLevel : QRCode.CorrectLevel.H // Error correction level
+          colorDark : "#000000",
+          colorLight : "#FFFFFF",
+          correctLevel : QRCode.CorrectLevel.H
         });
 
-        qrCodeSectionDiv.style.display = "flex"; // Show QR code section
-        qrCodeIcon.style.display = "block"; // Show the icon after QR code is generated
+        qrCodeSectionDiv.style.display = "flex";
+        qrCodeIcon.style.display = "block";
       }
 
-      /**
-       * Initiates a direct UPI payment using the converted INR amount.
-       */
       function upiPay() {
         const amountInput = document.getElementById("amount");
         const qrCodeSectionDiv = document.getElementById("qrcode-section");
         const qrCodeIcon = document.getElementById("qrcode-icon");
 
-        qrCodeSectionDiv.style.display = "none"; // Hide QR code section
-        qrCodeIcon.style.display = "none"; // Hide icon
+        qrCodeSectionDiv.style.display = "none";
+        qrCodeIcon.style.display = "none";
 
-        const amountForPayment = parseFloat(amountInput.dataset.amountInInr); // Get INR amount from data attribute
+        const amountForPayment = parseFloat(amountInput.dataset.amountInInr);
 
         if (isNaN(amountForPayment) || amountForPayment <= 0) {
           return;
         }
 
-        const upiId = "neko@barodampay"; // Updated UPI ID
-        const payeeName = "Neko"; // Encoded Payee Name
+        const upiId = "neko@barodampay";
+        const payeeName = "Neko";
         const payUrl = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(payeeName)}&am=${amountForPayment.toFixed(2)}&cu=INR`;
 
-        window.location.href = payUrl; // Redirect to UPI app
+        window.location.href = payUrl;
       }
 
-      /**
-       * Handles quick pay button clicks.
-       * Sets the amount and currency, then triggers conversion and payment initiation.
-       * @param {string} amount - The predefined amount from the quick pay button.
-       * @param {string} currency - The currency for the predefined amount (e.g., "INR").
-       */
       function handleQuickPay(amount, currency) {
-        document.getElementById("amount").value = amount; // Update the input field
-        document.getElementById("currency-select").value = currency; // Set the currency for quick pay
-        updateURL(); // Update the URL parameter
-        convertAmountForPayment(); // Convert and store INR amount
+        document.getElementById("amount").value = amount;
+        document.getElementById("currency-select").value = currency;
+        updateURL();
+        convertAmountForPayment();
 
-        if (window.innerWidth <= 768) { // Check for mobile screen size
-          upiPay(); // Call without amount, it will read from dataset
+        if (window.innerWidth <= 768) {
+          upiPay();
         } else {
-          generateQRCode(); // Call without amount, it will read from dataset
+          generateQRCode();
         }
       }
 
-      // Auto-populate amount and trigger conversion if 'amount' parameter is in URL on page load
       window.onload = function () {
         const amountParam = getQueryParam("amount");
         if (amountParam) {
           document.getElementById("amount").value = amountParam;
-          // Default currency to INR if amount is present in URL, or keep current selection
           document.getElementById('currency-select').value = getQueryParam("currency") || 'INR';
           updateURL();
-          convertAmountForPayment(); // Perform initial conversion
-          // Decide whether to show QR or initiate UPI based on device on load
+          convertAmountForPayment();
           if (window.innerWidth <= 768) {
             generateQRCode();
           } else {
             generateQRCode();
           }
         } else {
-            // If no amount in URL, ensure currency is set to INR and conversion display is clear
             document.getElementById('currency-select').value = 'INR';
             document.getElementById("amount-in-inr-display").textContent = "";
         }
