@@ -216,6 +216,28 @@
         text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       }
 
+      .or-divider {
+        margin: 20px 0;
+        font-size: 1.2em;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .or-divider::before,
+      .or-divider::after {
+        content: '';
+        flex-grow: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.3);
+        margin: 0 15px;
+      }
+
+
       @media (max-width: 768px) {
         .container {
           padding: 30px;
@@ -315,11 +337,13 @@
           <button class="mobile-only" onclick="upiPay()">Pay Directly</button>
         </div>
 
-        <div class="button-group quick-pay-group">
-          <button class="quick-pay-button" data-amount="300" data-currency="INR" onclick="handleQuickPay(this.dataset.amount, this.dataset.currency)">₹300</button>
-          <button class="quick-pay-button" data-amount="500" data-currency="INR" onclick="handleQuickPay(this.dataset.amount, this.dataset.currency)">₹500</button>
-          <button class="quick-pay-button" data-amount="1000" data-currency="INR" onclick="handleQuickPay(this.dataset.amount, this.dataset.currency)">₹1000</button>
-        </div>
+        <!-- OR Divider -->
+        <div class="or-divider">OR</div>
+
+        <!-- Razorpay Payment Button Integration -->
+        <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_QvNF45BurwX9Cx" async> </script> </form>
+        <!-- End Razorpay Payment Button -->
+
       </div>
 
       <div id="qrcode-section">
