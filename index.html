@@ -105,6 +105,20 @@
             text-align: center;
             color: var(--theme-primary);
         }
+        
+        /* --- NEW --- Registering a custom property for smooth angle animation */
+        @property --gradient-angle {
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
+        }
+        
+        /* --- NEW --- Keyframes for the slow gradient rotation */
+        @keyframes gradient-rotate {
+            to {
+                --gradient-angle: 360deg;
+            }
+        }
 
         .feature-card {
             background-color: var(--bg-secondary); /* This will be the inner solid color */
@@ -114,12 +128,15 @@
             text-align: center;
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
-            /* Gradient border that follows border-radius */
+            /* --- MODIFIED --- Gradient border that follows border-radius using a conic-gradient */
             border: 2px solid transparent; /* Creates space for the gradient border */
             background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), /* Inner solid background */
-                               linear-gradient(45deg, #a855f7, #ec4899, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6); /* Original premium gradient border */
+                               conic-gradient(from var(--gradient-angle), #a855f7, #ec4899, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7); /* Rotating gradient border */
             background-origin: border-box;
             background-clip: padding-box, border-box; /* Clips inner background to padding-box, gradient to border-box */
+            
+            /* --- MODIFIED --- Apply the new rotation animation */
+            animation: gradient-rotate 15s linear infinite;
         }
         .feature-card:hover {
             transform: translateY(-5px);
