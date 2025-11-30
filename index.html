@@ -531,7 +531,7 @@
             const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
             const mobileSidebarLinks = mobileSidebar.querySelectorAll('.mobile-sidebar-link');
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-            const guildCountElement = document.getElementById('guild-count-display'); // Added reference for the new element
+            const guildCountElement = document.getElementById('guild-count-display'); // Reference for the new element
 
             // Open sidebar
             hamburgerBtn.addEventListener('click', () => {
@@ -577,10 +577,9 @@
 
             // NEW FUNCTION: Fetch and display guild count
             async function fetchGuildCount() {
-                // *** IMPORTANT: REPLACE THIS URL WITH YOUR LIVE PROXY URL ***
+                // *** IMPORTANT: IF DEPLOYING, REPLACE THIS URL WITH YOUR LIVE PROXY URL ***
                 const proxyUrl = 'http://localhost:3000/servers'; 
-                // Setting a loading state
-                guildCountElement.textContent = '...'; 
+                guildCountElement.textContent = '...'; // Loading state
 
                 try {
                     const response = await fetch(proxyUrl);
@@ -591,18 +590,20 @@
                     
                     const data = await response.json();
                     
+                    // Check if the expected property 'guildCount' exists and is a number
                     if (data && typeof data.guildCount === 'number') {
                         // Format number for better readability (e.g., 10000 -> 10,000)
                         const formattedCount = data.guildCount.toLocaleString();
                         guildCountElement.textContent = formattedCount;
                     } else {
-                        // Display error if data is missing or malformed
+                        // Display 'N/A' if the structure of the JSON is unexpected
                         guildCountElement.textContent = 'N/A';
                         console.error('API response format error:', data);
                     }
                 } catch (error) {
+                    // Display 'Error' if the fetch failed (e.g., proxy is down, network issue)
                     console.error('Failed to fetch guild count:', error);
-                    guildCountElement.textContent = 'Error'; // Display error on the page
+                    guildCountElement.textContent = 'Error'; 
                 }
             }
 
