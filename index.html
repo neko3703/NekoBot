@@ -108,9 +108,9 @@
         
         /* --- NEW --- Registering a custom property for smooth angle animation */
         @property --gradient-angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
         }
         
         /* --- NEW --- Keyframes for the slow gradient rotation */
@@ -131,7 +131,7 @@
             /* --- MODIFIED --- Gradient border that follows border-radius using a conic-gradient */
             border: 2px solid transparent; /* Creates space for the gradient border */
             background-image: linear-gradient(var(--bg-secondary), var(--bg-secondary)), /* Inner solid background */
-                              conic-gradient(from var(--gradient-angle), #a855f7, #ec4899, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7); /* Rotating gradient border */
+                               conic-gradient(from var(--gradient-angle), #a855f7, #ec4899, #f97316, #eab308, #22c55e, #06b6d4, #3b82f6, #a855f7); /* Rotating gradient border */
             background-origin: border-box;
             background-clip: padding-box, border-box; /* Clips inner background to padding-box, gradient to border-box */
             
@@ -429,8 +429,7 @@
     <section id="stats" class="section-padding bg-gray-900 text-center">
         <div class="container mx-auto px-4 py-8">
             <h2 class="section-heading">Neko Code Statistics</h2>
-            <!-- Updated Grid Layout to support 4 cards on md screens and up -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                 <div class="feature-card">
                     <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">153k+</h3>
                     <p class="text-gray-300 text-lg">Active Userbase</p>
@@ -442,11 +441,6 @@
                 <div class="feature-card">
                     <h3 class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">100+</h3>
                     <p class="text-gray-300 text-lg">Unique Commands</p>
-                </div>
-                <!-- NEW: Guild Count Card with ID for JavaScript update -->
-                <div class="feature-card">
-                    <h3 id="guild-count-display" class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]">...</h3>
-                    <p class="text-gray-300 text-lg">Active Guilds</p>
                 </div>
             </div>
         </div>
@@ -553,15 +547,38 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- UI Setup (Hamburger, Scroll) ---
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const mobileSidebar = document.getElementById('mobile-sidebar');
             const closeMobileSidebarBtn = document.getElementById('close-mobile-sidebar-btn');
             const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
             const mobileSidebarLinks = mobileSidebar.querySelectorAll('.mobile-sidebar-link');
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-            
-            // UI logic... (omitted for brevity)
+
+            // Open sidebar
+            hamburgerBtn.addEventListener('click', () => {
+                mobileSidebar.classList.add('open');
+                mobileSidebarOverlay.classList.add('show');
+            });
+
+            // Close sidebar
+            closeMobileSidebarBtn.addEventListener('click', () => {
+                mobileSidebar.classList.remove('open');
+                mobileSidebarOverlay.classList.remove('show');
+            });
+
+            // Close sidebar when clicking overlay
+            mobileSidebarOverlay.addEventListener('click', () => {
+                mobileSidebar.classList.remove('open');
+                mobileSidebarOverlay.classList.remove('show');
+            });
+
+            // Close sidebar when clicking a link inside it
+            mobileSidebarLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileSidebar.classList.remove('open');
+                    mobileSidebarOverlay.classList.remove('show');
+                });
+            });
 
             // Scroll to top button logic
             window.onscroll = function() {
@@ -575,64 +592,9 @@
             scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-            
+
             // Header animation
             document.querySelector('header').classList.add('animate-fadeIn');
-            
-            // --- Guild Count Fetch Logic ---
-            const guildCountElement = document.getElementById('guild-count-display'); 
-
-            async function fetchGuildCount() {
-                // *** IMPORTANT CHANGE: Directly fetching from the public API URL. ***
-                // We must use this direct URL because GitHub Pages cannot run the proxy.js file.
-                const apiUrl = 'https://guild-api.nekocode.in/servers'; 
-                
-                guildCountElement.textContent = '...'; // Loading state
-                console.log(`Attempting direct fetch from: ${apiUrl}`); 
-
-                try {
-                    const response = await fetch(apiUrl);
-                    
-                    if (!response.ok) {
-                        // If the API returns a bad status (e.g., 404, 500)
-                        const errorMsg = `HTTP Error: ${response.status} ${response.statusText}`;
-                        console.error('Fetch failed (Bad HTTP Status or potential CORS block):', errorMsg);
-                        // If this error is a CORS block (status 0), the actual API may be fine, but the browser blocks it.
-                        // We will check for this below.
-                        throw new Error(errorMsg); 
-                    }
-                    
-                    const data = await response.json();
-                    
-                    // Check if the expected property 'guildCount' exists and is a number
-                    if (data && typeof data.guildCount === 'number') {
-                        const formattedCount = data.guildCount.toLocaleString();
-                        guildCountElement.textContent = formattedCount;
-                        console.log('Successfully updated guild count:', formattedCount);
-                    } else {
-                        // This catches correctly fetched but improperly formatted JSON
-                        guildCountElement.textContent = 'N/A';
-                        console.error('API response format error (guildCount property missing/invalid):', data);
-                    }
-                } catch (error) {
-                    console.error('Final error during guild count fetch:', error.message);
-                    
-                    // --- CRITICAL CHECK FOR CORS FAILURE ---
-                    // If the browser blocks the request due to CORS, the status will often be 0/TBD in the Network tab, 
-                    // and the error message might be generic.
-                    // If the direct fetch fails, it usually means the external API did NOT include the necessary
-                    // 'Access-Control-Allow-Origin' header for your GitHub domain.
-                    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                        guildCountElement.innerHTML = `<span title="The API server does not allow direct access from this website (CORS block). You must deploy a proxy server to a public host like Vercel or Render.">Error</span>`;
-                        console.error("CORS Error Suspected: Direct API access failed. A publicly deployed proxy is required.");
-                    } else {
-                        guildCountElement.textContent = 'Error'; 
-                    }
-                }
-            }
-
-            // Call the function to load the stats
-            fetchGuildCount(); 
         });
     </script>
 </body>
