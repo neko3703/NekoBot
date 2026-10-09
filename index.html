@@ -1,1079 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neko Code - Your Ultimate Discord Bot</title>
-    <meta
-      name="description"
-      content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and more to enhance your server experience."
-    />
-    <meta name="theme-color" content="#F6C3D7" />
-    <!-- Updated Theme Color to Light Pastel Pink -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neko Code - Your Ultimate Discord Bot</title>
+<meta name="description" content="Neko Code is a free, all-in-one Discord bot for moderation, tickets, games, an economy, welcome messages and security alerts. Add it to your server and let it handle the busywork.">
+<meta name="theme-color" content="#0b0912">
+<link rel="icon" href="./images/nekocode.png" type="image/webp">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nekocode.in/">
+<meta property="og:title" content="Neko Code - Your Ultimate Discord Bot">
+<meta property="og:description" content="Neko Code is a free, all-in-one Discord bot for moderation, tickets, games, an economy, welcome messages and security alerts. Add it to your server and let it handle the busywork.">
+<meta property="og:image" content="https://cdn.discordapp.com/attachments/826750466485780492/1504829322048049202/image0.png?ex=6a086904&is=6a071784&hm=541c7eb2308f3b8cff78a6257a1e66ed2ab1c8f663fa9670ed3dc35e7e8573ec&">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://nekocode.in/">
+<meta property="twitter:title" content="Neko Code - Your Ultimate Discord Bot">
+<meta property="twitter:description" content="Neko Code is a free, all-in-one Discord bot for moderation, tickets, games, an economy, welcome messages and security alerts. Add it to your server and let it handle the busywork.">
+<meta property="twitter:image" content="https://cdn.discordapp.com/attachments/826750466485780492/1392164575012454410/WfdJU8cQe8N4.png?ex=686e89cb&is=686d384b&hm=a77321edc9923969577df7eddd0797568ab7d47cbf4c78ae671b4fd09656da8d&">
+<script>try{if(localStorage.getItem("theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Dark theme (default): midnight plum + sakura. Change these to re-theme. */
+  --bg:#0b0912; --panel:#110e1a; --panel2:#181426; --card:#1a1628;
+  --heading:#ffd3e4; --text:#f1ecf6; --soft:var(--soft); --muted:#a59db8; --line:#2e2742;
+  --accent:#f4a3c4; --accent-hi:#ffd3e4; --accent-deep:#c2577f;
+  --on-accent:#1a0a12;
+  --header-bg:rgba(11,9,18,.88); --footer-bg:#07050c; --code-bg:#07050c; --cookie-bg:rgba(20,16,32,.9);
+  --g1:#f4a3c4; --g2:#ffd3e4; --g3:#b9a4ff;
+  --rainbow:#f4a3c4,#b9a4ff,#9ee6ff,#b9a4ff,#ffd3e4,#f4a3c4,#c2577f,#f4a3c4;
+  --shadow-card:0 8px 16px rgba(0,0,0,.3); --h1-shadow:0 4px 30px rgba(0,0,0,.6);
+  color-scheme:dark;
+  --head:"Montserrat",sans-serif; --body:"Inter",sans-serif;
+}
+[data-theme="light"]{
+  --bg:#fbf7fb; --panel:#ffffff; --panel2:#f5eef6; --card:#ffffff;
+  --heading:#a82459; --text:#241a2e; --soft:#4a3f5a; --muted:#6b5f7c; --line:#e3d7ea;
+  --accent:#c93874; --accent-hi:#d63f7d; --accent-deep:#a82459;
+  --on-accent:#ffffff;
+  --header-bg:rgba(251,247,251,.9); --footer-bg:#efe6f1; --code-bg:#f5eef6; --cookie-bg:rgba(255,255,255,.95);
+  --g1:#c93874; --g2:#e0568c; --g3:#7c4dff;
+  --rainbow:#d63f7d,#7c4dff,#0ea5c6,#7c4dff,#e0568c,#d63f7d,#a82459,#d63f7d;
+  --shadow-card:0 8px 18px rgba(70,30,90,.12); --h1-shadow:none;
+  color-scheme:light;
+}
+@property --angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes spin{to{--angle:360deg}}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{transition:background-color .3s,color .3s;font-family:var(--body);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--head)}
+:focus-visible{outline:3px solid var(--accent-hi);outline-offset:3px;border-radius:6px}
+.container{max-width:1152px;margin:0 auto;padding:0 1rem}
 
-    <!-- Favicon / Tab Icon -->
-    <link rel="icon" href="./images/nekocode.png" type="image/webp" />
+/* Header */
+header{position:sticky;top:0;z-index:30;background:var(--header-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:.6rem;height:50px}
+.brand{display:flex;align-items:center;gap:.5rem;font:800 1.15rem var(--head);color:var(--accent-hi);letter-spacing:.01em;margin-right:auto}
+.brand img{width:26px;height:26px;border-radius:50%}
+.links{display:flex;align-items:center;gap:.1rem}
+.links a{color:var(--soft);font-size:.88rem;font-weight:500;padding:.3rem .65rem;border-radius:.4rem;transition:color .2s,background .2s}
+.links a:hover{color:var(--text);background:rgba(244,163,196,.15)}
+.links a.active{color:var(--accent-hi);background:rgba(244,163,196,.18)}
+.links .sep{width:1px;height:16px;background:var(--line);margin:0 .4rem}
+.links a.ext::after{content:"\2197";font-size:.7em;margin-left:.25em;opacity:.6}
+.btn.head-cta{height:32px;padding:0 .95rem;font-size:.82rem;line-height:1;border-width:1px;border-radius:.45rem;box-shadow:none}
+.btn.head-cta:hover{transform:none;box-shadow:0 4px 12px rgba(244,163,196,.3)}
+.theme-btn{width:32px;height:32px;display:grid;place-items:center;background:none;border:1px solid var(--line);color:var(--soft);border-radius:.45rem;cursor:pointer;transition:border-color .2s,color .2s}
+.theme-btn:hover{border-color:var(--accent);color:var(--text)}
+.theme-btn svg{width:17px;height:17px}
+.theme-btn .sun{display:none}
+[data-theme="light"] .theme-btn .sun{display:block}[data-theme="light"] .theme-btn .moon{display:none}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--accent-hi);padding:.3rem;border-radius:.45rem;cursor:pointer;line-height:0}
+.burger:hover{background:rgba(244,163,196,.15)}
+@media(max-width:1060px){.links{display:none}.burger{display:block}}
 
-    <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://nekocode.in/" />
-    <!-- Replace with your actual website URL -->
-    <meta property="og:title" content="Neko Code - Your Ultimate Discord Bot" />
-    <meta
-      property="og:description"
-      content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and more to enhance your server experience."
-    />
-    <meta
-      property="og:image"
-      content="https://cdn.discordapp.com/attachments/826750466485780492/1504829322048049202/image0.png?ex=6a086904&is=6a071784&hm=541c7eb2308f3b8cff78a6257a1e66ed2ab1c8f663fa9670ed3dc35e7e8573ec&"
-    />
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1.6rem;border-radius:.6rem;font-weight:600;color:var(--on-accent);border:2px solid transparent;background:linear-gradient(135deg,var(--accent-deep),var(--accent-hi) 55%,var(--accent));box-shadow:0 4px 8px rgba(0,0,0,.3);transition:transform .15s,box-shadow .25s,background .25s;cursor:pointer}
+.btn:hover{background:linear-gradient(135deg,var(--accent),#ffffff 55%,var(--accent-hi));transform:translateY(-2px);box-shadow:0 8px 18px rgba(244,163,196,.35)}
+.btn:active{transform:none}
+.btn.outline{background:transparent;border-color:var(--accent);color:var(--accent-hi)}
+.btn.outline:hover{background:rgba(244,163,196,.15);color:var(--text)}
+.btn svg{width:20px;height:20px}
 
-    <!-- Twitter Meta Tags -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://nekocode.in/" />
-    <!-- Replace with your actual website URL -->
-    <meta
-      property="twitter:title"
-      content="Neko Code - Your Ultimate Discord Bot"
-    />
-    <meta
-      property="twitter:description"
-      content="Neko Code is a versatile Discord bot offering moderation, utility, fun commands, and more to enhance your server experience."
-    />
-    <meta
-      property="twitter:image"
-      content="https://cdn.discordapp.com/attachments/826750466485780492/1392164575012454410/WfdJU8cQe8N4.png?ex=686e89cb&is=686d384b&hm=a77321edc9923969577df7eddd0797568ab7d47cbf4c78ae671b4fd09656da8d&"
-    />
+/* Hero */
+.hero{position:relative;min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(60% 55% at 50% 0%,rgba(244,163,196,.12),transparent 70%),linear-gradient(var(--bg),var(--panel))}
+.hero-in{position:relative;z-index:1;max-width:56rem;padding:2rem 1rem}
+.hero h1{font-size:clamp(2.5rem,7vw,4.6rem);font-weight:800;line-height:1.1;color:var(--text);margin-bottom:1.5rem;text-shadow:var(--h1-shadow);animation:rise .8s both}
+.hero h1 .grad{background:linear-gradient(90deg,var(--g1),var(--g2) 45%,var(--g3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1{min-height:3.3em}
+.hero h1 .pre{display:block}
+.caret{display:inline-block;width:.06em;height:.9em;margin-left:.08em;vertical-align:-.08em;background:var(--accent-hi);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p{font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--soft);margin-bottom:2.25rem;animation:rise .8s .15s both}
+.cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:rise .8s .3s both}
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter (for body text) and Montserrat (for headings) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        /* Default Dark Mode Colors - Original values */
-        --bg-primary: #1d1d1d;
-        --bg-secondary: #1e293b;
-        --text-primary: #9333ea; /* Original purple */
-        --text-secondary: #94a3b8;
-        --border-color: #334155;
-        --code-bg: #000000;
+/* Sections */
+section{padding:5rem 0}
+.dark{background:var(--panel)}.mid{background:var(--panel2)}
+.center{text-align:center}
+.sec-title{font-size:clamp(2rem,4.5vw,2.5rem);font-weight:800;color:var(--heading);text-align:center;margin-bottom:2.5rem}
+.prose{max-width:48rem;margin:0 auto;color:var(--soft);font-size:1.1rem}
+.prose p+p{margin-top:1rem}
 
-        /* Theme Color (Vibrant Purple Gradient) - Original values */
-        --theme-primary: #8b5cf6; /* Vibrant Violet */
-        --theme-hover: #a78bfa; /* Lighter Purple */
-        --theme-border: #7c3aed; /* Deeper Purple */
-        --theme-active-sidebar: #4a6ac8; /* Not used on landing page, but kept for consistency */
+/* Cards with rotating rainbow border (original idea) */
+.card{background-image:linear-gradient(var(--card),var(--card)),conic-gradient(from var(--angle),var(--rainbow));background-origin:border-box;background-clip:padding-box,border-box;border:2px solid transparent;border-radius:1.5rem;padding:2rem;text-align:center;box-shadow:var(--shadow-card);animation:spin 15s linear infinite;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow-card),0 0 10px 2px rgba(244,163,196,.5),0 0 18px 4px rgba(255,211,228,.25)}
+.card h3{font-size:1.45rem;font-weight:700;color:var(--text);margin-bottom:.75rem}
+.card p{color:var(--muted)}
+.card .num{display:block;font-variant-numeric:tabular-nums;font:800 2.5rem var(--head);color:var(--accent-hi);margin-bottom:.4rem}
+.card .num+p{color:var(--soft);font-size:1.1rem}
+.grid{display:grid;gap:2rem}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1000px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.g3{grid-template-columns:1fr}section{padding:3.5rem 0}}
+.icon{width:54px;height:54px;margin:0 auto 1rem;border-radius:16px;display:grid;place-items:center;background:rgba(244,163,196,.15);color:var(--accent-hi)}
+.icon svg{width:28px;height:28px}
 
-        /* New Gold Theme Colors for Header and related elements */
-        --header-gold-primary: #d4af37; /* Gold */
-        --header-gold-hover: #fcd34d; /* Lighter Gold */
-        --header-gold-border: #b8860b; /* Darker Gold/Goldenrod */
-      }
+/* Commands */
+.tabs{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
+.tab{font:600 .95rem var(--body);color:var(--soft);background:transparent;border:1px solid var(--line);border-radius:999px;padding:.5rem 1.1rem;cursor:pointer;transition:.2s}
+.tab:hover{border-color:var(--accent)}
+.tab[aria-selected=true]{background:linear-gradient(135deg,var(--accent-deep),var(--accent-hi));border-color:transparent;color:var(--on-accent)}
+.panel{display:none;max-width:44rem;margin:0 auto 2rem;background:var(--code-bg);border:1px solid var(--line);border-radius:1rem;padding:1.25rem 1.5rem;text-align:left;font:500 .98rem/2 ui-monospace,Menlo,Consolas,monospace}
+.panel.on{display:block}
+.panel b{color:var(--accent-hi);font-weight:600}.panel span{color:var(--muted)}
 
-      html,
-      body {
-        height: 100%; /* Ensure html and body take full height */
-        margin: 0;
-        padding: 0;
-      }
+/* Footer */
+footer{background:var(--footer-bg);color:var(--muted);padding:3rem 0 2rem}
+.fcols{display:flex;flex-wrap:wrap;justify-content:center;gap:3rem;margin-top:1.5rem;text-align:left}
+footer h4{color:var(--text);margin-bottom:.6rem}
+footer ul{list-style:none}footer li{margin-bottom:.3rem}
+footer a{color:var(--muted);transition:color .2s}footer a:hover{color:var(--accent-hi)}
+footer .copy{text-align:center}
 
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease;
-        line-height: 1.6;
-        /* Applying background image directly to body */
-        background-image: url("./images/neko code logo.png"); /* Using the provided image path */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed; /* Keeps background fixed when scrolling */
-      }
+/* Mobile sidebar */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);z-index:40;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}.overlay.show{opacity:1;visibility:visible}
+.side{position:fixed;top:0;right:0;height:100%;width:86%;max-width:340px;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--panel2),var(--bg) 40%);border-left:1px solid var(--line);z-index:50;transform:translateX(100%);visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility .35s;box-shadow:-12px 0 40px rgba(0,0,0,.5)}
+.side.open{transform:none;visibility:visible}
+.side-top{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.25rem;border-bottom:1px solid var(--line)}
+.side-brand{display:flex;align-items:center;gap:.6rem;font:800 1.15rem var(--head);color:var(--accent-hi)}
+.side-brand img{width:30px;height:30px;border-radius:50%}
+.side-close{background:none;border:1px solid var(--line);color:var(--soft);cursor:pointer;padding:.4rem;border-radius:.5rem;line-height:0}
+.side-close:hover{border-color:var(--accent);color:var(--text)}
+.side-body{flex:1;overflow-y:auto;padding:1rem 1rem 0}
+.side-label{font-size:.8rem;font-weight:600;color:var(--muted);padding:.6rem .75rem .3rem}
+.side nav a{display:flex;align-items:center;gap:.8rem;padding:.7rem .75rem;border-radius:.6rem;font-weight:500;color:var(--text);transition:background .2s,color .2s}
+.side nav a svg{width:20px;height:20px;flex:none;color:var(--muted);transition:color .2s}
+.side nav a:hover,.side nav a.active{background:rgba(244,163,196,.16);color:var(--text)}
+.side nav a:hover svg,.side nav a.active svg{color:var(--accent-hi)}
+.side nav a.active{box-shadow:inset 3px 0 0 var(--accent)}
+.side nav a.ext::after{content:"\2197";margin-left:auto;font-size:.85rem;color:var(--muted)}
+.side hr{border:0;border-top:1px solid var(--line);margin:.75rem 0 .4rem}
+.side nav a,.side-label{opacity:0;transform:translateX(16px)}
+.side.open nav a,.side.open .side-label{opacity:1;transform:none;transition:opacity .35s,transform .35s,background .2s,color .2s;transition-delay:calc(var(--i,0)*45ms + 120ms),calc(var(--i,0)*45ms + 120ms),0s,0s}
+.side-foot{padding:1rem 1.25rem 1.25rem;border-top:1px solid var(--line);display:grid;gap:.6rem}
+.side-foot .btn{width:100%}
+.socials{display:flex;justify-content:center;gap:1.25rem;margin-top:.5rem;font-size:.9rem}
+.socials a{color:var(--muted)}.socials a:hover{color:var(--accent-hi)}
+body.lock{overflow:hidden}
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: "Montserrat", sans-serif;
-        color: var(--text-primary);
-      }
-
-      .btn-primary {
-        background: linear-gradient(
-          45deg,
-          var(--theme-primary),
-          var(--theme-hover)
-        ); /* Original gradient for primary buttons */
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        transition:
-          background 0.3s ease,
-          transform 0.1s ease,
-          box-shadow 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 600;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        text-decoration: none;
-      }
-      .btn-primary:hover {
-        background: linear-gradient(
-          45deg,
-          var(--theme-hover),
-          var(--theme-primary)
-        ); /* Reverse gradient on hover */
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-      }
-      .btn-primary:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-
-      .section-heading {
-        font-size: 2.5rem; /* Equivalent to text-4xl */
-        font-weight: 800; /* Extra bold */
-        margin-bottom: 2rem;
-        text-align: center;
-        color: var(--theme-primary);
-      }
-
-      /* --- NEW --- Registering a custom property for smooth angle animation */
-      @property --gradient-angle {
-        syntax: "<angle>";
-        initial-value: 0deg;
-        inherits: false;
-      }
-
-      /* --- NEW --- Keyframes for the slow gradient rotation */
-      @keyframes gradient-rotate {
-        to {
-          --gradient-angle: 360deg;
-        }
-      }
-
-      .feature-card {
-        background-color: var(
-          --bg-secondary
-        ); /* This will be the inner solid color */
-        border-radius: 1.5rem;
-        padding: 2rem;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        transition:
-          transform 0.2s ease-in-out,
-          box-shadow 0.2s ease-in-out;
-
-        /* --- MODIFIED --- Gradient border that follows border-radius using a conic-gradient */
-        border: 2px solid transparent; /* Creates space for the gradient border */
-        background-image:
-          linear-gradient(var(--bg-secondary), var(--bg-secondary)),
-          /* Inner solid background */
-          conic-gradient(
-              from var(--gradient-angle),
-              #a855f7,
-              #ec4899,
-              #f97316,
-              #eab308,
-              #22c55e,
-              #06b6d4,
-              #3b82f6,
-              #a855f7
-            ); /* Rotating gradient border */
-        background-origin: border-box;
-        background-clip:
-          padding-box, border-box; /* Clips inner background to padding-box, gradient to border-box */
-
-        /* --- MODIFIED --- Apply the new rotation animation */
-        animation: gradient-rotate 15s linear infinite;
-      }
-      .feature-card:hover {
-        transform: translateY(-5px);
-        /* Reduced shine on hover glow with gradient effect */
-        box-shadow:
-          0 8px 16px rgba(0, 0, 0, 0.3),
-          /* Existing dark shadow */ 0 0 8px 2px rgba(139, 92, 246, 0.5),
-          /* Primary glow from theme-primary */ 0 0 12px 3px
-            rgba(167, 139, 250, 0.3); /* Secondary glow from theme-hover */
-      }
-      .feature-card h3 {
-        font-size: 1.5rem; /* text-2xl */
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: var(--text-primary);
-      }
-      .feature-card p {
-        color: var(--text-secondary);
-      }
-
-      .footer-link {
-        color: var(--text-secondary);
-        transition: color 0.2s ease;
-      }
-      .footer-link:hover {
-        color: var(--text-primary);
-      }
-
-      /* Hero Section Background - Now just a container for content, background is on body */
-      .hero-section-background {
-        position: relative; /* Needed for overlay positioning */
-        min-height: 100vh; /* Ensures it takes full viewport height */
-        background-color: transparent; /* Make it transparent to show body background */
-        display: flex; /* Ensure content is centered */
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-
-      /* Hero Section Overlay */
-      .hero-overlay-gradient {
-        background-color: rgba(
-          0,
-          0,
-          0,
-          0.6
-        ); /* Semi-transparent black overlay */
-        z-index: 1; /* Ensure it's above the background image */
-      }
-
-      /* Mobile Sidebar */
-      .mobile-sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 80%; /* Adjust as needed */
-        max-width: 300px;
-        height: 100%;
-        background-color: var(--bg-primary);
-        z-index: 50;
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out;
-        padding: 1.5rem;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-        display: flex;
-        flex-direction: column;
-      }
-
-      .mobile-sidebar.open {
-        transform: translateX(0);
-      }
-
-      .mobile-sidebar-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 40;
-        display: none;
-      }
-
-      .mobile-sidebar-overlay.show {
-        display: block;
-      }
-
-      .mobile-sidebar-link {
-        display: block;
-        padding: 0.75rem 1rem;
-        color: white;
-        font-weight: 500;
-        border-radius: 0.375rem;
-        transition: background-color 0.2s ease;
-        text-decoration: none;
-      }
-
-      .mobile-sidebar-link:hover {
-        background-color: var(--border-color);
-      }
-
-      /* Scroll to Top Button */
-      #scrollToTopBtn {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 30px;
-        z-index: 99;
-        border: 1px solid var(--theme-border);
-        outline: none;
-        background-color: rgba(106, 142, 232, 0.2); /* Blue with transparency */
-        color: var(--theme-border);
-        cursor: pointer;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-        transition:
-          background-color 0.3s ease,
-          transform 0.1s ease,
-          color 0.3s ease;
-      }
-      #scrollToTopBtn:hover {
-        background-color: var(--theme-border);
-        color: white;
-        transform: translateY(-2px);
-      }
-      #scrollToTopBtn:active {
-        transform: translateY(0);
-      }
-
-      /* Dynamic Contact Us Button */
-      #contactUsBtn {
-        position: fixed;
-        bottom: 20px; /* Aligned with scroll to top button */
-        left: 30px; /* Moved to the left */
-        z-index: 99;
-        background: linear-gradient(
-          45deg,
-          var(--theme-primary),
-          var(--theme-hover)
-        ); /* Original Gradient background */
-        color: white;
-        padding: 12px 20px;
-        border-radius: 0.75rem; /* More rounded corners */
-        font-weight: 600;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Stronger shadow */
-        transition: all 0.3s ease; /* Smooth transition for all properties */
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        border: none; /* Remove default border */
-        cursor: pointer;
-      }
-
-      #contactUsBtn:hover {
-        background: linear-gradient(
-          45deg,
-          var(--theme-hover),
-          var(--theme-primary)
-        ); /* Reverse gradient on hover */
-        transform: translateY(-4px) scale(1.02); /* Lift and slightly enlarge */
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Even stronger shadow on hover */
-      }
-
-      #contactUsBtn:active {
-        transform: translateY(0) scale(0.98); /* Press down effect */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      }
-
-      /* Header background elements - subtle glow (NEW) */
-      .header-bg-glow {
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(
-          circle at 50% 50%,
-          rgba(212, 175, 55, 0.1),
-          rgba(15, 23, 42, 0) 70%
-        );
-        animation: rotateGlow 20s linear infinite;
-        z-index: 0;
-      }
-
-      @keyframes rotateGlow {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Responsive adjustments for sections */
-      @media (min-width: 768px) {
-        .section-padding {
-          padding-top: 5rem;
-          padding-bottom: 5rem;
-        }
-      }
-      @media (max-width: 767px) {
-        .section-padding {
-          padding-top: 3rem;
-          padding-bottom: 3rem;
-        }
-        .section-heading {
-          font-size: 2rem; /* Smaller on mobile */
-        }
-      }
-
-      .cookie-banner {
-        position: fixed;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%) translateY(20px);
-        width: 90%;
-        max-width: 520px;
-        z-index: 9999;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.4s ease;
-      }
-
-      .cookie-banner.show {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-        pointer-events: auto;
-      }
-
-      .cookie-card {
-        backdrop-filter: blur(16px);
-        background: rgba(20, 20, 25, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 22px 24px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-      }
-
-      .cookie-text {
-        font-size: 14px;
-        line-height: 1.6;
-        color: #e6e6e6;
-      }
-
-      .cookie-actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-      }
-
-      .cookie-btn {
-        padding: 9px 16px;
-        border-radius: 8px;
-        font-size: 13px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border: none;
-      }
-
-      .cookie-btn.primary {
-        background: #6366f1;
-        color: white;
-      }
-
-      .cookie-btn.primary:hover {
-        transform: translateY(-1px);
-        background: #4f46e5;
-      }
-
-      .cookie-btn.secondary {
-        background: transparent;
-        color: #ccc;
-      }
-
-      .cookie-btn.secondary:hover {
-        background: rgba(255, 255, 255, 0.08);
-      }
-    </style>
-  </head>
-  <body class="antialiased leading-normal">
-    <!-- Mobile Sidebar Overlay -->
-    <div id="mobile-sidebar-overlay" class="mobile-sidebar-overlay"></div>
-
-    <!-- Mobile Sidebar Menu -->
-    <div id="mobile-sidebar" class="mobile-sidebar">
-      <div class="flex justify-between items-center mb-6">
-        <h3 class="text-2xl font-bold text-white">Menu</h3>
-        <button
-          id="close-mobile-sidebar-btn"
-          class="text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-      </div>
-      <nav class="flex-grow">
-        <ul class="space-y-2">
-          <li>
-            <a
-              href="https://nekocode.instatus.com/"
-              target="_blank"
-              class="mobile-sidebar-link"
-              >Status</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://nekocode.in/aboutme"
-              target="_blank"
-              class="mobile-sidebar-link"
-              >About me</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://docs.nekocode.in/"
-              target="_blank"
-              class="mobile-sidebar-link"
-              >Docs</a
-            >
-          </li>
-          <li>
-            <a
-              href="https://nekocode.in/support-me"
-              target="_blank"
-              class="mobile-sidebar-link"
-              >Support me</a
-            >
-          </li>
-        </ul>
-      </nav>
+/* Floating */
+#top{position:fixed;right:24px;bottom:20px;z-index:20;display:none;padding:10px 15px;border-radius:.5rem;font:600 1rem var(--body);cursor:pointer;color:var(--accent-hi);background:rgba(244,163,196,.12);border:1px solid var(--accent);box-shadow:0 4px 8px rgba(0,0,0,.4);transition:.25s}
+#top:hover{background:var(--accent);color:var(--on-accent);transform:translateY(-2px)}
+#contactUsBtn{position:fixed;left:24px;bottom:20px;z-index:20;padding:.7rem 1.2rem}
+.cookie{position:fixed;left:50%;bottom:84px;transform:translate(-50%,20px);width:min(92%,520px);z-index:60;opacity:0;pointer-events:none;transition:.4s;backdrop-filter:blur(16px);background:var(--cookie-bg);border:1px solid var(--line);border-radius:16px;padding:1.2rem 1.5rem;font-size:.9rem;color:var(--text)}
+.cookie.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.cookie div{display:flex;justify-content:flex-end;gap:.6rem;margin-top:.9rem}
+.cookie button{font:500 .85rem var(--body);padding:.55rem 1rem;border-radius:8px;border:0;cursor:pointer;background:transparent;color:var(--soft)}
+.cookie button:hover{background:rgba(244,163,196,.15)}
+.cookie #ca{background:var(--accent);color:var(--on-accent)}.cookie #ca:hover{background:var(--accent-hi)}
+@media(prefers-reduced-motion:reduce){.caret{display:none}*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="overlay" id="overlay"></div>
+<aside class="side" id="side" aria-label="Menu" aria-hidden="true">
+  <div class="side-top">
+    <span class="side-brand"><img src="./images/nekocode.png" alt="">Neko Code</span>
+    <button class="side-close" id="close" aria-label="Close menu"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 5l12 12M17 5L5 17"/></svg></button>
+  </div>
+  <div class="side-body">
+    <nav aria-label="Mobile">
+      <div class="side-label" style="--i:0">On this page</div>
+      <a href="#about" class="" style="--i:1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>About</a><a href="#features" class="" style="--i:2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>Features</a><a href="#commands" class="" style="--i:3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg>Commands</a><a href="#support" class="" style="--i:4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2M10 10a4 4 0 100-8 4 4 0 000 8zM21 20v-2a4 4 0 00-3-3.9M15 2.1a4 4 0 010 7.800"/></svg>Community</a>
+      <hr>
+      <div class="side-label" style="--i:5">Resources</div>
+      <a href="https://docs.nekocode.in/" class="ext" style="--i:6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h12a4 4 0 014 4v12H8a4 4 0 01-4-4zM8 8h8M8 12h6"/></svg>Docs</a><a href="https://nekocode.instatus.com/" class="ext" style="--i:7" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>Status</a><a href="https://nekocode.in/aboutme" class="ext" style="--i:8" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>About me</a><a href="https://nekocode.in/support-me" class="ext" style="--i:9" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-8-11a4.5 4.5 0 018-2.500A4.5 4.5 0 0120 10c0 6-8 11-8 11z"/></svg>Support me</a>
+    </nav>
+  </div>
+  <div class="side-foot">
+    <a class="btn" href="https://nekocode.in/invite" target="_blank" rel="noopener">Invite Neko Code</a>
+    <a class="btn outline" href="https://nekocode.in/discord" target="_blank" rel="noopener">Join our Discord</a>
+    <div class="socials">
+      <a href="https://github.com/Neko3703" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.youtube.com/@neko_code" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://x.com/NekoCode_" target="_blank" rel="noopener">X</a>
+      <a href="https://www.instagram.com/nekocode_" target="_blank" rel="noopener">Instagram</a>
     </div>
+  </div>
+</aside>
 
-    <!-- Navigation Bar (Updated Header) -->
-    <header
-      class="bg-gray-900 text-white p-4 md:p-6 shadow-xl relative overflow-hidden"
-    >
-      <div class="header-bg-glow"></div>
-      <div
-        class="container mx-auto flex flex-col md:flex-row justify-between items-center relative z-10 animate-fadeIn"
-      >
-        <!-- Hamburger Icon (visible on mobile, hidden on desktop) -->
-        <button
-          id="hamburger-btn"
-          class="lg:hidden text-gray-400 hover:text-white focus:outline-none p-2 rounded-full hover:bg-gray-700 absolute left-4 top-1/2 -translate-y-1/2 md:static md:translate-y-0"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
+<header>
+  <div class="container nav">
+    <a class="brand" href="https://nekocode.in"><img src="./images/nekocode.png" alt="">Neko Code</a>
+    <nav class="links" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#commands">Commands</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a class="ext" href="https://docs.nekocode.in/" target="_blank" rel="noopener">Docs</a>
+      <a class="ext" href="https://nekocode.instatus.com/" target="_blank" rel="noopener">Status</a>
+      <a class="ext" href="https://nekocode.in/aboutme" target="_blank" rel="noopener">About me</a>
+      <a class="ext" href="https://nekocode.in/support-me" target="_blank" rel="noopener">Support me</a>
+    </nav>
+    <button class="theme-btn" id="theme" aria-label="Switch to light mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a class="btn head-cta" href="https://nekocode.in/invite" target="_blank" rel="noopener">Invite</a>
+    <button class="burger" id="burger" aria-label="Open menu"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
 
-        <a
-          href="https://nekocode.in"
-          class="flex items-center space-x-2 mb-2 md:mb-0"
-        >
-          <img
-            src="./images/nekocode.png"
-            alt="Neko Code Icon"
-            class="w-7 h-7 rounded-full"
-          />
-          <h1
-            class="text-2xl lg:text-3xl font-extrabold tracking-wide text-amber-400"
-          >
-            Neko Code
-          </h1>
-        </a>
-        <nav class="space-x-4 text-base hidden lg:flex">
-          <!-- Desktop navigation hidden on mobile -->
-          <a
-            href="https://nekocode.instatus.com/"
-            target="_blank"
-            class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1"
-          >
-            Status
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
-          <a
-            href="https://nekocode.in/aboutme"
-            target="_blank"
-            class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1"
-          >
-            About me
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
-          <a
-            href="https://docs.nekocode.in/"
-            target="_blank"
-            class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1"
-          >
-            Docs
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
-          <a
-            href="https://nekocode.in/support-me"
-            target="_blank"
-            class="text-gray-300 hover:text-amber-400 transition-all duration-300 relative group pb-1"
-          >
-            Support me
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
-        </nav>
-      </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-section-background">
-      <!-- This div now acts as the semi-transparent black overlay -->
-      <div class="absolute inset-0 hero-overlay-gradient"></div>
-      <div class="relative z-20 p-4 max-w-4xl mx-auto">
-        <h1
-          class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up"
-        >
-          Neko Code: Your Ultimate Discord Bot
-        </h1>
-        <p
-          class="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in-up delay-200"
-        >
-          Enhance your server with powerful moderation, fun commands, and
-          essential utilities.
-        </p>
-        <div
-          class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 animate-fade-in-up delay-400"
-        >
-          <a
-            href="https://nekocode.in/invite"
-            target="_blank"
-            class="btn-primary"
-          >
-            <!-- Updated SVG icon for the "Invite Neko Code" button -->
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                clip-rule="evenodd"
-              ></path>
-            </svg>
-            Invite Neko Code
-          </a>
-          <a
-            href="#features"
-            class="btn-primary !bg-transparent border-2 border-[var(--theme-primary)] hover:!bg-[var(--theme-hover)]"
-          >
-            Learn More
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section-padding bg-gray-900 text-center">
-      <div class="container mx-auto px-4 py-8">
-        <h2 class="section-heading">About Neko Code</h2>
-        <div class="max-w-3xl mx-auto text-gray-300 text-lg">
-          <p class="mb-4">
-            Neko Code is a free to use discord app designed to enhance your
-            Discord server experience with a wide range of features. From
-            powerful moderation tools to engaging fun commands and essential
-            utility functions, Neko Code aims to be an all-in-one solution for
-            server management and community engagement.
-          </p>
-          <p class="mb-4">
-            Our goal is to provide a stable, user-friendly, and constantly
-            evolving bot that meets the diverse needs of various Discord
-            communities. We are committed to regular updates, incorporating user
-            feedback, and ensuring the bot runs smoothly 24/7.
-          </p>
-          <p>
-            Join our vibrant community and support server if you have any
-            questions, suggestions, or just want to connect with other Neko Code
-            users!
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section id="stats" class="section-padding bg-gray-900 text-center">
-      <div class="container mx-auto px-4 py-8">
-        <h2 class="section-heading">Neko Code Statistics</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div class="feature-card">
-            <h3
-              class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]"
-            >
-              160k+
-            </h3>
-            <p class="text-gray-300 text-lg">Active Userbase and Growing</p>
-          </div>
-          <div class="feature-card">
-            <h3
-              class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]"
-            >
-              24/7 Active
-            </h3>
-            <p class="text-gray-300 text-lg">with 99.9% Uptime</p>
-          </div>
-          <div class="feature-card">
-            <h3
-              class="mb-2 text-4xl font-extrabold text-[var(--theme-primary)]"
-            >
-              100+
-            </h3>
-            <p class="text-gray-300 text-lg">Unique Commands</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="section-padding bg-gray-800">
-      <div class="container mx-auto px-4 py-8">
-        <h2 class="section-heading">Key Features</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="feature-card">
-            <h3 class="mb-4">Moderation</h3>
-            <p>
-              Keep your server clean and orderly with powerful moderation
-              commands like kick, ban, mute, warn, and more.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h3 class="mb-4">Utilities</h3>
-            <p>
-              Handy tools for everyday server tasks, including user info, server
-              info, avatar lookup, ticketing system and role management.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h3 class="mb-4">Fun & Games</h3>
-            <p>
-              Engage your community with entertaining commands, mini-games, and
-              interactive elements to keep the fun going.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h3 class="mb-4">Economy System</h3>
-            <p>
-              Participate in a server-wide economy with various ways to earn and
-              spend virtual currency, adding a new layer of interaction.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h3 class="mb-4">Automated Messages</h3>
-            <p>
-              Automate welcome and goodbye messages for new and leaving members,
-              ensuring a warm and organized server environment.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h3 class="mb-4">Advanced Detectors</h3>
-            <p>
-              Utilize intelligent detectors for token leaks and ghost pings,
-              enhancing server security and transparency.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Commands Section (Simplified for landing page) -->
-    <section id="commands" class="section-padding bg-gray-900 text-center">
-      <div class="container mx-auto px-4 py-8">
-        <h2 class="section-heading">Explore Commands</h2>
-        <p class="max-w-3xl mx-auto text-gray-300 text-lg mb-8">
-          Neko Code offers a comprehensive suite of commands, available as both
-          modern slash commands and traditional prefix commands. Dive into our
-          detailed documentation to discover every command and its usage.
-        </p>
-        <a href="https://docs.nekocode.in/" target="_blank" class="btn-primary">
-          View Full Documentation
-        </a>
-      </div>
-    </section>
-
-    <!-- Support Section -->
-    <section id="support" class="section-padding bg-gray-800 text-center">
-      <div class="container mx-auto px-4 py-8">
-        <h2 class="section-heading">Need Help? Join Our Community!</h2>
-        <p class="max-w-3xl mx-auto text-gray-300 text-lg mb-8">
-          If you have any questions, need assistance, or want to suggest new
-          features, our friendly support team and community are here to help.
-          Join our official Discord server today!
-        </p>
-        <a
-          href="https://nekocode.in/discord"
-          target="_blank"
-          class="btn-primary"
-        >
-          <svg
-            class="w-5 h-5 mr-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10.394 2.08a1 1 0 01-.788 0L.245 5.503a1 1 0 00.358 1.83l.297.086A1 1 0 001 7v6a1 1 0 001 1h16a1 1 0 001-1V7a1 1 0 00-.09.417l-.297-.086a1 1 0 00-.358-1.83L10.394 2.08zM10 16a6 6 0 100-12 6 6 0 000 12z"
-              clip-rule="evenodd"
-              fill-rule="evenodd"
-            ></path>
-          </svg>
-          Join Our Discord Server
-        </a>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-500 py-8 text-center">
-      <div class="container mx-auto px-4">
-        <p>&copy; 2025 Neko Code. All rights reserved.</p>
-        <div class="flex flex-wrap justify-center space-x-4 mt-4">
-          <div class="w-full md:w-auto mb-4 md:mb-0">
-            <h4 class="text-white font-semibold mb-2">Important Links</h4>
-            <ul class="space-y-1">
-              <li>
-                <a
-                  href="https://nekocode.in/discord"
-                  target="_blank"
-                  class="footer-link"
-                  >Discord Server</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://github.com/Neko3703"
-                  target="_blank"
-                  class="footer-link"
-                  >GitHub</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/@neko_code"
-                  target="_blank"
-                  class="footer-link"
-                  >YouTube</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://x.com/NekoCode_"
-                  target="_blank"
-                  class="footer-link"
-                  >X (Twitter)</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/nekocode_"
-                  target="_blank"
-                  class="footer-link"
-                  >Instagram</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/tejasva-sharma2402/"
-                  target="_blank"
-                  class="footer-link"
-                  >LinkedIn</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="w-full md:w-auto">
-            <h4 class="text-white font-semibold mb-2">Legal</h4>
-            <ul class="space-y-1">
-              <li>
-                <a
-                  href="https://nekocode.in/privacy-policy"
-                  target="_blank"
-                  class="footer-link"
-                  >Privacy Policy</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://nekocode.in/terms-of-service"
-                  target="_blank"
-                  class="footer-link"
-                  >Terms of Service</a
-                >
-              </li>
-              <li>
-                <a
-                  href="https://nekocode.in/cancellations-and-refund-policy"
-                  target="_blank"
-                  class="footer-link"
-                  >Cancellation & Refund Policy</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button id="scrollToTopBtn" title="Go to top">↑</button>
-
-    <!-- Dynamic Contact Us Button -->
-    <a href="https://nekocode.in/contact-us" target="_blank" id="contactUsBtn">
-      <!-- Replaced the SVG icon for the "Contact Us" button -->
-      <svg
-        class="w-5 h-5"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884zM18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-        ></path>
-      </svg>
-      Contact Us
-    </a>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const hamburgerBtn = document.getElementById("hamburger-btn");
-        const mobileSidebar = document.getElementById("mobile-sidebar");
-        const closeMobileSidebarBtn = document.getElementById(
-          "close-mobile-sidebar-btn",
-        );
-        const mobileSidebarOverlay = document.getElementById(
-          "mobile-sidebar-overlay",
-        );
-        const mobileSidebarLinks = mobileSidebar.querySelectorAll(
-          ".mobile-sidebar-link",
-        );
-        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-        // Open sidebar
-        hamburgerBtn.addEventListener("click", () => {
-          mobileSidebar.classList.add("open");
-          mobileSidebarOverlay.classList.add("show");
-        });
-
-        // Close sidebar
-        closeMobileSidebarBtn.addEventListener("click", () => {
-          mobileSidebar.classList.remove("open");
-          mobileSidebarOverlay.classList.remove("show");
-        });
-
-        // Close sidebar when clicking overlay
-        mobileSidebarOverlay.addEventListener("click", () => {
-          mobileSidebar.classList.remove("open");
-          mobileSidebarOverlay.classList.remove("show");
-        });
-
-        // Close sidebar when clicking a link inside it
-        mobileSidebarLinks.forEach((link) => {
-          link.addEventListener("click", () => {
-            mobileSidebar.classList.remove("open");
-            mobileSidebarOverlay.classList.remove("show");
-          });
-        });
-
-        // Scroll to top button logic
-        window.onscroll = function () {
-          if (
-            document.body.scrollTop > 200 ||
-            document.documentElement.scrollTop > 200
-          ) {
-            scrollToTopBtn.style.display = "block";
-          } else {
-            scrollToTopBtn.style.display = "none";
-          }
-        };
-
-        scrollToTopBtn.addEventListener("click", () => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        // Header animation
-        document.querySelector("header").classList.add("animate-fadeIn");
-      });
-
-      document.addEventListener("DOMContentLoaded", () => {
-        try {
-          const banner = document.getElementById("cookie-banner");
-          const accept = document.getElementById("cookie-accept");
-          const decline = document.getElementById("cookie-decline");
-
-          if (!banner || !accept || !decline) {
-            console.error("Cookie banner elements missing.");
-            return;
-          }
-
-          const consent = localStorage.getItem("cookieConsent");
-
-          if (!consent) {
-            setTimeout(() => {
-              banner.classList.add("show");
-            }, 800);
-          }
-
-          accept.addEventListener("click", () => {
-            try {
-              localStorage.setItem("cookieConsent", "accepted");
-              banner.classList.remove("show");
-            } catch (err) {
-              console.error("Failed to store cookie consent:", err);
-            }
-          });
-
-          decline.addEventListener("click", () => {
-            try {
-              localStorage.setItem("cookieConsent", "declined");
-              banner.classList.remove("show");
-            } catch (err) {
-              console.error("Failed to store cookie consent:", err);
-            }
-          });
-        } catch (error) {
-          console.error("Cookie banner initialization error:", error);
-        }
-      });
-    </script>
-    <div id="cookie-banner" class="cookie-banner">
-      <div class="cookie-card">
-        <div class="cookie-text">
-          🍪 We use cookies to improve performance, analyze traffic, and enhance
-          your experience.
-        </div>
-
-        <div class="cookie-actions">
-          <button id="cookie-decline" class="cookie-btn secondary">
-            Decline
-          </button>
-
-          <button id="cookie-accept" class="cookie-btn primary">
-            Accept Cookies
-          </button>
-        </div>
-      </div>
+<main>
+<section class="hero" style="padding:0">
+  <div class="hero-in">
+    <h1 aria-label="Neko Code: Your Ultimate Discord Bot"><span class="pre" id="pre">Neko Code:</span> <span class="grad" id="typed">Your Ultimate Discord Bot</span><span class="caret" aria-hidden="true"></span></h1>
+    <p>Keep your community safe, active and entertained with one free bot: moderation, tickets, games, an economy and smart security.</p>
+    <div class="cta">
+      <a class="btn" href="https://nekocode.in/invite" target="_blank" rel="noopener"><svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/></svg>Invite Neko Code</a>
+      <a class="btn outline" href="#features">Learn More</a>
     </div>
-  </body>
+  </div>
+</section>
+
+<section id="about" class="dark center">
+  <div class="container">
+    <h2 class="sec-title">About Neko Code</h2>
+    <div class="prose">
+      <p>Neko Code is a free to use Discord app designed to enhance your Discord server experience with a wide range of features. From powerful moderation tools to engaging fun commands and essential utility functions, Neko Code aims to be an all-in-one solution for server management and community engagement.</p>
+      <p>Our goal is to provide a stable, user-friendly, and constantly evolving bot that meets the diverse needs of various Discord communities. We are committed to regular updates, incorporating user feedback, and ensuring the bot runs smoothly 24/7.</p>
+      <p>Join our vibrant community and support server if you have any questions, suggestions, or just want to connect with other Neko Code users!</p>
+    </div>
+  </div>
+</section>
+
+<section id="stats" class="dark center" style="padding-top:0">
+  <div class="container">
+    <h2 class="sec-title">Neko Code Statistics</h2>
+    <div class="grid g3" style="max-width:62rem;margin:0 auto">
+      <div class="card"><span class="num" data-stat="users">170k+</span><p>Active Userbase and Growing</p></div>
+      <div class="card"><span class="num" data-stat="uptime">99.9%</span><p>Uptime, Active 24/7</p></div>
+      <div class="card"><span class="num" data-stat="commands">100+</span><p>Unique Commands</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="mid">
+  <div class="container">
+    <h2 class="sec-title">Key Features</h2>
+    <div class="grid g3">
+      <div class="card"><div class="icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></div><h3>Moderation</h3><p>Keep your server clean and orderly with powerful moderation commands like kick, ban, mute, warn, and more.</p></div>
+      <div class="card"><div class="icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 00-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 005.4-5.4l-2.5 2.5-2.5-.5-.5-2.5z"/></svg></div><h3>Utilities</h3><p>Handy tools for everyday server tasks, including user info, server info, avatar lookup, ticketing system and role management.</p></div>
+      <div class="card"><div class="icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 10v5M4.5 12.5h5M16 11h.01M18.5 14h.01"/></svg></div><h3>Fun &amp; Games</h3><p>Engage your community with entertaining commands, mini-games, and interactive elements to keep the fun going.</p></div>
+      <div class="card"><div class="icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3 3 0 00-5 1.5c0 3 5 1.5 5 4.5a3 3 0 01-5 1.5M12 6v2M12 16v2"/></svg></div><h3>Economy System</h3><p>Participate in a server-wide economy with various ways to earn and spend virtual currency, adding a new layer of interaction.</p></div>
+      <div class="card"><div class="icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.600A8 8 0 1121 12z"/></svg></div><h3>Automated Messages</h3><p>Automate welcome and goodbye messages for new and leaving members, ensuring a warm and organized server environment.</p></div>
+      <div class="card"><div class="icon"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg></div><h3>Advanced Detectors</h3><p>Utilize intelligent detectors for token leaks and ghost pings, enhancing server security and transparency.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="commands" class="dark center">
+  <div class="container">
+    <h2 class="sec-title">Explore Commands</h2>
+    <p class="prose" style="margin-bottom:2rem">Neko Code offers a comprehensive suite of commands, available as both modern slash commands and traditional prefix commands. Dive into our detailed documentation to discover every command and its usage.</p>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-p="p1">Moderation</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p2">Utilities</button>
+    </div>
+    <div class="panel on" id="p1"><b>/kick</b> <span>remove a member</span><br><b>/ban</b> <span>ban a member</span><br><b>/mute</b> <span>silence a member</span><br><b>/warn</b> <span>log a warning</span></div>
+    <div class="panel" id="p2"><b>/userinfo</b> <span>member details</span><br><b>/serverinfo</b> <span>server details</span><br><b>/avatar</b> <span>view an avatar</span><br><b>/ticket</b> <span>open a ticket</span></div>
+    <a href="https://docs.nekocode.in/" target="_blank" rel="noopener" class="btn">View Full Documentation</a>
+  </div>
+</section>
+
+<section id="support" class="mid center">
+  <div class="container">
+    <h2 class="sec-title">Need Help? Join Our Community!</h2>
+    <p class="prose" style="margin-bottom:2rem">If you have any questions, need assistance, or want to suggest new features, our friendly support team and community are here to help. Join our official Discord server today!</p>
+    <a class="btn" href="https://nekocode.in/discord" target="_blank" rel="noopener"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 01-.788 0L.245 5.503a1 1 0 00.358 1.83l.297.086A1 1 0 001 7v6a1 1 0 001 1h16a1 1 0 001-1V7a1 1 0 00-.09.417l-.297-.086a1 1 0 00-.358-1.83L10.394 2.08zM10 16a6 6 0 100-12 6 6 0 000 12z" clip-rule="evenodd" fill-rule="evenodd"/></svg>Join Our Discord Server</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <p class="copy">&copy; 2025 Neko Code. All rights reserved.</p>
+    <div class="fcols">
+      <div><h4>Important Links</h4><ul>
+        <li><a href="https://nekocode.in/discord" target="_blank" rel="noopener">Discord Server</a></li>
+        <li><a href="https://github.com/Neko3703" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.youtube.com/@neko_code" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://x.com/NekoCode_" target="_blank" rel="noopener">X (Twitter)</a></li>
+        <li><a href="https://www.instagram.com/nekocode_" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.linkedin.com/in/tejasva-sharma2402/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+      <div><h4>Legal</h4><ul>
+        <li><a href="https://nekocode.in/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></li>
+        <li><a href="https://nekocode.in/terms-of-service" target="_blank" rel="noopener">Terms of Service</a></li>
+        <li><a href="https://nekocode.in/cancellations-and-refund-policy" target="_blank" rel="noopener">Cancellation &amp; Refund Policy</a></li></ul></div>
+    </div>
+  </div>
+</footer>
+
+<button id="top" title="Go to top" aria-label="Go to top">↑</button>
+<a class="btn" id="contactUsBtn" href="https://nekocode.in/contact-us" target="_blank" rel="noopener"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884zM18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>Contact Us</a>
+
+<div id="cookie" class="cookie" role="dialog" aria-label="Cookie notice">
+  🍪 We use cookies to improve performance, analyze traffic, and enhance your experience.
+  <div><button id="cd">Decline</button><button id="ca">Accept Cookies</button></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const side=$("#side"),ov=$("#overlay"),burger=$("#burger");
+const toggle=o=>{side.classList.toggle("open",o);ov.classList.toggle("show",o);document.body.classList.toggle("lock",o);
+  side.setAttribute("aria-hidden",!o);burger.setAttribute("aria-expanded",o);
+  if(o)setTimeout(()=>$("#close").focus(),50);else burger.focus({preventScroll:true})};
+burger.onclick=()=>toggle(true);$("#close").onclick=()=>toggle(false);ov.onclick=()=>toggle(false);
+side.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>toggle(false)));
+addEventListener("keydown",e=>{if(e.key==="Escape"&&side.classList.contains("open"))toggle(false)});
+matchMedia("(min-width:1061px)").addEventListener("change",e=>{if(e.matches&&side.classList.contains("open"))toggle(false)});
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected",x===t));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===t.dataset.p));
+});
+addEventListener("scroll",()=>{$("#top").style.display=scrollY>200?"block":"none"});
+const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)document.querySelectorAll(".links a[href^='#'],.side nav a[href^='#']").forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+e.target.id))}),{rootMargin:"-40% 0px -55% 0px"});
+["about","features","commands","support"].forEach(i=>spy.observe($("#"+i)));
+$("#top").onclick=()=>scrollTo({top:0,behavior:"smooth"});
+
+/* ===== Dark / light mode ===== */
+(()=>{
+  const root=document.documentElement,btn=$("#theme"),meta=document.querySelector('meta[name="theme-color"]');
+  const apply=t=>{
+    if(t==="light")root.dataset.theme="light";else delete root.dataset.theme;
+    btn.setAttribute("aria-label",t==="light"?"Switch to dark mode":"Switch to light mode");
+    if(meta)meta.content=t==="light"?"#fbf7fb":"#0b0912";
+  };
+  apply(root.dataset.theme==="light"?"light":"dark");
+  btn.onclick=()=>{const t=root.dataset.theme==="light"?"dark":"light";apply(t);try{localStorage.setItem("theme",t)}catch(e){}};
+})();
+
+/* ===== STATS: edit the numbers here =====
+   to = number it counts up to, suffix = text after it, decimals = digits after the point,
+   duration = how long the count takes (ms). */
+const STATS={
+  users:   {to:160,  suffix:"k+", decimals:0, duration:1800},
+  uptime:  {to:99.9, suffix:"%",  decimals:1, duration:1800},
+  commands:{to:100,  suffix:"+",  decimals:0, duration:1800}
+};
+const fmt=(v,c)=>v.toFixed(c.decimals)+c.suffix;
+const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+Object.entries(STATS).forEach(([k,c])=>{
+  const el=document.querySelector('[data-stat="'+k+'"]');if(!el)return;
+  el.textContent=fmt(still?c.to:0,c);
+  if(still)return;
+  new IntersectionObserver((es,ob)=>{if(!es[0].isIntersecting)return;ob.disconnect();
+    const t0=performance.now();
+    const tick=t=>{const p=Math.min((t-t0)/c.duration,1);
+      const e=p===1?1:1-Math.pow(2,-10*p); /* fast start, slows into the final number */
+      el.textContent=fmt(c.to*e,c);
+      if(p<1)requestAnimationFrame(tick);else el.textContent=fmt(c.to,c)};
+    requestAnimationFrame(tick)},{threshold:.5}).observe(el);
+});
+
+/* ===== HERO TITLE: edit the rotating phrases here ===== */
+const PHRASES=["Your Ultimate Discord Bot","Moderation Made Effortless","Fun Games & Server Economy","Security That Never Sleeps"];
+(()=>{
+  const pre=$("#pre"),out=$("#typed");if(!pre||!out||matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  const PRE="Neko Code:",TYPE=60,ERASE=30,HOLD=2200,GAP=400;
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  (async()=>{
+    pre.textContent="";out.textContent="";
+    for(const ch of PRE){pre.textContent+=ch;await wait(TYPE)}
+    await wait(GAP);
+    for(let i=0;;i=(i+1)%PHRASES.length){
+      for(const ch of PHRASES[i]){out.textContent+=ch;await wait(TYPE)}
+      await wait(HOLD);
+      while(out.textContent.length){out.textContent=out.textContent.slice(0,-1);await wait(ERASE)}
+      await wait(GAP);
+    }
+  })();
+})();
+try{
+  if(!localStorage.getItem("cookieConsent"))setTimeout(()=>$("#cookie").classList.add("show"),800);
+  [["#ca","accepted"],["#cd","declined"]].forEach(([s,v])=>$(s).onclick=()=>{
+    try{localStorage.setItem("cookieConsent",v)}catch(e){}
+    $("#cookie").classList.remove("show");
+  });
+}catch(e){$("#cookie").remove()}
+</script>
+</body>
 </html>
