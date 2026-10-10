@@ -1,284 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thank You!</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* Custom styles for the Inter font */
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Even lighter, joyful gradient background: almost white pastels */
-            background: linear-gradient(to bottom right, #ffffff, #fdfdff, #fefeff, #fffeff); /* Extremely light, almost white pastel shades */
-            /* Ensure content is centered vertically and horizontally */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh; /* Full viewport height */
-            padding: 1rem; /* Add some padding around the content */
-            text-align: center; /* Center text within the body */
-            overflow: hidden; /* Hide overflow for confetti effect */
-            position: relative; /* For absolute positioning of confetti */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Message Received - Neko Code</title>
+<meta name="description" content="Thanks for contacting Neko Code. Your message has been received and we will get back to you shortly.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0912">
+<link rel="icon" href="./images/neko-code.png">
+<script>try{if(localStorage.getItem("theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Same palette as the home page. Dark theme (default): midnight plum + sakura. */
+  --bg:#0b0912; --panel:#110e1a; --panel2:#181426; --card:#1a1628;
+  --heading:#ffd3e4; --text:#f1ecf6; --soft:#c9c6cf; --muted:#a59db8; --line:#2e2742;
+  --accent:#f4a3c4; --accent-hi:#ffd3e4; --accent-deep:#c2577f;
+  --on-accent:#1a0a12;
+  --header-bg:rgba(11,9,18,.88); --footer-bg:#07050c;
+  --rainbow:#f4a3c4,#b9a4ff,#9ee6ff,#b9a4ff,#ffd3e4,#f4a3c4,#c2577f,#f4a3c4;
+  --shadow-card:0 8px 16px rgba(0,0,0,.3);
+  color-scheme:dark;
+  --head:"Montserrat",sans-serif; --body:"Inter",sans-serif;
+}
+[data-theme="light"]{
+  --bg:#fbf7fb; --panel:#ffffff; --panel2:#f5eef6; --card:#ffffff;
+  --heading:#a82459; --text:#241a2e; --soft:#4a3f5a; --muted:#6b5f7c; --line:#e3d7ea;
+  --accent:#c93874; --accent-hi:#d63f7d; --accent-deep:#a82459;
+  --on-accent:#ffffff;
+  --header-bg:rgba(251,247,251,.9); --footer-bg:#efe6f1;
+  --rainbow:#d63f7d,#7c4dff,#0ea5c6,#7c4dff,#e0568c,#d63f7d,#a82459,#d63f7d;
+  --shadow-card:0 8px 18px rgba(70,30,90,.12);
+  color-scheme:light;
+}
+@property --angle{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes spin{to{--angle:360deg}}
+@keyframes rise{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+@keyframes ring{0%{transform:scale(.9);opacity:.6}100%{transform:scale(1.7);opacity:0}}
+@keyframes fall{0%{transform:translateY(-40px) rotate(0);opacity:0}10%{opacity:.9}100%{transform:translateY(calc(100vh + 40px)) rotate(720deg);opacity:0}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--text);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased;transition:background-color .3s,color .3s}
+a{color:inherit;text-decoration:none}
+h1{font-family:var(--head)}
+:focus-visible{outline:3px solid var(--accent-hi);outline-offset:3px;border-radius:6px}
+.container{max-width:1152px;margin:0 auto;padding:0 1rem}
 
-        /* Keyframe for fade-in animation */
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+/* Header (same as home page) */
+header{position:sticky;top:0;z-index:30;background:var(--header-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:.6rem;height:50px}
+.brand{display:flex;align-items:center;gap:.5rem;font:800 1.15rem var(--head);color:var(--accent-hi);margin-right:auto}
+.brand img{width:26px;height:26px;border-radius:50%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1.6rem;border-radius:.6rem;font:600 1rem var(--body);color:var(--on-accent);border:2px solid transparent;background:linear-gradient(135deg,var(--accent-deep),var(--accent-hi) 55%,var(--accent));box-shadow:0 4px 8px rgba(0,0,0,.3);transition:transform .15s,box-shadow .25s,filter .25s,background .25s;cursor:pointer}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1);box-shadow:0 8px 18px rgba(244,163,196,.35)}
+.btn.outline{background:transparent;border-color:var(--accent);color:var(--accent-hi);box-shadow:none}
+.btn.outline:hover{background:rgba(244,163,196,.15);color:var(--text);filter:none}
+.btn.head-cta{height:32px;padding:0 .95rem;font-size:.82rem;line-height:1;border-width:1px;border-radius:.45rem;box-shadow:none}
+.btn.head-cta:hover{transform:none;box-shadow:0 4px 12px rgba(244,163,196,.3)}
+.theme-btn{width:32px;height:32px;display:grid;place-items:center;background:none;border:1px solid var(--line);color:var(--soft);border-radius:.45rem;cursor:pointer;transition:border-color .2s,color .2s}
+.theme-btn:hover{border-color:var(--accent);color:var(--text)}
+.theme-btn svg{width:17px;height:17px}
+.theme-btn .sun{display:none}
+[data-theme="light"] .theme-btn .sun{display:block}[data-theme="light"] .theme-btn .moon{display:none}
 
-        /* Apply animation to the main content container */
-        .animate-fade-in-scale {
-            animation: fadeInScale 0.6s ease-out forwards;
-        }
-
-        /* Keyframe for subtle icon bounce */
-        @keyframes bounceIn {
-            0% { transform: scale(0); opacity: 0; }
-            70% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
-        .animate-icon-bounce {
-            animation: bounceIn 0.8s ease-out forwards;
-        }
-
-        /* Keyframe for subtle pulse on icon */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .icon-pulse-effect {
-            animation: pulse 2s infinite ease-in-out;
-        }
-
-        /* Enhanced text shadow for the main heading */
-        .heading-shadow-enhanced {
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.08); /* Slightly more pronounced shadow */
-        }
-
-        /* Text shadow for the paragraph */
-        .paragraph-shadow {
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.03); /* Subtle shadow for readability */
-        }
-
-        /* Confetti styles */
-        .confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Allow clicks to pass through */
-            z-index: -1; /* Place behind content */
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #fce4ec; /* Default light pink */
-            opacity: 0;
-            animation: confetti-fall linear infinite;
-        }
-
-        @keyframes confetti-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(calc(100vh + 100px)) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Floating elements styles */
-        .floating-elements-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -2; /* Even further behind confetti */
-        }
-
-        .floating-element {
-            position: absolute;
-            opacity: 0.1; /* Very translucent */
-            border-radius: 50%; /* Default to circle */
-            animation: float-up-down linear infinite;
-        }
-
-        @keyframes float-up-down {
-            0% {
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            25% {
-                transform: translateY(-20px) translateX(10px) scale(1.02);
-            }
-            50% {
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            75% {
-                transform: translateY(20px) translateX(-10px) scale(0.98);
-            }
-            100% {
-                transform: translateY(0) translateX(0) scale(1);
-            }
-        }
-
-        /* Gradient text for heading */
-        .gradient-text {
-            background: linear-gradient(to right, #a78bfa, #818cf8, #6366f1); /* Purple to blue gradient */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            color: transparent; /* Fallback for non-webkit browsers */
-        }
-    </style>
+/* Page */
+main{flex:1;display:grid;place-items:center;padding:3rem 1rem;position:relative;overflow:hidden;background:radial-gradient(55% 45% at 50% 30%,rgba(244,163,196,.14),transparent 70%)}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;top:0;display:block;opacity:0;animation:fall linear infinite}
+.card{position:relative;z-index:1;max-width:36rem;width:100%;text-align:center;padding:3rem 2rem;background-image:linear-gradient(var(--card),var(--card)),conic-gradient(from var(--angle),var(--rainbow));background-origin:border-box;background-clip:padding-box,border-box;border:2px solid transparent;border-radius:1.5rem;box-shadow:var(--shadow-card);animation:spin 15s linear infinite,rise .7s both}
+.check{position:relative;width:88px;height:88px;margin:0 auto 1.5rem;display:grid;place-items:center;border-radius:50%;background:rgba(244,163,196,.15);color:var(--accent-hi);animation:pop .8s .1s both}
+.check::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);animation:ring 2.4s ease-out infinite}
+.check svg{width:46px;height:46px}
+h1{font-size:clamp(2.2rem,6vw,3.2rem);font-weight:800;line-height:1.1;margin-bottom:1rem}
+h1 span{background:linear-gradient(90deg,#f4a3c4,#ffd3e4 45%,#b9a4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-theme="light"] h1 span{background-image:linear-gradient(90deg,#c93874,#e0568c 45%,#7c4dff);-webkit-background-clip:text;background-clip:text}
+.card p{color:var(--soft);font-size:1.1rem;margin-bottom:2rem}
+.cta{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+footer{background:var(--footer-bg);color:var(--muted);padding:1.25rem 0;font-size:.9rem;text-align:center}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.confetti{display:none}}
+</style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4">
-    <!-- Confetti Container -->
-    <div class="confetti-container">
-        <!-- Confetti pieces will be generated here by JavaScript -->
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="/"><img src="./images/neko-code.png" alt="">Neko Code</a>
+    <button class="theme-btn" id="theme" aria-label="Switch to light mode"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <a class="btn head-cta" href="https://nekocode.in/invite" target="_blank" rel="noopener">Invite</a>
+  </div>
+</header>
+
+<main>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="card">
+    <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+    <h1><span>Message Received!</span></h1>
+    <p>Your message has been successfully received. We appreciate you reaching out and will get back to you shortly!</p>
+    <div class="cta">
+      <a class="btn" href="/">Go to Homepage</a>
+      <a class="btn outline" href="https://nekocode.in/discord" target="_blank" rel="noopener">Join our Discord</a>
     </div>
+  </div>
+</main>
 
-    <!-- Floating Elements Container -->
-    <div class="floating-elements-container">
-        <!-- Floating elements will be generated here by JavaScript -->
-    </div>
+<footer><div class="container">&copy; 2025 Neko Code. All rights reserved.</div></footer>
 
-    <!-- Main content container -->
-    <div class="max-w-xl w-full p-4 animate-fade-in-scale relative z-10">
-        <!-- Thank You Icon -->
-        <div class="mb-6 flex justify-center">
-            <!-- Icon color changed to a calming green-500, added pulse effect -->
-            <svg class="w-24 h-24 text-green-500 animate-icon-bounce icon-pulse-effect" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-        </div>
-
-        <!-- Main Thank You Heading - Now with gradient text -->
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 heading-shadow-enhanced gradient-text">Message Received!</h1>
-
-        <!-- Confirmation Message -->
-        <p class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed paragraph-shadow">
-            Your message has been successfully received.
-            We appreciate you reaching out and will get back to you shortly!
-        </p>
-
-        <!-- Call to Action Button -->
-        <a href="/" class="inline-block bg-transparent border-2 border-purple-500 text-purple-600 font-semibold py-3 px-8 rounded-full shadow-md hover:bg-purple-100 hover:shadow-lg transition duration-300 ease-in-out transform hover:scale-105 active:scale-95 active:border-purple-600 active:text-purple-700">
-            Go to Homepage
-        </a>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const confettiContainer = document.querySelector('.confetti-container');
-            const floatingElementsContainer = document.querySelector('.floating-elements-container');
-            const numberOfConfetti = 75; // Reduced number of confetti
-            const numberOfFloatingElements = 10; // Fewer, larger elements
-
-            const colors = [
-                '#fce4ec', // Light pink
-                '#fffde7', // Light yellow
-                '#ede7f6', // Light purple
-                '#e3f2fd', // Light blue
-                '#c8e6c9', // Light green
-                '#ffccbc', // Light orange
-                '#bbdefb', // Slightly darker blue
-                '#ffecb3', // Slightly darker yellow
-                '#e1bee7', // Lavender
-                '#d1c4e9', // Light violet
-                '#b2ebf2', // Light aqua
-                '#ffe0b2', // Light peach
-                '#cfd8dc'  // Light grey-blue
-            ];
-
-            const confettiShapes = ['circle', 'square', 'triangle']; // Added shapes
-
-            // Generate Confetti
-            for (let i = 0; i < numberOfConfetti; i++) {
-                const confetti = document.createElement('span');
-                confetti.classList.add('confetti');
-
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.backgroundColor = randomColor;
-
-                const randomShape = confettiShapes[Math.floor(Math.random() * confettiShapes.length)];
-                if (randomShape === 'circle') {
-                    confetti.style.borderRadius = '50%';
-                } else if (randomShape === 'square') {
-                    confetti.style.borderRadius = '0%';
-                } else if (randomShape === 'triangle') {
-                    confetti.style.width = '0';
-                    confetti.style.height = '0';
-                    confetti.style.borderLeft = '6px solid transparent';
-                    confetti.style.borderRight = '6px solid transparent';
-                    confetti.style.borderBottom = `12px solid ${randomColor}`;
-                    confetti.style.backgroundColor = 'transparent';
-                }
-
-                confetti.style.left = `${Math.random() * 100}%`;
-                confetti.style.animationDuration = `${Math.random() * 6 + 6}s`;
-                confetti.style.animationDelay = `${Math.random() * 5}s`;
-                
-                if (randomShape !== 'triangle') {
-                    const size = Math.random() * 5 + 7;
-                    confetti.style.width = `${size}px`;
-                    confetti.style.height = `${size}px`;
-                } else {
-                    confetti.style.transform = `scale(${Math.random() * 0.5 + 0.75})`;
-                }
-                
-                confettiContainer.appendChild(confetti);
-            }
-
-            // Generate Floating Elements
-            for (let i = 0; i < numberOfFloatingElements; i++) {
-                const floatingElement = document.createElement('span');
-                floatingElement.classList.add('floating-element');
-
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                floatingElement.style.backgroundColor = randomColor;
-
-                const size = Math.random() * 50 + 30; // 30px to 80px for larger elements
-                floatingElement.style.width = `${size}px`;
-                floatingElement.style.height = `${size}px`;
-                floatingElement.style.left = `${Math.random() * 100}%`;
-                floatingElement.style.top = `${Math.random() * 100}%`; // Start anywhere on the screen
-                floatingElement.style.animationDuration = `${Math.random() * 15 + 15}s`; // Slower animation
-                floatingElement.style.animationDelay = `${Math.random() * 10}s`; // Longer delay range
-                
-                // Randomize shape (circles or squares for floating elements)
-                if (Math.random() > 0.5) {
-                    floatingElement.style.borderRadius = '0%'; // Square
-                } else {
-                    floatingElement.style.borderRadius = '50%'; // Circle
-                }
-
-                floatingElementsContainer.appendChild(floatingElement);
-            }
-        });
-    </script>
+<script>
+const $=s=>document.querySelector(s);
+/* Dark / light mode (shared with the other pages) */
+(()=>{
+  const root=document.documentElement,btn=$("#theme"),meta=document.querySelector('meta[name="theme-color"]');
+  const apply=t=>{
+    if(t==="light")root.dataset.theme="light";else delete root.dataset.theme;
+    btn.setAttribute("aria-label",t==="light"?"Switch to dark mode":"Switch to light mode");
+    meta.content=t==="light"?"#fbf7fb":"#0b0912";
+  };
+  apply(root.dataset.theme==="light"?"light":"dark");
+  btn.onclick=()=>{const t=root.dataset.theme==="light"?"dark":"light";apply(t);try{localStorage.setItem("theme",t)}catch(e){}};
+})();
+/* Confetti in the site colors */
+(()=>{
+  if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  const box=$("#confetti"),colors=["#f4a3c4","#b9a4ff","#9ee6ff","#ffd3e4","#c2577f","#7c4dff"],r=Math.random;
+  for(let i=0;i<60;i++){
+    const c=document.createElement("i"),s=7+r()*6,tri=r()<.33;
+    c.style.cssText=`left:${r()*100}%;animation-duration:${6+r()*6}s;animation-delay:${r()*6}s;`+
+      (tri?`width:0;height:0;border-left:${s/2}px solid transparent;border-right:${s/2}px solid transparent;border-bottom:${s*1.6}px solid ${colors[i%6]}`
+          :`width:${s}px;height:${s}px;background:${colors[i%6]};border-radius:${r()<.5?"50%":"2px"}`);
+    box.appendChild(c);
+  }
+})();
+</script>
 </body>
 </html>
-    
