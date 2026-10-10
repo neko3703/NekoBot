@@ -218,7 +218,7 @@ footer a:hover{color:var(--accent-hi)}
 
       <section class="slide"><div class="inner"><div class="card solo"><span class="num" aria-hidden="true">01</span>
         <h2>My Journey</h2>
-        <p>My adventure into the world of programming began with a fascination for how digital tools could enhance communication and interaction. JavaScript quickly became my language of choice, its versatility allowing me to build dynamic web experiences and, eventually, powerful Discord bots. Over the years, I've dived deep into full-stack development, mastering HTML, CSS, Node.js, and various database solutions to craft seamless and robust applications.</p>
+        <p>My adventure into the world of programming began with a fascination for how digital tools could enhance communication and interaction. JavaScript quickly became my language of choice, its versatility allowing me to build dynamic web experiences and, eventually, powerful Discord bots. Over the years, I've dived deep into full-stack development, mastering HTML, CSS, Node.js, and various database solutions like Google Sheets to craft seamless and robust applications.</p>
       </div></div></section>
 
       <section class="slide"><div class="inner"><div class="card solo"><span class="num" aria-hidden="true">02</span>
@@ -301,15 +301,27 @@ $("#burger").onclick=()=>{const o=$("#drop").classList.toggle("open");$("#burger
     idx=i;lockUntil=Date.now()+LOCK;show();
   }
   function layout(){
+    const y=scrollY;                  /* remember where the reader is */
     let ok=!reduce.matches;
     root.classList.toggle("stage-on",ok);
     if(ok)ok=slides.every(s=>s.querySelector(".inner").offsetHeight+48<=main.clientHeight); /* every section must fit on one screen */
     on=ok;
     root.classList.toggle("stage-on",on);root.classList.toggle("reveal",!on);
     if(on){show()}
-    else{slides.forEach(s=>{s.classList.remove("active","past");s.inert=false;io.unobserve(s);io.observe(s)})}
+    else{
+      slides.forEach(s=>{s.classList.remove("active","past");s.inert=false;io.unobserve(s);io.observe(s)});
+      if(scrollY!==y)window.scrollTo({top:y,behavior:"instant"});  /* the test above briefly locks the page, so put the scroll back */
+    }
   }
-  let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(layout,120)});
+  let rt,lw=innerWidth,lh=innerHeight;
+  addEventListener("resize",()=>{
+    clearTimeout(rt);
+    rt=setTimeout(()=>{
+      const dw=Math.abs(innerWidth-lw),dh=Math.abs(innerHeight-lh);
+      if(!on&&dw===0&&dh<250)return;  /* phone toolbars sliding in and out: nothing to recompute */
+      lw=innerWidth;lh=innerHeight;layout();
+    },150);
+  });
   reduce.addEventListener("change",layout);
   addEventListener("load",layout);
   layout();
@@ -321,7 +333,7 @@ $("#burger").onclick=()=>{const o=$("#drop").classList.toggle("open");$("#burger
     e.preventDefault();
     const now=Date.now(),dt=now-lastWheel,mag=Math.abs(e.deltaY);
     lastWheel=now;
-    if(dt>110){acc=0;used=false}                   /* a pause means a new scroll has started */
+    if(dt>250||(dt>110&&mag>=lastMag*.8)){acc=0;used=false} /* a pause (or a push that is not fading out) starts a new scroll */
     else if(used&&mag>lastMag+25){acc=0;used=false} /* a stronger push mid-momentum counts as new */
     lastMag=mag;
     if(used||now<lockUntil)return;
