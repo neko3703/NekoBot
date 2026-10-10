@@ -84,46 +84,72 @@ header{position:sticky;top:0;z-index:30;background:var(--header-bg);backdrop-fil
 @media(max-width:820px){.links{display:none}.burger{display:grid}}
 
 /* Page */
-main{flex:1;padding:3.5rem 0 4.5rem;background:radial-gradient(60% 35% at 50% 0%,rgba(244,163,196,.12),transparent 70%)}
-.intro{text-align:center;margin-bottom:3rem;animation:rise .7s both}
-.intro h1{font-size:clamp(2.2rem,5.5vw,3.6rem);font-weight:800;line-height:1.1;margin-bottom:1rem}
+main{flex:1;background:radial-gradient(60% 35% at 50% 0%,rgba(244,163,196,.12),transparent 70%)}
+.slide{display:flex;align-items:center;justify-content:center;padding:1.5rem 1rem}
+.inner{width:100%;max-width:880px;margin:0 auto}
+.inner.wide{max-width:1000px}
+.snap,#dots,.hint{display:none}
 .grad{background:linear-gradient(90deg,#f4a3c4,#ffd3e4 45%,#b9a4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 [data-theme="light"] .grad{background-image:linear-gradient(90deg,#c93874,#e0568c 45%,#7c4dff);-webkit-background-clip:text;background-clip:text}
-.intro p{color:var(--soft);max-width:44rem;margin:0 auto;font-size:1.15rem}
 
-.layout{display:grid;grid-template-columns:320px 1fr;gap:1.75rem;align-items:start;animation:rise .7s .15s both}
-@media(max-width:900px){.layout{grid-template-columns:1fr}}
-.profile{position:sticky;top:76px;text-align:center}
-@media(max-width:900px){.profile{position:static}}
+.intro{text-align:center;padding:2rem 0}
+.intro h1{font-size:clamp(2.3rem,6vw,4.2rem);font-weight:800;line-height:1.1;margin-bottom:1.25rem}
+.intro p{color:var(--soft);max-width:44rem;margin:0 auto;font-size:1.2rem}
+.hint{margin:2.5rem auto 0;flex-direction:column;align-items:center;gap:.3rem;color:var(--muted);font-size:.85rem;font-weight:600}
+.hint svg{width:22px;height:22px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
 
-.card{background-image:linear-gradient(var(--card),var(--card)),conic-gradient(from var(--angle),var(--rainbow));background-origin:border-box;background-clip:padding-box,border-box;border:2px solid transparent;border-radius:1.5rem;padding:2rem;box-shadow:var(--shadow-card);animation:spin 15s linear infinite}
+.card{position:relative;background-image:linear-gradient(var(--card),var(--card)),conic-gradient(from var(--angle),var(--rainbow));background-origin:border-box;background-clip:padding-box,border-box;border:2px solid transparent;border-radius:1.5rem;padding:2.25rem;box-shadow:var(--shadow-card);animation:spin 15s linear infinite}
+.card h2{font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:800;line-height:1.15;color:var(--heading);margin-bottom:1rem}
+.card p{color:var(--soft);font-size:1.12rem;line-height:1.75}
+.card p+p{margin-top:1rem}
+.card strong{color:var(--text);font-weight:700}
+.num{position:absolute;top:.6rem;right:1.4rem;font:900 4.5rem/1 var(--head);color:rgba(244,163,196,.13);pointer-events:none}
 
-/* Profile */
-.avatar{width:170px;height:170px;margin:0 auto 1.25rem;border-radius:50%;padding:5px;background:conic-gradient(from var(--angle),var(--rainbow));animation:spin 10s linear infinite;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+/* Profile slide */
+.profile{display:grid;grid-template-columns:240px 1fr;gap:2.25rem;align-items:center}
+.who{text-align:center}
+.avatar{width:170px;height:170px;margin:0 auto 1.1rem;border-radius:50%;padding:5px;background:conic-gradient(from var(--angle),var(--rainbow));animation:spin 10s linear infinite;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .avatar img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid var(--card);background:var(--panel2)}
-.profile h2{font-size:2rem;font-weight:800;line-height:1.1}
-.role{color:var(--soft);font-weight:600;margin:.35rem 0 1rem}
-.chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:1.25rem}
+.who h2{font-size:2rem;margin-bottom:.2rem;color:var(--text)}
+.role{color:var(--soft);font-weight:600;margin-bottom:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-bottom:1.1rem}
 .chips span{font-size:.78rem;font-weight:600;color:var(--accent-hi);border:1px solid var(--line);border-radius:999px;padding:.15rem .65rem}
-.socials{display:flex;justify-content:center;gap:.6rem;padding-top:1.25rem;border-top:1px solid var(--line)}
+.socials{display:flex;justify-content:center;gap:.6rem}
 .socials a{width:42px;height:42px;display:grid;place-items:center;font-size:1.3rem;color:var(--soft);border:1px solid var(--line);border-radius:.7rem;transition:color .2s,border-color .2s,transform .2s,background .2s}
 .socials a:hover{color:var(--text);border-color:var(--accent);background:rgba(244,163,196,.15);transform:translateY(-2px)}
-.handle{margin-top:1rem;color:var(--muted);font-size:.95rem}
+.handle{margin-top:.9rem;color:var(--muted);font-size:.95rem}
 .handle i{color:var(--accent-hi);margin-right:.35rem}
-
-/* Content */
-.content{display:grid;gap:1.5rem}
-.content .lead{font-size:1.15rem;color:var(--soft);line-height:1.75}
-.content h3{font-size:1.5rem;font-weight:800;color:var(--heading);margin-bottom:.8rem}
-.content p{color:var(--soft);line-height:1.75}
-.content p+p{margin-top:1rem}
-.content strong{color:var(--text);font-weight:700}
+.lead p{font-size:1.2rem}
 
 /* CTA */
-.cta{margin-top:2rem;text-align:center;padding:3rem 1.5rem}
-.cta h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;line-height:1.15;margin-bottom:1rem}
-.cta p{color:var(--soft);max-width:40rem;margin:0 auto 1.75rem;font-size:1.1rem}
+.cta{text-align:center;padding:3rem 1.75rem}
+.cta h2{font-size:clamp(1.8rem,4vw,2.7rem);margin-bottom:1rem}
+.cta p{max-width:40rem;margin:0 auto 1.75rem}
 .cta .row{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+
+/* Normal mode (phones, short screens, reduced motion): ordinary page with a fade-in per section */
+.reveal .slide{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
+.reveal .slide.in{opacity:1;transform:none}
+.slide:first-child{padding-top:3.5rem}
+.slide:last-child{padding-bottom:4rem}
+@media(max-width:700px){.profile{grid-template-columns:1fr;gap:1.5rem}.card{padding:1.5rem}.card p{font-size:1rem}.lead p{font-size:1.05rem}.num{font-size:3rem}}
+
+/* Stage mode: the page stays put and the sections change as you scroll */
+.stage-on{scroll-padding-top:50px}
+.stage-on #track{height:calc(var(--h)*var(--n))}
+.stage-on #stage{position:sticky;top:50px;height:var(--h);overflow:hidden}
+.stage-on .slide{position:absolute;inset:0;padding:1.5rem 4rem 1.5rem 1.5rem;will-change:transform,opacity,filter}
+.stage-on .slide:first-child,.stage-on .slide:last-child{padding-top:1.5rem;padding-bottom:1.5rem}
+.stage-on .snap{display:block;position:absolute;left:0;width:1px;height:var(--h);scroll-snap-align:start;pointer-events:none}
+.stage-on .hint{display:flex}
+.stage-on #dots{display:flex;position:fixed;right:16px;top:calc(50% + 25px);transform:translateY(-50%);flex-direction:column;gap:.9rem;z-index:20}
+#dots button{position:relative;width:12px;height:12px;border-radius:50%;border:2px solid var(--muted);background:transparent;padding:0;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+#dots button::before{content:"";position:absolute;inset:-8px}
+#dots button.on{background:var(--accent);border-color:var(--accent);transform:scale(1.3)}
+#dots button:hover{border-color:var(--accent)}
+#dots button::after{content:attr(data-label);position:absolute;right:24px;top:50%;transform:translateY(-50%);white-space:nowrap;font:600 .78rem var(--body);color:var(--text);background:var(--panel2);border:1px solid var(--line);padding:.15rem .6rem;border-radius:.4rem;opacity:0;pointer-events:none;transition:opacity .2s}
+#dots button:hover::after,#dots button:focus-visible::after{opacity:1}
 
 footer{background:var(--footer-bg);color:var(--muted);padding:1.5rem 0;font-size:.9rem}
 footer .container{display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;justify-content:space-between;align-items:center}
@@ -157,56 +183,60 @@ footer a:hover{color:var(--accent-hi)}
 </header>
 
 <main>
-  <div class="container">
-    <section class="intro">
-      <h1 class="grad">Meet the Creator of Neko Code</h1>
-      <p>Journey into the mind behind Neko Code. I am the sole visionary and craftsman, dedicated to building an unparalleled Discord bot experience.</p>
-    </section>
+  <div id="track">
+    <i class="snap" style="top:calc(var(--h)*0)"></i><i class="snap" style="top:calc(var(--h)*1)"></i><i class="snap" style="top:calc(var(--h)*2)"></i><i class="snap" style="top:calc(var(--h)*3)"></i><i class="snap" style="top:calc(var(--h)*4)"></i><i class="snap" style="top:calc(var(--h)*5)"></i>
+    <div id="stage">
 
-    <div class="layout">
-      <aside class="card profile">
-        <div class="avatar"><img src="./images/neko.png" alt="Neko's avatar"></div>
-        <h2>Neko</h2>
-        <p class="role">Solo Developer &amp; Visionary</p>
-        <div class="chips" aria-label="Skills"><span>JavaScript</span><span>Node.js</span><span>discord.js</span><span>HTML &amp; CSS</span></div>
-        <div class="socials">
-          <a href="https://github.com/neko3703/" target="_blank" rel="noopener" aria-label="GitHub Profile"><i class="bi bi-github"></i></a>
-          <a href="https://x.com/neko3703" target="_blank" rel="noopener" aria-label="X (Twitter) Profile"><i class="bi bi-twitter-x"></i></a>
-          <a href="https://www.linkedin.com/in/tejasva-sharma2402/" target="_blank" rel="noopener" aria-label="LinkedIn Profile"><i class="bi bi-linkedin"></i></a>
-        </div>
-        <p class="handle"><i class="bi bi-discord"></i>neko.code</p>
-      </aside>
+      <section class="slide"><div class="inner intro">
+        <h1 class="grad">Meet the Creator of Neko Code</h1>
+        <p>Journey into the mind behind Neko Code. I am the sole visionary and craftsman, dedicated to building an unparalleled Discord bot experience.</p>
+        <div class="hint" aria-hidden="true"><span>Scroll</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      </div></section>
 
-      <div class="content">
-        <div class="card">
-          <p class="lead">As the sole creator of Neko Code, every single line of code, every feature, and every design choice comes straight from my passion and dedication. I personally handle the entire development process, making sure everything is not just innovative but also super stable. My goal is simple: to create a sophisticated and reliable bot that doesn't just meet your expectations, but totally blows them away, making your Discord server even better.</p>
+      <section class="slide"><div class="inner wide"><div class="card profile">
+        <div class="who">
+          <div class="avatar"><img src="./images/neko.png" alt="Neko's avatar"></div>
+          <h2>Neko</h2>
+          <p class="role">Solo Developer &amp; Visionary</p>
+          <div class="chips" aria-label="Skills"><span>JavaScript</span><span>Node.js</span><span>discord.js</span><span>HTML &amp; CSS</span></div>
+          <div class="socials">
+            <a href="https://github.com/neko3703/" target="_blank" rel="noopener" aria-label="GitHub Profile"><i class="bi bi-github"></i></a>
+            <a href="https://x.com/neko3703" target="_blank" rel="noopener" aria-label="X (Twitter) Profile"><i class="bi bi-twitter-x"></i></a>
+            <a href="https://www.linkedin.com/in/tejasva-sharma2402/" target="_blank" rel="noopener" aria-label="LinkedIn Profile"><i class="bi bi-linkedin"></i></a>
+          </div>
+          <p class="handle"><i class="bi bi-discord"></i>neko.code</p>
         </div>
-        <div class="card">
-          <h3>My Journey</h3>
-          <p>My adventure into the world of programming began with a fascination for how digital tools could enhance communication and interaction. JavaScript quickly became my language of choice, its versatility allowing me to build dynamic web experiences and, eventually, powerful Discord bots. Over the years, I've dived deep into full-stack development, mastering HTML, CSS, Node.js, and various database solutions like Google Sheets to craft seamless and robust applications.</p>
-          <p>The challenge of problem-solving and the joy of creating something impactful drive my continuous learning. Each project is an opportunity to experiment with new technologies and refine my craft, always aiming to deliver intuitive and high-performance solutions.</p>
+        <div class="lead"><p>As the sole creator of Neko Code, every single line of code, every feature, and every design choice comes straight from my passion and dedication. I personally handle the entire development process, making sure everything is not just innovative but also super stable. My goal is simple: to create a sophisticated and reliable bot that doesn't just meet your expectations, but totally blows them away, making your Discord server even better.</p></div>
+      </div></div></section>
+
+      <section class="slide"><div class="inner"><div class="card"><span class="num" aria-hidden="true">01</span>
+        <h2>My Journey</h2>
+        <p>My adventure into the world of programming began with a fascination for how digital tools could enhance communication and interaction. JavaScript quickly became my language of choice, its versatility allowing me to build dynamic web experiences and, eventually, powerful Discord bots. Over the years, I've dived deep into full-stack development, mastering HTML, CSS, Node.js, and various database solutions like Google Sheets to craft seamless and robust applications.</p>
+        <p>The challenge of problem-solving and the joy of creating something impactful drive my continuous learning. Each project is an opportunity to experiment with new technologies and refine my craft, always aiming to deliver intuitive and high-performance solutions.</p>
+      </div></div></section>
+      <section class="slide"><div class="inner"><div class="card"><span class="num" aria-hidden="true">02</span>
+        <h2>Development Philosophy</h2>
+        <p>At the heart of Neko Code's development is a commitment to <strong>innovation, reliability, and user experience</strong>. I believe a truly great bot isn't just about features; it's about how those features integrate seamlessly into your server, making interactions intuitive and enjoyable. I prioritize clean code, efficient performance, and robust error handling to ensure Neko Code is a stable and trustworthy addition to your community.</p>
+        <p>I also strongly advocate for <strong>community-driven development</strong>. Your feedback and suggestions are not just welcome; they are essential. They directly influence Neko Code's evolution, ensuring it grows in ways that genuinely benefit its users.</p>
+      </div></div></section>
+      <section class="slide"><div class="inner"><div class="card"><span class="num" aria-hidden="true">03</span>
+        <h2>Future Vision</h2>
+        <p>The journey with Neko Code is just beginning. My vision includes expanding its capabilities with even more intelligent and interactive features, exploring new integrations, and continuously optimizing for speed and scalability. I'm excited to continue building, learning, and evolving Neko Code into the most comprehensive and indispensable bot for Discord servers.</p>
+      </div></div></section>
+      <section class="slide"><div class="inner"><div class="card cta">
+        <h2 class="grad">Your Voice, My Vision</h2>
+        <p>Your feedback is the compass guiding Neko Code's evolution. Whether it's an innovative suggestion, a request for assistance, or reporting an anomaly, your direct engagement is invaluable.</p>
+        <div class="row">
+          <a class="btn" href="https://nekocode.in/discord" target="_blank" rel="noopener"><i class="bi bi-discord"></i> Join Our Discord</a>
+          <a class="btn outline" href="https://docs.nekocode.in" target="_blank" rel="noopener"><i class="bi bi-book"></i> Read the Docs</a>
         </div>
-        <div class="card">
-          <h3>Development Philosophy</h3>
-          <p>At the heart of Neko Code's development is a commitment to <strong>innovation, reliability, and user experience</strong>. I believe a truly great bot isn't just about features; it's about how those features integrate seamlessly into your server, making interactions intuitive and enjoyable. I prioritize clean code, efficient performance, and robust error handling to ensure Neko Code is a stable and trustworthy addition to your community.</p>
-          <p>I also strongly advocate for <strong>community-driven development</strong>. Your feedback and suggestions are not just welcome; they are essential. They directly influence Neko Code's evolution, ensuring it grows in ways that genuinely benefit its users.</p>
-        </div>
-        <div class="card">
-          <h3>Future Vision</h3>
-          <p>The journey with Neko Code is just beginning. My vision includes expanding its capabilities with even more intelligent and interactive features, exploring new integrations, and continuously optimizing for speed and scalability. I'm excited to continue building, learning, and evolving Neko Code into the most comprehensive and indispensable bot for Discord servers.</p>
-        </div>
-      </div>
+      </div></div></section>
+
     </div>
-
-    <section class="card cta">
-      <h2 class="grad">Your Voice, My Vision</h2>
-      <p>Your feedback is the compass guiding Neko Code's evolution. Whether it's an innovative suggestion, a request for assistance, or reporting an anomaly, your direct engagement is invaluable.</p>
-      <div class="row">
-        <a class="btn" href="https://nekocode.in/discord" target="_blank" rel="noopener"><i class="bi bi-discord"></i> Join Our Discord</a>
-        <a class="btn outline" href="https://docs.nekocode.in" target="_blank" rel="noopener"><i class="bi bi-book"></i> Read the Docs</a>
-      </div>
-    </section>
   </div>
+  <nav id="dots" aria-label="Sections">
+    <button data-label="Intro" aria-label="Intro"></button><button data-label="About me" aria-label="About me"></button><button data-label="My Journey" aria-label="My Journey"></button><button data-label="Philosophy" aria-label="Development Philosophy"></button><button data-label="Future Vision" aria-label="Future Vision"></button><button data-label="Say hi" aria-label="Get in touch"></button>
+  </nav>
 </main>
 
 <footer>
@@ -234,6 +264,75 @@ const $=s=>document.querySelector(s);
   btn.onclick=()=>{const t=root.dataset.theme==="light"?"dark":"light";apply(t);try{localStorage.setItem("theme",t)}catch(e){}};
 })();
 $("#burger").onclick=()=>{const o=$("#drop").classList.toggle("open");$("#burger").setAttribute("aria-expanded",o)};
+
+/* ===== Scroll stage: sections change while the page stays in place ===== */
+(()=>{
+  const root=document.documentElement,track=$("#track"),slides=[...document.querySelectorAll(".slide")],dots=[...document.querySelectorAll("#dots button")];
+  const N=slides.length,HEADER=50,reduce=matchMedia("(prefers-reduced-motion:reduce)");
+  let on=false,h=0;
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add("in")}),{threshold:.15});
+  const top0=()=>track.getBoundingClientRect().top+scrollY;
+
+  const target=()=>Math.min(Math.max((scrollY-top0()+HEADER)/h,0),N-1);
+  let cur=0,raf=0;
+  /* draw the sections for progress value p: a smooth cross-fade with a little drift and blur */
+  function render(p){
+    slides.forEach((s,i)=>{
+      const d=p-i,t=Math.min(Math.max((Math.abs(d)-.12)/.6,0),1),e=t*t*(3-2*t);
+      s.style.opacity=Math.pow(1-e,1.6);
+      s.style.transform=`translate3d(0,${(d>0?-1:1)*e*56}px,0) scale(${1-e*.04})`;
+      s.style.filter=e>.01?`blur(${(e*7).toFixed(2)}px)`:"none";
+      s.style.visibility=t>=1?"hidden":"visible";
+      s.inert=t>=.5;
+    });
+  }
+  /* ease toward the real scroll position, so even a notched mouse wheel glides */
+  function frame(){
+    raf=0;if(!on)return;
+    const tg=target();cur+=(tg-cur)*.16;
+    if(Math.abs(tg-cur)<.0008)cur=tg;
+    render(cur);
+    const k=Math.round(tg);dots.forEach((b,i)=>b.classList.toggle("on",i===k));
+    if(cur!==tg)raf=requestAnimationFrame(frame);
+  }
+  const update=()=>{if(on&&!raf)raf=requestAnimationFrame(frame)};
+  function layout(){
+    h=innerHeight-HEADER;
+    root.style.setProperty("--h",h+"px");root.style.setProperty("--n",N);
+    let ok=!reduce.matches;
+    root.classList.toggle("stage-on",ok);
+    if(ok)ok=slides.every(s=>s.querySelector(".inner").offsetHeight+48<=h); /* every section must fit on one screen */
+    on=ok;
+    root.classList.toggle("stage-on",on);root.classList.toggle("reveal",!on);
+    if(on){cur=target();render(cur);update()}
+    else{cancelAnimationFrame(raf);raf=0;slides.forEach(s=>{s.style.cssText="";s.inert=false;io.unobserve(s);io.observe(s)})}
+  }
+  let st,touching=false;
+  addEventListener("scroll",()=>{if(!on)return;update();clearTimeout(st);st=setTimeout(settle,120)},{passive:true});
+  addEventListener("touchstart",()=>touching=true,{passive:true});
+  addEventListener("touchend",()=>{touching=false;clearTimeout(st);st=setTimeout(settle,160)},{passive:true});
+  /* when scrolling stops between two sections, glide to the nearest one */
+  function settle(){
+    if(!on||touching)return;
+    const p=(scrollY-top0()+HEADER)/h;
+    if(p<-.02||p>N-1+.02)return;
+    const k=Math.round(p);
+    if(Math.abs(p-k)>.02)go(k);
+  }
+  let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(layout,120)});
+  reduce.addEventListener("change",layout);
+  addEventListener("load",layout);
+  layout();
+
+  const go=i=>scrollTo({top:top0()-HEADER+Math.min(Math.max(i,0),N-1)*h,behavior:"smooth"});
+  dots.forEach((b,i)=>b.onclick=()=>go(i));
+  addEventListener("keydown",e=>{
+    if(!on||e.target!==document.body||e.altKey||e.ctrlKey||e.metaKey)return;
+    const p=(scrollY-top0()+HEADER)/h;
+    if(e.key==="ArrowDown"||e.key==="PageDown"){if(p<N-1-.05){e.preventDefault();go(Math.floor(p+.05)+1)}}
+    if(e.key==="ArrowUp"||e.key==="PageUp"){if(p>.05&&p<=N-1+.05){e.preventDefault();go(Math.ceil(p-.05)-1)}}
+  });
+})();
 </script>
 </body>
 </html>
